@@ -1,0 +1,18 @@
+[user]
+    name = eliott
+    email = eliott@cactuswax.net
+[alias]
+    co = checkout
+[color]
+    ui = auto
+[branch]
+    autosetupmerge = true
+[sendemail]
+    chainreplyto = false
+    smtpserver = /usr/bin/msmtp
+    suppressfrom = true
+[apply]
+    whitespace = strip
+[core]
+    editor = vim
+    pager = less -FSRX +'/^---'

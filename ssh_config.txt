@@ -1,0 +1,16 @@
+## defaults go at the bottom
+## config options _do not override_ unless they appear on the 
+## command line as -o 'config foo'
+host *
+    protocol 2
+    compression yes
+    forwardagent no
+    controlmaster auto
+    controlpath ~/.ssh/master-%r@%h:%p
+    hashknownhosts yes
+    stricthostkeychecking ask
+    ServerAliveInterval 300
+    # recently, aes256 has been shown to be less secure than aes256
+    # due to number of permutations. so put it last
+    # http://www.schneier.com/blog/archives/2009/07/another_new_aes.html
+    ciphers aes192-ctr,aes128-ctr,aes256-ctr

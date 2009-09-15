@@ -1,0 +1,24 @@
+#term screen-256color
+#term screen
+term xterm-color
+
+# detach on disconnect
+autodetach on
+
+# Support alternate screens so that, for example, when you 
+# quit out of vi, the display is redrawn as it was before vi
+# redrew the full screen.
+altscreen on
+
+# modify the termcap/terminfo when I'm using XTerm.
+terminfo xterm* LP
+
+#change the hardstatus settings to give an window list at the bottom of the
+#screen, with the time and date and with the current window highlighted
+hardstatus alwayslastline
+hardstatus string '%{= kG}[%{Y}%l%{G}] %50L>%{g}%-Lw%{= ky}%n*%f %t%{= kG}%+Lw%<'
+
+# turns on monitoring. C-a M
+#defmonitor on
+# turns on visual bell 'woof woof!'
+vbell on

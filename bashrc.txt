@@ -1,0 +1,118 @@
+[ -z "$PS1" ] && return
+
+case $TERM in
+    xterm*)
+        PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME%%.*}\007"'
+        ;;
+    dumb)
+        return
+        ;;
+    *) ;;
+esac
+
+PS1='\u@\h:\w\$ '
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+## some classic env vars ##
+export EDITOR=vim
+export VISUAL=vim
+export PAGER=less
+
+# erase dups before adding line, and ignore lines starting with spaces
+# See bash(1) for more options
+export HISTCONTROL="ignorespace:erasedups"
+# suppress duplicate commands, the simple invocation of 'ls' without any
+# arguments, and the shell built-ins bg, fg, and exit
+# also ignores any command starting with a space
+export HISTIGNORE="&:l[ls]:[bf]g:exit:[ \t]*"
+# disable saving of history -- only make history per/bash process
+unset HISTFILE
+
+## enable colors in grep ##
+export GREP_OPTIONS='--color=auto'
+
+## some git specific vars ##
+# vim on os x returns a non-zero exit code when called with the short
+# path name. fucks up git & friends. Use full path.
+export GIT_EDITOR=vim
+export GIT_PAGER=less
+
+## less specific vars ##
+# turn off .lesshst file
+export LESSHISTFILE="-"
+# color highlighting in less
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+## set the gpg tty for helper apps (like gnupg.vim) ##
+export GPG_TTY=$(tty)
+
+## pull in gpg agent env var
+if [ -f "$HOME/.gpg-agent-info" ]; then
+    . "$HOME/.gpg-agent-info"
+    export GPG_AGENT_INFO
+fi
+
+## Some OS specific stuff ##
+case $(uname -s) in
+    Darwin)
+        ## enable color for LS ##
+        export CLICOLOR=1
+
+        ## macports stuff ##
+        if [ -x /opt/local/bin/port ]; then
+            export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+            export MANPATH=/opt/local/share/man:$MANPATH
+
+            ## lesspipe if installed ##
+            if [ -x /opt/local/bin/lesspipe.sh ]; then
+                export LESSOPEN="|/opt/local/bin/lesspipe.sh %s"
+            fi
+
+            ## bash_completion if installed ##
+            if [ -x /opt/local/etc/bash_completion ]; then
+                . /opt/local/etc/bash_completion
+            fi
+        fi
+        ;;
+    Linux)
+        ## enable color for LS ##
+        alias ls='ls --color=auto'
+
+        ## dircolors stuff ##
+        [ -x /usr/bin/dircolors ] && eval "`dircolors -b`"
+
+        # make less more friendly for non-text input files, see lesspipe(1)
+        [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+        
+        ## enable bash completion ##
+        if [ -f /etc/bash_completion ]; then
+            . /etc/bash_completion
+        fi
+        ;;
+    *)
+        # openbsd doesn't do much for color
+        # some others may..
+        export CLICOLOR=1
+        ;;
+esac
+
+## add some handy aliases ##
+alias ll='ls -lh'
+alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
+alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
+# done use this much these days
+# alias rtorrent='(ulimit -n 512; ulimit -u 128; rtorrent)'
+
+# add my own bin to path
+if [ -d ~/bin ] ; then
+    export PATH=~/bin:"${PATH}"
+fi
