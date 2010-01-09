@@ -1,6 +1,6 @@
 [user]
-    name = eliott
-    email = eliott@cactuswax.net
+    #name = 
+    #email = 
 [alias]
     co = checkout
 [color]
@@ -8,11 +8,21 @@
 [branch]
     autosetupmerge = true
 [sendemail]
-    chainreplyto = false
-    smtpserver = /usr/bin/msmtp
+    smtpserver = /usr/local/bin/msmtp
     suppressfrom = true
+    chainreplyto = false
+    thread = true
+    compose = true
+    confirm = auto
+[format]
+    subjectprefix = PATCH
+    suffix = .patch.txt
+    numbered = true
+    attach = true
 [apply]
     whitespace = strip
 [core]
     editor = vim
-    pager = less -FSRX +'/^---'
+    pager = less -FSX
+	#autocrlf = input
+

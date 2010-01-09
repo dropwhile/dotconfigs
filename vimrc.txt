@@ -9,12 +9,14 @@ set mouse=v           "disable goofy mousing
 "set noswf             "disable swapfile
 
 " change location of .viminfo and swp files
-" make the ~/.cache/vim/swp/ directory manually
+" make the ~/.vim/tmp/ directory manually
 set viminfo='20,<50,s10,h,n~/.vim/.viminfo
 set dir=~/.vim/tmp//   "set swp dir. trailing slashes avoid collisions
                           "by replacing path with %
 "set viminfo=""         "turn off viminfo
 
+" scroll by 3 line at window buffer edge instead of just 1 (shows more context)
+set scrolloff=3
 
 "searching related"
 set ignorecase        "Ignore case in searches --opposite is: set noic
@@ -51,6 +53,9 @@ set nostartofline     "don't jump cursor around, stay in current column
 set backspace=indent,eol,start "allow backspace over everything w\insert mode
 set shell=bash
 "set number           "show line numbers
+set ruler             "show file location at the bottom right
+set hidden            "current buffer can be backgrounded without having to
+                      "write something out. remembers marks and history.
 
 "Set some colors"
 set background=dark
@@ -73,6 +78,12 @@ hi PmenuSel       cterm=BOLD   ctermfg=yellow    ctermbg=darkgrey
 hi PmenuSbar      cterm=BOLD   ctermfg=lightblue ctermbg=lightgrey
 hi PmenuThumb     cterm=BOLD   ctermfg=cyan      ctermbg=darkgrey
 
+" function to strip trailing whitespace
+function! StripWhitespace()
+    normal m`
+    %s/\s\+$//e
+    normal ``
+endfunction
 
 "maps and ignore maps
 "dont auto unindent # comments
@@ -84,7 +95,10 @@ set pastetoggle=<F11>
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "The following removes extra space at ends of lines, for certain file types
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e `` 
+"autocmd BufWritePre *.py normal m`:%s/\s\+$//e `` 
+"autocmd BufWritePre *.py call StripWhitespace()
+" highlight trailing whitespace 
+autocmd BufRead,BufNewFile *.py match Error /\s\+$/
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -105,4 +119,7 @@ set wildmode=longest:full,full
 
 " GPG Stuff
 let g:GPGUseAgent = 1
+
+" ramaps
+inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 

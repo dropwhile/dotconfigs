@@ -10,11 +10,18 @@ case $TERM in
     *) ;;
 esac
 
-PS1='\u@\h:\w\$ '
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+} 
+
+PS1='\u@\h:\w$(parse_git_branch)\$ '
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+# send hup on exit
+shopt -s huponexit
 
 ## some classic env vars ##
 export EDITOR=vim
@@ -51,6 +58,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+export LESS="-Ri"
 
 ## set the gpg tty for helper apps (like gnupg.vim) ##
 export GPG_TTY=$(tty)
@@ -109,8 +117,7 @@ esac
 alias ll='ls -lh'
 alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
 alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
-# done use this much these days
-# alias rtorrent='(ulimit -n 512; ulimit -u 128; rtorrent)'
+alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
 
 # add my own bin to path
 if [ -d ~/bin ] ; then
