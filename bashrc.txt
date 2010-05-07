@@ -68,8 +68,7 @@ export LESS="-Ri"
 export GPG_TTY=$(tty)
 
 ## pull in gpg agent env var
-GPGAGENT=$(which gpg-agent 2>/dev/null)
-if [ $? -eq 0 ] && [ -f "$HOME/.gpg-agent-info" ]; then
+if [ -n "$(which gpg-agent 2>/dev/null)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
     . "$HOME/.gpg-agent-info"
     export GPG_AGENT_INFO
 fi
@@ -90,8 +89,9 @@ case $(uname -s) in
             export MANPATH=/opt/local/share/man:$MANPATH
 
             ## lesspipe if installed ##
-            if [ -x /opt/local/bin/lesspipe.sh ]; then
-                export LESSOPEN="|/opt/local/bin/lesspipe.sh %s"
+            LESSPIPEX="$(which lesspipe.sh 2>/dev/null)"
+            if [ -x "${LESSPIPEX}" ]; then
+                export LESSOPEN="|${LESSPIPEX} %s"
             fi
 
             ## bash_completion if installed ##
@@ -115,7 +115,7 @@ case $(uname -s) in
 
 
         # make less more friendly for non-text input files, see lesspipe(1)
-        [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+        [ -x "$(which lesspipe 2>/dev/null)" ] && eval "$(lesspipe)"
         
         ## enable bash completion ##
         if [ -f /etc/bash_completion ]; then
@@ -130,10 +130,11 @@ case $(uname -s) in
 esac
 
 # virtualenvwrapper stuff
-if [ -e $(which virtualenvwrapper.sh) ]; then
-    source $(which virtualenvwrapper.sh)
+VENVW="$(which virtualenvwrapper.sh 2>/dev/null)"
+if [ -e "${VENVW}" ]; then
+    source "${VENVW}"
     export WORKON_HOME=$HOME/.virtualenvs
-    if [ -e $(which pip) ]; then
+    if [ -e "$(which pip 2>/dev/null)" ]; then
         export PIP_VIRTUALENV_BASE=$WORKON_HOME
         # prob don't need this. might be nice though.
         # eval `pip completion --bash`
