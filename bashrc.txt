@@ -1,6 +1,77 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+########################
+#### start function defs
+########################
+
+# fucntion to show git branch
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+} 
+
+##############################
+#### start os specific section
+##############################
+case $(uname -s) in
+    Darwin)
+        ### start darwin specific bashrc
+        ## enable color for LS ##
+        export CLICOLOR=1
+
+        # aliases
+        alias ls='ls -p'
+        alias locate='mdfind -name'
+
+        ## macports stuff ##
+        if [ -x /opt/local/bin/port ]; then
+            export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+            export MANPATH=/opt/local/share/man:$MANPATH
+
+            ## lesspipe if installed ##
+            LESSPIPEX="$(which lesspipe.sh 2>/dev/null)"
+            [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
+
+            ## bash_completion if installed ##
+            [ -f /opt/local/etc/bash_completion ] && . /opt/local/etc/bash_completion
+        fi
+        ;;
+        ### end darwin specific bashrc
+    Linux)
+        ### start linux specific bashrc
+        if [ -e /etc/redhat-release ]; then
+            # fix redhat goofy strip paths from PATH thing.
+            PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+        fi
+
+        ## enable color for LS ##
+        alias ls='ls -p --color=auto'
+
+        ## dircolors stuff ##
+        #[ -x /usr/bin/dircolors ] && eval "`dircolors -b`"
+        export LS_COLORS='no=00:fi=00:di=34;40:ln=35;40:pi=33;40:so=36;40:bd=40;33;01:cd=40;33;01:or=35;40:mi=41;30;01:ex=31;40:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:';
+
+
+        # make less more friendly for non-text input files, see lesspipe(1)
+        [ -x "$(which lesspipe 2>/dev/null)" ] && eval "$(lesspipe)"
+        
+        ## enable bash completion ##
+        [ -f /etc/bash_completion ] && . /etc/bash_completion
+        ;;
+        ### end linux specific bashrc
+    *)
+        ### start 'other' bashrch
+        # openbsd doesn't do much for color
+        # some others may..
+        export CLICOLOR=1
+        ;;
+        ### end 'other' bashrch
+esac
+
+##########################
+#### start general section
+##########################
+
 # If this is an xterm set the title to user@host:dir
 case $TERM in
     xterm*)
@@ -11,11 +82,6 @@ case $TERM in
         ;;
     *) ;;
 esac
-
-# fucntion to show git branch
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-} 
 
 # set ps1 to show git branch
 PS1='\u@\h:\w$(parse_git_branch)\$ '
@@ -67,67 +133,14 @@ export LESS="-Ri"
 ## set the gpg tty for helper apps (like gnupg.vim) ##
 export GPG_TTY=$(tty)
 
+# random mozilla thing
+export MOZ_DISABLE_PANGO=1
+
 ## pull in gpg agent env var
 if [ -n "$(which gpg-agent 2>/dev/null)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
     . "$HOME/.gpg-agent-info"
     export GPG_AGENT_INFO
 fi
-
-## Some OS specific stuff ##
-case $(uname -s) in
-    Darwin)
-        ## enable color for LS ##
-        export CLICOLOR=1
-
-        # aliases
-        alias ls='ls -p'
-        alias locate='mdfind -name'
-
-        ## macports stuff ##
-        if [ -x /opt/local/bin/port ]; then
-            export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-            export MANPATH=/opt/local/share/man:$MANPATH
-
-            ## lesspipe if installed ##
-            LESSPIPEX="$(which lesspipe.sh 2>/dev/null)"
-            if [ -x "${LESSPIPEX}" ]; then
-                export LESSOPEN="|${LESSPIPEX} %s"
-            fi
-
-            ## bash_completion if installed ##
-            if [ -x /opt/local/etc/bash_completion ]; then
-                . /opt/local/etc/bash_completion
-            fi
-        fi
-        ;;
-    Linux)
-        if [ -e /etc/redhat-release ]; then
-            # fix redhat goofy strip paths from PATH thing.
-            PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-        fi
-
-        ## enable color for LS ##
-        alias ls='ls -p --color=auto'
-
-        ## dircolors stuff ##
-        #[ -x /usr/bin/dircolors ] && eval "`dircolors -b`"
-        export LS_COLORS='no=00:fi=00:di=34;40:ln=35;40:pi=33;40:so=36;40:bd=40;33;01:cd=40;33;01:or=35;40:mi=41;30;01:ex=31;40:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:';
-
-
-        # make less more friendly for non-text input files, see lesspipe(1)
-        [ -x "$(which lesspipe 2>/dev/null)" ] && eval "$(lesspipe)"
-        
-        ## enable bash completion ##
-        if [ -f /etc/bash_completion ]; then
-            . /etc/bash_completion
-        fi
-        ;;
-    *)
-        # openbsd doesn't do much for color
-        # some others may..
-        export CLICOLOR=1
-        ;;
-esac
 
 # virtualenvwrapper stuff
 VENVW="$(which virtualenvwrapper.sh 2>/dev/null)"
@@ -152,6 +165,4 @@ if [ -d ~/bin ] ; then
     export PATH="${PATH}:${HOME}/bin"
 fi
 
-# custom vars
-export MOZ_DISABLE_PANGO=1
 
