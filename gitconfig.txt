@@ -23,6 +23,7 @@
     whitespace = strip
 [core]
     editor = vim
-    pager = less -FSX
-	#autocrlf = input
+    #pager = less -FSX
+    pager = less -FSRX +'/^---'
+    #autocrlf = input
 

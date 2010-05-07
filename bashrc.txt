@@ -1,5 +1,7 @@
+# If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# If this is an xterm set the title to user@host:dir
 case $TERM in
     xterm*)
         PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME%%.*}\007"'
@@ -10,10 +12,12 @@ case $TERM in
     *) ;;
 esac
 
+# fucntion to show git branch
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 } 
 
+# set ps1 to show git branch
 PS1='\u@\h:\w$(parse_git_branch)\$ '
 
 # check the window size after each command and, if necessary,
@@ -36,7 +40,7 @@ export HISTCONTROL="ignorespace:erasedups"
 # also ignores any command starting with a space
 export HISTIGNORE="&:l[ls]:[bf]g:exit:[ \t]*"
 # disable saving of history -- only make history per/bash process
-unset HISTFILE
+#unset HISTFILE
 
 ## enable colors in grep ##
 export GREP_OPTIONS='--color=auto'
@@ -64,7 +68,8 @@ export LESS="-Ri"
 export GPG_TTY=$(tty)
 
 ## pull in gpg agent env var
-if [ -f "$HOME/.gpg-agent-info" ]; then
+GPGAGENT=$(which gpg-agent 2>/dev/null)
+if [ $? -eq 0 ] && [ -f "$HOME/.gpg-agent-info" ]; then
     . "$HOME/.gpg-agent-info"
     export GPG_AGENT_INFO
 fi
@@ -74,6 +79,10 @@ case $(uname -s) in
     Darwin)
         ## enable color for LS ##
         export CLICOLOR=1
+
+        # aliases
+        alias ls='ls -p'
+        alias locate='mdfind -name'
 
         ## macports stuff ##
         if [ -x /opt/local/bin/port ]; then
@@ -98,7 +107,7 @@ case $(uname -s) in
         fi
 
         ## enable color for LS ##
-        alias ls='ls --color=auto'
+        alias ls='ls -p --color=auto'
 
         ## dircolors stuff ##
         #[ -x /usr/bin/dircolors ] && eval "`dircolors -b`"
@@ -120,8 +129,19 @@ case $(uname -s) in
         ;;
 esac
 
+# virtualenvwrapper stuff
+if [ -e $(which virtualenvwrapper.sh) ]; then
+    source $(which virtualenvwrapper.sh)
+    export WORKON_HOME=$HOME/.virtualenvs
+    if [ -e $(which pip) ]; then
+        export PIP_VIRTUALENV_BASE=$WORKON_HOME
+        # prob don't need this. might be nice though.
+        # eval `pip completion --bash`
+    fi
+fi
+
 ## add some handy aliases ##
-alias ll='ls -lh'
+alias ll='ls -plh'
 alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
 alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
 alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
@@ -130,3 +150,7 @@ alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
 if [ -d ~/bin ] ; then
     export PATH="${PATH}:${HOME}/bin"
 fi
+
+# custom vars
+export MOZ_DISABLE_PANGO=1
+
