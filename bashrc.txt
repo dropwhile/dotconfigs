@@ -15,8 +15,6 @@ parse_git_branch() {
 ##############################
 case $(uname -s) in
     Darwin)
-        ### start darwin specific bashrc
-
         # aliases
         alias ls='ls -p'
         alias locate='mdfind -name'
@@ -34,9 +32,7 @@ case $(uname -s) in
             [ -f /opt/local/etc/bash_completion ] && . /opt/local/etc/bash_completion
         fi
         ;;
-        ### end darwin specific bashrc
     Linux)
-        ### start linux specific bashrc
         if [ -e /etc/redhat-release ]; then
             # fix redhat goofy strip paths from PATH thing.
             PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
@@ -54,7 +50,6 @@ case $(uname -s) in
         ## enable bash completion ##
         [ -f /etc/bash_completion ] && . /etc/bash_completion
         ;;
-        ### end linux specific bashrc
 esac
 
 ##########################
