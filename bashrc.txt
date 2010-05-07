@@ -141,7 +141,7 @@ if [ -e $(which virtualenvwrapper.sh) ]; then
 fi
 
 ## add some handy aliases ##
-alias ll='ls -plh'
+alias ll='ls -lh'
 alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
 alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
 alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
