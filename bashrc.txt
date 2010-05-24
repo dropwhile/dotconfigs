@@ -100,7 +100,7 @@ export HISTCONTROL="ignorespace:erasedups"
 # suppress duplicate commands, the simple invocation of 'ls' without any
 # arguments, and the shell built-ins bg, fg, and exit
 # also ignores any command starting with a space
-export HISTIGNORE="&:l[ls]:[bf]g:exit:[ \t]*"
+export HISTIGNORE="&:l[ls]:[bf]g:exit"
 # disable saving of history -- only make history per/bash process
 #unset HISTFILE
 
@@ -146,13 +146,14 @@ if [ -e "${VENVW}" ]; then
     export WORKON_HOME=$HOME/.virtualenvs
     if [ -e "$(which pip 2>/dev/null)" ]; then
         export PIP_VIRTUALENV_BASE=$WORKON_HOME
+        export PIP_REQUIRE_VIRTUALENV=true
         # prob don't need this. might be nice though.
         # eval `pip completion --bash`
     fi
 fi
 
 ## add some handy aliases ##
-alias ll='ls -lh'
+alias ll='ls -plh'
 alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
 alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
 alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
