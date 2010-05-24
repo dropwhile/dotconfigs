@@ -1,8 +1,11 @@
 [user]
-    #name = 
-    #email = 
+    name = elij
+    email = 
 [alias]
     co = checkout
+    qlog = log --pretty=oneline --abbrev-commit --graph --decorate
+    wdiff = diff --color-words
+    wshow = show --color-words
 [color]
     ui = auto
 [branch]
@@ -23,7 +26,6 @@
     whitespace = strip
 [core]
     editor = vim
-    #pager = less -FSX
-    pager = less -FSRX +'/^---'
+    pager = less -+$LESS -FRSX +'/^---'
     #autocrlf = input
 
