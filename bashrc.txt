@@ -31,6 +31,16 @@ case $(uname -s) in
             ## bash_completion if installed ##
             [ -f /opt/local/etc/bash_completion ] && . /opt/local/etc/bash_completion
         fi
+        # function to go to the directory of the topmost open
+        # finder folder
+        # from http://www.macosxhints.com/article.php?story=20060719155640762
+        function ff { osascript -e 'tell application "Finder"'\
+            -e "if (${1-1} <= (count Finder windows)) then"\
+            -e "get POSIX path of (target of window ${1-1} as alias)"\
+            -e 'else' -e 'get POSIX path of (desktop as alias)'\
+            -e 'end if' -e 'end tell'; };\
+
+        function cdff { cd "$(ff $@)"; };
         ;;
     Linux)
         if [ -e /etc/redhat-release ]; then
