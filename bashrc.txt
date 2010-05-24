@@ -8,7 +8,7 @@
 # fucntion to show git branch
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-} 
+}
 
 ##############################
 #### start os specific section
@@ -57,7 +57,7 @@ case $(uname -s) in
 
         # make less more friendly for non-text input files, see lesspipe(1)
         [ -x "$(which lesspipe 2>/dev/null)" ] && eval "$(lesspipe)"
-        
+
         ## enable bash completion ##
         [ -f /etc/bash_completion ] && . /etc/bash_completion
         ;;
