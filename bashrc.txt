@@ -25,7 +25,7 @@ case $(uname -s) in
             export MANPATH=/opt/local/share/man:$MANPATH
 
             ## lesspipe if installed ##
-            LESSPIPEX="$(which lesspipe.sh 2>/dev/null)"
+            LESSPIPEX="$(type -p lesspipe.sh)"
             [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 
             ## bash_completion if installed ##
@@ -56,7 +56,7 @@ case $(uname -s) in
         export LS_COLORS='no=00:fi=00:di=34;40:ln=35;40:pi=33;40:so=36;40:bd=40;33;01:cd=40;33;01:or=35;40:mi=41;30;01:ex=31;40:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:';
 
         # make less more friendly for non-text input files, see lesspipe(1)
-        [ -x "$(which lesspipe 2>/dev/null)" ] && eval "$(lesspipe)"
+        type -p lesspipe 1>&- && eval "$(lesspipe)"
 
         ## enable bash completion ##
         [ -f /etc/bash_completion ] && . /etc/bash_completion
@@ -79,8 +79,14 @@ case $TERM in
 esac
 
 # set ps1 to show git branch, using previously defined
-# function
-PS1='\u@\h:\w$(parse_git_branch)\$ '
+# function. Also show different host color if over ssh.
+# visual queue = winrar
+# ( idea lifted from phrakture. pew pew! )
+if [ -z "$SSH_TTY" ]; then
+    PS1='\u@\h:\w$(parse_git_branch)\$ '
+else
+    PS1='\u\[\033[37m\]@\h\[\033[m\]:\w$(parse_git_branch)\$ '
+fi
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -131,20 +137,22 @@ export GPG_TTY=$(tty)
 
 # other environment vars
 export MOZ_DISABLE_PANGO=1
+export FIREFOX_DSP=none
+export OOO_FORCE_DESKTOP=gnome
 export CLICOLOR=1
 
 ## pull in gpg agent env var
-if [ -n "$(which gpg-agent 2>/dev/null)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
+if [ -n "$(type -p gpg-agent)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
     . "$HOME/.gpg-agent-info"
     export GPG_AGENT_INFO
 fi
 
 # virtualenvwrapper stuff
-VENVW="$(which virtualenvwrapper.sh 2>/dev/null)"
+VENVW="$(type -p virtualenvwrapper.sh)"
 if [ -e "${VENVW}" ]; then
     source "${VENVW}"
     export WORKON_HOME=$HOME/.virtualenvs
-    if [ -e "$(which pip 2>/dev/null)" ]; then
+    if [ -e "$(type -p pip)" ]; then
         export PIP_VIRTUALENV_BASE=$WORKON_HOME
         export PIP_REQUIRE_VIRTUALENV=true
         # prob don't need this. might be nice though.
