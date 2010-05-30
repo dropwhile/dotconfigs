@@ -9,12 +9,6 @@ export OS=$(uname -s)
 #### function defs
 #######################
 
-###### general
-# fucntion to show git branch
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-
 ###### os specific
 case $OS in
     Darwin)
@@ -33,10 +27,17 @@ case $OS in
         ;;
 esac
 
+###### general
+# fucntion to show git branch
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
 ############################
 #### environment settings
 ############################
 
+###### os specific
 case $OS in
     Darwin)
         export COPYFILE_DISABLE='true'
@@ -71,32 +72,7 @@ case $OS in
         ;;
 esac
 
-##########################
-#### aliases
-##########################
-## os specific
-case $OS in
-    Darwin)
-        alias locate='mdfind -name'
-        alias ls='ls -p'
-        ;;
-    Linux)
-        alias ls='ls --color=auto -p'
-        ;;
-esac
-
-### general
-alias l.='ls -d .*'
-alias ll='ls -lh'
-
-alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
-alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
-alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
-
-##########################
-#### start general section
-##########################
-
+###### general
 # If this is an xterm set the title to user@host:dir
 case $TERM in
     xterm*)
@@ -194,3 +170,25 @@ fi
 if [ -d ~/bin ] ; then
     export PATH="${PATH}:${HOME}/bin"
 fi
+
+##########################
+#### aliases
+##########################
+## os specific
+case $OS in
+    Darwin)
+        alias locate='mdfind -name'
+        alias ls='ls -p'
+        ;;
+    Linux)
+        alias ls='ls --color=auto -p'
+        ;;
+esac
+
+### general
+alias l.='ls -d .*'
+alias ll='ls -lh'
+
+alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
+alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
+alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
