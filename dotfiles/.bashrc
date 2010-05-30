@@ -1,29 +1,45 @@
+# vim: set ft=sh:
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-########################
-#### start function defs
-########################
+# detect os
+export OS=$(uname -s)
 
+#######################
+#### function defs
+#######################
+
+###### general
 # fucntion to show git branch
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
-##############################
-#### start os specific section
-##############################
-case $(uname -s) in
+###### os specific
+case $OS in
     Darwin)
-        # aliases
-        alias ls='ls -p'
-        alias locate='mdfind -name'
+        # function to go to the directory of the topmost open
+        # finder folder
+        # from http://www.macosxhints.com/article.php?story=20060719155640762
+       function ff { osascript -e 'tell application "Finder"'\
+          -e "if (${1-1} <= (count Finder windows)) then"\
+          -e "get POSIX path of (target of window ${1-1} as alias)"\
+          -e 'else' -e 'get POSIX path of (desktop as alias)'\
+          -e 'end if' -e 'end tell'; };\
+        
+        function cdff { cd "$(ff $@)"; };
+        ;;
+    Linux)
+        ;;
+esac
 
-        # envs
-        ## disable resource fork tar'ing
+############################
+#### environment settings
+############################
+
+case $OS in
+    Darwin)
         export COPYFILE_DISABLE='true'
-
-        ## macports stuff ##
         if [ -x /opt/local/bin/port ]; then
             export PATH=/opt/local/bin:/opt/local/sbin:$PATH
             export MANPATH=/opt/local/share/man:$MANPATH
@@ -33,27 +49,15 @@ case $(uname -s) in
             [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 
             ## bash_completion if installed ##
-            [ -f /opt/local/etc/bash_completion ] && . /opt/local/etc/bash_completion
+            [ -f /opt/local/etc/bash_completion ] && 
+                . /opt/local/etc/bash_completion
         fi
-        # function to go to the directory of the topmost open
-        # finder folder
-        # from http://www.macosxhints.com/article.php?story=20060719155640762
-        function ff { osascript -e 'tell application "Finder"'\
-            -e "if (${1-1} <= (count Finder windows)) then"\
-            -e "get POSIX path of (target of window ${1-1} as alias)"\
-            -e 'else' -e 'get POSIX path of (desktop as alias)'\
-            -e 'end if' -e 'end tell'; };\
-
-        function cdff { cd "$(ff $@)"; };
         ;;
     Linux)
         if [ -e /etc/redhat-release ]; then
-            # fix redhat goofy strip paths from PATH thing.
+        # fix redhat goofy strip paths from PATH thing.
             PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
         fi
-
-        ## enable color for LS ##
-        alias ls='ls -p --color=auto'
 
         ## dircolors stuff ##
         #[ -x /usr/bin/dircolors ] && eval "`dircolors -b`"
@@ -66,6 +70,28 @@ case $(uname -s) in
         [ -f /etc/bash_completion ] && . /etc/bash_completion
         ;;
 esac
+
+##########################
+#### aliases
+##########################
+## os specific
+case $OS in
+    Darwin)
+        alias locate='mdfind -name'
+        alias ls='ls -p'
+        ;;
+    Linux)
+        alias ls='ls --color=auto -p'
+        ;;
+esac
+
+### general
+alias l.='ls -d .*'
+alias ll='ls -lh'
+
+alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
+alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
+alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
 
 ##########################
 #### start general section
@@ -164,15 +190,7 @@ if [ -e "${VENVW}" ]; then
     fi
 fi
 
-## add some handy aliases ##
-alias ll='ls -plh'
-alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
-alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
-alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
-
 # add my own bin to the END of path
 if [ -d ~/bin ] ; then
     export PATH="${PATH}:${HOME}/bin"
 fi
-
-
