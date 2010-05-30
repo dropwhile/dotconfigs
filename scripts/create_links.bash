@@ -6,12 +6,12 @@ for dotfile in ${NDIR}/dotfiles/*; do
     FFILE="$(basename "${dotfile}")"
     OFILE="${HOME}/${FFILE}"
     if [ -h "${OFILE}" ]; then
-        echo "${OFILE} is already linked"
+        echo "x> ${OFILE} is already linked"
     elif [ -f "${OFILE}" ] || [ -d "${OFILE}" ]; then
-        echo "${OFILE} already exists, but is not a link"
-        echo "remove file and run again to link"
+        echo "-> ${OFILE} already exists, but is not a link"
+        echo "   remove file and run again to link"
     else
-        echo "linking ${OFILE} to ${dotfile}"
+        echo "o> linking ${OFILE} to ${dotfile}"
         ln -s "${dotfile}" "${OFILE}"
     fi
 done
