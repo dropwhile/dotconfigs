@@ -19,6 +19,10 @@ case $(uname -s) in
         alias ls='ls -p'
         alias locate='mdfind -name'
 
+        # envs
+        ## disable resource fork tar'ing
+        export COPYFILE_DISABLE='true'
+
         ## macports stuff ##
         if [ -x /opt/local/bin/port ]; then
             export PATH=/opt/local/bin:/opt/local/sbin:$PATH
