@@ -6,7 +6,7 @@ host *
     compression yes
     forwardagent no
     controlmaster auto
-    controlpath ~/.ssh/master-%r@%h:%p
+    controlpath ~/.ssh/cm/master-%r@%h:%p
     hashknownhosts yes
     stricthostkeychecking ask
     ServerAliveInterval 300
