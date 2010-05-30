@@ -1,6 +1,7 @@
 [user]
     name = elij
-    email = 
+    # email set in env var
+    #email = 
 [alias]
     co = checkout
     qlog = log --pretty=oneline --abbrev-commit --graph --decorate
