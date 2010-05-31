@@ -33,8 +33,8 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
-update_myconfigs() {
-    (cd ~/.myconfigs/ && git pull)
+dotfiles_update() {
+    (cd ~/.myconfigs/ && git pull && ~/.myconfigs/scripts/create_links.bash)
 }
 
 ############################
