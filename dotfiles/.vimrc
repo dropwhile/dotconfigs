@@ -111,6 +111,8 @@ autocmd BufReadPost *
 " For all text files set 'textwidth' to 78 characters.
 autocmd FileType text setlocal textwidth=78
 
+" highlight twisted.tac files as python
+autocmd BufRead,BufNewFile *.tac set ft=python
 
 " no clue what this does anymore...but umm... it looks neat. Wild!
 set wildchar=<tab>
