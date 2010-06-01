@@ -50,7 +50,7 @@ parse_git_branch() {
 }
 
 dotfiles_update() {
-    (cd ~/.myconfigs/ && git pull && ~/.myconfigs/scripts/create_links.bash)
+    $HOME/.myconfigs/scripts/dotfiles_update.bash
 }
 
 get_whois_registrant() {
