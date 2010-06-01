@@ -5,6 +5,9 @@
 # detect os
 export OS=$(uname -s)
 
+## load local env vars if they exist
+[ -f $HOME/.bashrc_local ] && . bashrc_local
+
 #######################
 #### function defs
 #######################
@@ -216,3 +219,7 @@ alias ll='ls -lh'
 alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
 alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
 alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
+
+## load any local overrides at the end
+[ -f $HOME/.bashrc_over ] && . bashrc_over
+
