@@ -188,6 +188,7 @@ if [ -e "${VENVW}" ]; then
     if [ -e "$(type -p pip)" ]; then
         export PIP_VIRTUALENV_BASE=$WORKON_HOME
         export PIP_REQUIRE_VIRTUALENV=true
+        export PIP_LOG_FILE=/dev/null
         # prob don't need this. might be nice though.
         # eval `pip completion --bash`
     fi
