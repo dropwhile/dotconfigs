@@ -97,6 +97,10 @@ case $OS in
         ## enable bash completion ##
         [ -f /etc/bash_completion ] && . /etc/bash_completion
         ;;
+    FreeBSD)
+        PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+        export BLOCKSIZE=K;
+        ;;
 esac
 
 ###### general
