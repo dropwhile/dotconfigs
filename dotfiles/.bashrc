@@ -215,6 +215,9 @@ case $OS in
     Linux)
         alias ls='ls --color=auto -p'
         ;;
+    FreeBSD)
+        alias psf='ps -wwfaux'
+        ;;
 esac
 
 ### general
