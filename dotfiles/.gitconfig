@@ -28,6 +28,7 @@
     signingkey = A3925B9E
 [alias]
     co = checkout
+    unstage = reset HEAD
     qlog = log --pretty=oneline --abbrev-commit --graph --decorate
     wdiff = diff --color-words
     wshow = show --color-words
