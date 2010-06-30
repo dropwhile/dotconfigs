@@ -114,6 +114,9 @@ autocmd FileType text setlocal textwidth=78
 " highlight twisted.tac files as python
 autocmd BufRead,BufNewFile *.tac set ft=python
 
+" disable expandtab in makefile
+autocmd FileType make set noet
+
 " no clue what this does anymore...but umm... it looks neat. Wild!
 set wildchar=<tab>
 set wildmenu
