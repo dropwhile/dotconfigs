@@ -91,9 +91,10 @@ inoremap # X<BS>#
 set pastetoggle=<F11>
 
 "set completeopt=menu
-"autocmd FileType ruby set omnifunc=rubycomplete#Complete
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
 
+""""""
+"""""" FileType support and file detection autocommands 
+""""""
 "The following removes extra space at ends of lines, for certain file types
 "autocmd BufWritePre *.py normal m`:%s/\s\+$//e `` 
 "autocmd BufWritePre *.py call StripWhitespace()
@@ -110,9 +111,6 @@ autocmd BufReadPost *
 
 " For all text files set 'textwidth' to 78 characters.
 autocmd FileType text setlocal textwidth=78
-
-" highlight twisted.tac files as python
-autocmd BufRead,BufNewFile *.tac set ft=python
 
 " disable expandtab in makefile
 autocmd FileType make set noet
