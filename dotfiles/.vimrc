@@ -123,6 +123,10 @@ set wildmode=longest:full,full
 " GPG Stuff
 let g:GPGUseAgent = 1
 
+" explore
+let g:netrw_altv = 1
+let g:netrw_alto = 1
+
 " ramaps
 inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 

@@ -84,7 +84,7 @@ case $OS in
     Linux)
         if [ -e /etc/redhat-release ]; then
         # fix redhat goofy strip paths from PATH thing.
-            PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+            PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
         fi
 
         ## dircolors stuff ##
