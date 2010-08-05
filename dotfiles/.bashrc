@@ -69,6 +69,7 @@ case $OS in
     Darwin)
         export COPYFILE_DISABLE='true'
         if [ -x /opt/local/bin/port ]; then
+            # purposefully putting opt paths first
             export PATH=/opt/local/bin:/opt/local/sbin:$PATH
             export MANPATH=/opt/local/share/man:$MANPATH
 
@@ -84,7 +85,7 @@ case $OS in
     Linux)
         if [ -e /etc/redhat-release ]; then
         # fix redhat goofy strip paths from PATH thing.
-            PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin
+            PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
         fi
 
         ## dircolors stuff ##
@@ -98,7 +99,7 @@ case $OS in
         [ -f /etc/bash_completion ] && . /etc/bash_completion
         ;;
     FreeBSD)
-        PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+        PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
         export BLOCKSIZE=K;
         ;;
 esac
