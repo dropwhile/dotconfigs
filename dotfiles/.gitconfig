@@ -2,6 +2,7 @@
     whitespace = fix
 [branch]
     autosetupmerge = true
+    autosetuprebase = remote
 [color]
     ui = auto
 [core]
@@ -34,3 +35,6 @@
     wshow = show --color-words
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
     lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --branches --remotes
+    st = status -s
+[push]
+	default = tracking
