@@ -7,6 +7,7 @@ host *
     forwardagent no
     controlmaster auto
     controlpath ~/.ssh/cm/master-%r@%h:%p
+    controlpersist 5m
     hashknownhosts yes
     stricthostkeychecking ask
     ServerAliveInterval 300
