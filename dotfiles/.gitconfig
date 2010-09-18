@@ -15,7 +15,7 @@
     numbered = true
     attach = true
 [merge]
-    tool = vimdiff
+    tool = vimdiff3
 [sendemail]
     smtpserver = /usr/local/bin/msmtp
     suppressfrom = true
@@ -37,4 +37,8 @@
     lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --branches --remotes
     st = status -s
 [push]
-	default = tracking
+    default = tracking
+[mergetool "vimdiff3"]
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool "gvimdiff3"]
+    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
