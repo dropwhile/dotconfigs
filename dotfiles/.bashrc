@@ -68,6 +68,7 @@ get_whois_registrant() {
 case $OS in
     Darwin)
         export COPYFILE_DISABLE='true'
+        export LSCOLORS='gxfxcxdxbxegedabagacad'
         if [ -x /opt/local/bin/port ]; then
             # purposefully putting opt paths first
             export PATH=/opt/local/bin:/opt/local/sbin:$PATH
