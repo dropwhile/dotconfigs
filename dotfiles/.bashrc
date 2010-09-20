@@ -95,6 +95,12 @@ case $OS in
 
         # make less more friendly for non-text input files, see lesspipe(1)
         type -p lesspipe 1>&- && eval "$(lesspipe)"
+        ## if the above fails, try this too.
+        if [ $? -ne 0 ]; then
+            ## lesspipe if installed ##
+            LESSPIPEX="$(type -p lesspipe.sh)"
+            [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
+        fi
 
         ## enable bash completion ##
         [ -f /etc/bash_completion ] && . /etc/bash_completion
@@ -188,7 +194,7 @@ if [ -n "$(type -p gpg-agent)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
 fi
 
 # virtualenvwrapper stuff
-VENVW="$(type -p virtualenvwrapper.sh)"
+[ -n "${VENVW}" ] || VENVW="$(type -p virtualenvwrapper.sh)"
 if [ -e "${VENVW}" ]; then
     source "${VENVW}"
     export WORKON_HOME=$HOME/.virtualenvs
