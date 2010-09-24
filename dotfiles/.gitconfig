@@ -9,6 +9,7 @@
     editor = vim
     pager = less -+$LESS -FRSX +'/^---'
     autocrlf = input
+    excludesfile = ~/.gitignore
 [format]
     subjectprefix = PATCH
     suffix = .patch.txt
