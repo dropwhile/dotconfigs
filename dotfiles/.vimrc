@@ -62,21 +62,21 @@ set background=dark
 colorscheme desert
 
 "highlight LineNr  term=NONE
-"hi Normal  ctermfg=black       ctermbg=white
-"hi Comment ctermfg=lightgreen
-"hi Function    ctermfg=lightred
-"hi Statement   ctermfg=lightblue
-"hi Include ctermfg=lightblue
+"hi Normal          ctermfg=black       ctermbg=white
+"hi Comment         ctermfg=lightgreen
+"hi Function        ctermfg=lightred
+"hi Statement       ctermfg=lightblue
+"hi Include         ctermfg=lightblue
 "hi htmlSpecialChar ctermfg=yellow
-"hi Define  ctermfg=lightblue
-"hi Constant    ctermfg=magenta
-"hi Special ctermfg=white
-"hi Type    ctermfg=lightblue
+"hi Define          ctermfg=lightblue
+"hi Constant        ctermfg=magenta
+"hi Special         ctermfg=white
+"hi Type            ctermfg=lightblue
 
-hi Pmenu          cterm=NONE   ctermfg=lightblue ctermbg=lightgrey
-hi PmenuSel       cterm=BOLD   ctermfg=yellow    ctermbg=darkgrey
-hi PmenuSbar      cterm=BOLD   ctermfg=lightblue ctermbg=lightgrey
-hi PmenuThumb     cterm=BOLD   ctermfg=cyan      ctermbg=darkgrey
+hi Pmenu            cterm=NONE  ctermfg=lightblue   ctermbg=lightgrey
+hi PmenuSel         cterm=BOLD  ctermfg=yellow      ctermbg=darkgrey
+hi PmenuSbar        cterm=BOLD  ctermfg=lightblue   ctermbg=lightgrey
+hi PmenuThumb       cterm=BOLD  ctermfg=cyan        ctermbg=darkgrey
 
 " function to strip trailing whitespace
 function! StripWhitespace()
@@ -130,3 +130,9 @@ let g:netrw_alto = 1
 " ramaps
 inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 
+if has('gui_running')
+    set gfn:Monaco:h11
+    set noantialias
+    set columns=80
+    set lines=30
+endif
