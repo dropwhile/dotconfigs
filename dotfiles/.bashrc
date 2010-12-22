@@ -1,5 +1,12 @@
 # vim: set ft=sh:
-# If not running interactively, don't do anything
+
+## rvm
+# This loads RVM into a shell session.
+# always source this file even for non-interactive shells
+# rvm requirement apparently for ruby exec stuff
+[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
+
+# If not running interactively, don't do anything else
 [ -z "$PS1" ] && return
 
 # detect os
@@ -239,4 +246,3 @@ alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
 
 ## load any local overrides at the end
 [ -f $HOME/.bashrc_over ] && . $HOME/.bashrc_over
-
