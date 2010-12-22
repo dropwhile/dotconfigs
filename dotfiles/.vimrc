@@ -135,4 +135,6 @@ if has('gui_running')
     set noantialias
     set columns=80
     set lines=30
+    set guioptions-=T
+    set mouse=a "enable visual mouse mode in gvim/macvim
 endif
