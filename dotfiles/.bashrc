@@ -13,7 +13,7 @@
 export OS=$(uname -s)
 
 ## load local env vars if they exist
-[ -f $HOME/.bashrc_local ] && . $HOME/.bashrc_local
+[ -f $HOME/.bashrc_pre ] && . $HOME/.bashrc_pre
 
 #######################
 #### function defs
@@ -245,4 +245,4 @@ alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
 alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
 
 ## load any local overrides at the end
-[ -f $HOME/.bashrc_over ] && . $HOME/.bashrc_over
+[ -f $HOME/.bashrc_post ] && . $HOME/.bashrc_post
