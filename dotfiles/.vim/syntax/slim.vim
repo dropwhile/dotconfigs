@@ -48,6 +48,7 @@ syn match slimJs /^\(\s\+\)\<javascript:\>.*\(\n\1\s.*\)*/ contains=@htmlJavaScr
 syn match slimHaml /^\(\s\+\)\<haml:\>.*\(\n\1\s.*\)*/ contains=@slimHaml,slimFilter
 syn match slimErb  /^\(\s\+\)\<erb:\>.*\(\n\1\s.*\)*/ contains=@slimErb,slimFilter
 
+hi def link slimHtml                   String
 hi def link slimText                   String
 hi def link slimComment                Comment
 hi def link slimFilter                 Special
