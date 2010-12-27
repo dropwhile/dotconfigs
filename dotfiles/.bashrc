@@ -133,7 +133,7 @@ esac
 
 # set ps1 to show git branch, using previously defined
 # function. Also show different host color if over ssh.
-# visual queue = winrar
+# visual cues = winrar
 # ( idea lifted from phrakture. pew pew! )
 if [ -z "$SSH_TTY" ]; then
     PS1='\u@\h:\w$(parse_git_branch)\$ '
