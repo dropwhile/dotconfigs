@@ -209,10 +209,20 @@ if [ -e "${VENVW}" ]; then
         export PIP_VIRTUALENV_BASE=$WORKON_HOME
         export PIP_REQUIRE_VIRTUALENV=true
         export PIP_LOG_FILE=/dev/null
-        # prob don't need this. might be nice though.
-        # eval `pip completion --bash`
     fi
 fi
+
+### load completions if they exist
+# rvm
+#if [ -n "${rvm_selfcontained}" ] && [ -e $HOME/.rvm/scripts/completion ]; then
+#    . $HOME/.rvm/scripts/completion
+#fi
+
+#if [ -n "${PIP_REQUIRE_VIRTUALENV}" ]; then
+#    # prob don't need this. might be nice though.
+#    # eval `pip completion --bash`
+#fi
+
 
 # add my own bin to the END of path
 if [ -d ~/bin ] ; then
