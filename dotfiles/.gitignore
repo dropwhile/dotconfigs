@@ -1,2 +1,9 @@
+# mac meta files
+.DS_Store
+
+# python byte-compiled files
 *.py[co]
+
+# twisted trial temp dir
 /_trial_temp
+
