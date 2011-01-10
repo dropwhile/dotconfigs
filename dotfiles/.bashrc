@@ -15,6 +15,42 @@ export OS=$(uname -s)
 ## load local env vars if they exist
 [ -f $HOME/.bashrc_pre ] && . $HOME/.bashrc_pre
 
+## set some color variables to make things a bit easier to read later
+TXTBLK='\e[0;30m' # Black - Regular
+TXTRED='\e[0;31m' # Red
+TXTGRN='\e[0;32m' # Green
+TXTYLW='\e[0;33m' # Yellow
+TXTBLU='\e[0;34m' # Blue
+TXTPUR='\e[0;35m' # Purple
+TXTCYN='\e[0;36m' # Cyan
+TXTWHT='\e[0;37m' # White
+BLDBLK='\e[1;30m' # Black - Bold
+BLDRED='\e[1;31m' # Red
+BLDGRN='\e[1;32m' # Green
+BLDYLW='\e[1;33m' # Yellow
+BLDBLU='\e[1;34m' # Blue
+BLDPUR='\e[1;35m' # Purple
+BLDCYN='\e[1;36m' # Cyan
+BLDWHT='\e[1;37m' # White
+UNDBLK='\e[4;30m' # Black - Underline
+UNDRED='\e[4;31m' # Red
+UNDGRN='\e[4;32m' # Green
+UNDYLW='\e[4;33m' # Yellow
+UNDBLU='\e[4;34m' # Blue
+UNDPUR='\e[4;35m' # Purple
+UNDCYN='\e[4;36m' # Cyan
+UNDWHT='\e[4;37m' # White
+BAKBLK='\e[40m' # Black - Background
+BAKRED='\e[41m' # Red - Background
+BAKGRN='\e[42m' # Green - Background
+BAKYLW='\e[43m' # Yellow - Background
+BAKBLU='\e[44m' # Blue - Background
+BAKPUR='\e[45m' # Purple - Background
+BAKCYN='\e[46m' # Cyan - Background
+BAKWHT='\e[47m' # White - Background
+TXTRST='\e[0m' # Text Reset
+
+
 #######################
 #### function defs
 #######################
@@ -136,9 +172,9 @@ esac
 # visual cues = winrar
 # ( idea lifted from phrakture. pew pew! )
 if [ -z "$SSH_TTY" ]; then
-    PS1='\u@\h:\w$(parse_git_branch)\$ '
+    PS1="${TXTWHT}\u@\h${TXTRST}:\w$(parse_git_branch)\$ "
 else
-    PS1='\u\[\033[37m\]@\h\[\033[m\]:\w$(parse_git_branch)\$ '
+    PS1="${TXTYLW}\u@\h${TXTRST}:\w$(parse_git_branch)\$ "
 fi
 
 # check the window size after each command and, if necessary,
