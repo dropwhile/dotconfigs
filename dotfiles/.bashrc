@@ -99,9 +99,9 @@ set_bash_prompt() {
     # visual cues = winrar
     # ( idea lifted from phrakture. pew pew! )
     if [ -z "$SSH_TTY" ]; then
-        PS1="${TXTWHT}\u@\h${TXTRST}:\w$(parse_git_branch)\$ "
+        PS1="\[${TXTWHT}\u@\h${TXTRST}:\w$(parse_git_branch)\$ \]"
     else
-        PS1="${TXTYLW}\u@\h${TXTRST}:\w$(parse_git_branch)\$ "
+        PS1="\[${TXTYLW}\u@\h${TXTRST}:\w$(parse_git_branch)\$ \]"
     fi
 }
 
