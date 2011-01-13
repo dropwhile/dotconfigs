@@ -53,8 +53,12 @@ esac
 
 ###### general
 # fucntion to show git branch
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+# later on bash-completion will pull in git-completion, if it is installed
+# which will override this function. So just provide this as a fallback in 
+# case __git_ps1 doesn't exist later....
+__git_ps1() {
+    ref=$(git symbolic-ref -q HEAD 2> /dev/null) || return
+    printf "${1:- (%s)}" "${ref#refs/heads/}"
 }
 
 # set prompt
@@ -99,9 +103,9 @@ set_bash_prompt() {
     # visual cues = winrar
     # ( idea lifted from phrakture. pew pew! )
     if [ -z "$SSH_TTY" ]; then
-        PS1="\[${TXTWHT}\]\u@\h\[${TXTRST}\]:\w\$(parse_git_branch)\$ "
+        PS1="\[${TXTWHT}\]\u@\h\[${TXTRST}\]:\w\$(__git_ps1 '(%s)')\$ "
     else
-        PS1="\[${TXTYLW}\]\u@\h\[${TXTRST}\]:\w\$(parse_git_branch)\$ "
+        PS1="\[${TXTYLW}\]\u@\h\[${TXTRST}\]:\w\$(__git_ps1 '(%s)')\$ "
     fi
 }
 
@@ -111,7 +115,7 @@ dotfiles_update() {
 
 get_whois_registrant() {
     while read domain; do
-        echo "#### ${domain} ####"
+        printf "#### ${domain} ####\n"
         whois ${domain} | grep -A6 -E "(Registrant|Registration)"
     done
 }
