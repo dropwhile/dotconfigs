@@ -99,9 +99,9 @@ set_bash_prompt() {
     # visual cues = winrar
     # ( idea lifted from phrakture. pew pew! )
     if [ -z "$SSH_TTY" ]; then
-        PS1="\[${TXTWHT}\]\u@\h\[${TXTRST}\]:\w$(parse_git_branch)\$ "
+        PS1="\[${TXTWHT}\]\u@\h\[${TXTRST}\]:\w\$(parse_git_branch)\$ "
     else
-        PS1="\[${TXTYLW}\]\u@\h\[${TXTRST}\]:\w$(parse_git_branch)\$ "
+        PS1="\[${TXTYLW}\]\u@\h\[${TXTRST}\]:\w\$(parse_git_branch)\$ "
     fi
 }
 
@@ -117,7 +117,14 @@ get_whois_registrant() {
 }
 
 json_pretty() {
-    cat $@ | python -mjson.tool
+    local PY26=$(type -p python2.6)
+    local PY27=$(type -p python2.7)
+    # prefer python27 if it exists
+    if [ -x "${PY27}" ]; then
+        cat $@ | "${PY27}" -mjson.tool
+    elif [ -x "${PY26}" ]; then
+        cat $@ | "${PY27}" -mjson.tool
+    fi
 }
 
 ############################
