@@ -116,6 +116,10 @@ get_whois_registrant() {
     done
 }
 
+json_pretty() {
+    cat $@ | python -mjson.tool
+}
+
 ############################
 #### environment settings
 ############################
