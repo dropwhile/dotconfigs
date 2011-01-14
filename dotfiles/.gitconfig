@@ -10,6 +10,7 @@
     pager = less -+$LESS -FRSX +'/^---'
     autocrlf = input
     excludesfile = ~/.gitignore
+	safecrlf = warn
 [format]
     subjectprefix = PATCH
     suffix = .patch.txt
@@ -30,13 +31,15 @@
     signingkey = A3925B9E
 [alias]
     co = checkout
+    st = status -s
     unstage = reset HEAD
-    qlog = log --pretty=oneline --abbrev-commit --graph --decorate
     wdiff = diff --color-words
     wshow = show --color-words
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    type = cat-file -t
+    dump = cat-file -p
+    qlog = log --pretty=oneline --abbrev-commit --graph --decorate
+    lg = log --graph --pretty=format:'%Cred%h%Creset - %Cgreen%ad%Creset |%C(yellow)%d%Creset %s [%an]' --abbrev-commit --date=short
     lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --branches --remotes
-    st = status -s
 [push]
     default = tracking
 [mergetool "vimdiff3"]
