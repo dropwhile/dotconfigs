@@ -27,7 +27,7 @@ hardstatus string '%{= kG}[%{Y}%l%{G}] %50L>%{g}%-Lw%{= ky}%n*%f %t%{= kG}%+Lw%<
 vbell on
 
 # Run everything in UTF-8.
-defutf8 on
+#defutf8 on
 
 # disable multiuser. nobody attaches but me!
 multiuser off
