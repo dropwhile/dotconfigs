@@ -120,6 +120,10 @@ get_whois_registrant() {
     done
 }
 
+services_lookup() {
+    grep -w "${1}" /etc/services
+}
+
 json_pretty() {
     local PY26=$(type -p python2.6)
     local PY27=$(type -p python2.7)
