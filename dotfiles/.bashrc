@@ -125,13 +125,17 @@ services_lookup() {
 }
 
 json_pretty() {
-    local PY26=$(type -p python2.6)
-    local PY27=$(type -p python2.7)
-    # prefer python27 if it exists
-    if [ -x "${PY27}" ]; then
-        cat $@ | "${PY27}" -mjson.tool
-    elif [ -x "${PY26}" ]; then
-        cat $@ | "${PY27}" -mjson.tool
+    PYOK=$(cat <<EOP | python
+import sys
+if sys.version_info[0] > 2:
+    print "ok"
+elif sys.version_info[0] == 2 and sys.version_info[1] >= 6:
+    print "ok"
+else:
+    print "not-ok"
+EOP)
+    if [ "${PYOK}" = "ok" ]; then
+        cat $@ | python -mjson.tool
     fi
 }
 
@@ -243,7 +247,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
-export LESS="-Ri"
+export LESS="RXi"
 
 ## set the gpg tty for helper apps (like gnupg.vim) ##
 export GPG_TTY=$(tty)
