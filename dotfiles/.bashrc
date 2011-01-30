@@ -234,7 +234,9 @@ export GREP_OPTIONS='--color=auto'
 # vim on os x returns a non-zero exit code when called with the short
 # path name. fucks up git & friends. Use full path.
 export GIT_EDITOR=vim
-export GIT_PAGER=less
+# pager is set it .gitconfig core.pager
+# setting it here overrides that setting (and subsequent args)
+#export GIT_PAGER=less
 
 ## less specific vars ##
 # turn off .lesshst file
@@ -247,7 +249,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
-export LESS="RXi"
+export LESS="Ri"
 
 ## set the gpg tty for helper apps (like gnupg.vim) ##
 export GPG_TTY=$(tty)
