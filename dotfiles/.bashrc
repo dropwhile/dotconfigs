@@ -52,7 +52,7 @@ case $OS in
 esac
 
 ###### general
-# fucntion to show git branch
+# function to show git branch
 # later on bash-completion will pull in git-completion, if it is installed
 # which will override this function. So just provide this as a fallback in 
 # case __git_ps1 doesn't exist later....
