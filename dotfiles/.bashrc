@@ -308,7 +308,8 @@ case $OS in
         alias ls='ls --color=auto -p'
         ;;
     FreeBSD)
-        alias psf='ps -wwfaux'
+        alias ls='ls -p'
+        alias psf='ps wwfaux'
         ;;
 esac
 
