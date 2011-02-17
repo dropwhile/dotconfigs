@@ -48,3 +48,20 @@ directories
     the dot files for various things. these are symlinked to the `$HOME`
     directory.
 
+
+notes
+=====
+
+-   `.bashrc_pre` and `.bashrc_post` files can be created to handle system 
+    specific configuration. These files are sourced at the beginning, and end 
+    (respectively), of the `.bashrc` file.
+
+    This allows modification of behaviors later in the `.bashrc` file, while
+    keeping that file as system agnostic as possible. For example, to disable
+    virtualenvwrapper for python, I create a `.bashrc_pre` with `export
+    VENVW="disable"` in it.
+
+-   On some systems, the `.bashrc` file can take a while to parse. This is
+    especially the case when loading hooks for rvm *and* virtualenvwrapper.
+    There is only one remote system (a VM) that I notice this on though, and I
+    attribute it to the very slow I/O that system occasionally sees.
