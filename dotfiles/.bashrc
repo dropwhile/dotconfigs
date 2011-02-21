@@ -212,6 +212,10 @@ shopt -s checkwinsize
 # send hup on exit
 shopt -s huponexit
 
+# do not attempt to search the PATH for possible completions when
+# completion is attempted on an empty line.
+shopt -s no_empty_cmd_completion
+
 ## some classic env vars ##
 export EDITOR=vim
 export VISUAL=vim
