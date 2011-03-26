@@ -271,14 +271,19 @@ if [ -n "$(type -p gpg-agent)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
 fi
 
 # virtualenvwrapper stuff
-[ -n "${VENVW}" ] || VENVW="$(type -p virtualenvwrapper.sh)"
-if [ -e "${VENVW}" ]; then
-    source "${VENVW}"
-    export WORKON_HOME=$HOME/.virtualenvs
-    if [ -e "$(type -p pip)" ]; then
-        export PIP_VIRTUALENV_BASE=$WORKON_HOME
-        export PIP_REQUIRE_VIRTUALENV=true
-        export PIP_LOG_FILE=/dev/null
+# only enable when ~/.virtualenvs exists
+if [ -d $HOME/.virtualenvs ]; then
+    [ -n "${VENVW}" ] || VENVW="$(type -p virtualenvwrapper.sh)"
+    if [ -e "${VENVW}" ]; then
+        source "${VENVW}"
+        export WORKON_HOME=$HOME/.virtualenvs
+        if [ -e "$(type -p pip)" ]; then
+            export PIP_VIRTUALENV_BASE=$WORKON_HOME
+            export PIP_REQUIRE_VIRTUALENV=true
+            export PIP_LOG_FILE=/dev/null
+            # prob don't need this. might be nice later at some point though.
+            # eval `pip completion --bash`
+        fi
     fi
 fi
 
@@ -287,12 +292,6 @@ fi
 #if [ -n "${rvm_selfcontained}" ] && [ -e $HOME/.rvm/scripts/completion ]; then
 #    . $HOME/.rvm/scripts/completion
 #fi
-
-#if [ -n "${PIP_REQUIRE_VIRTUALENV}" ]; then
-#    # prob don't need this. might be nice though.
-#    # eval `pip completion --bash`
-#fi
-
 
 # add my own bin to the END of path
 if [ -d ~/bin ] ; then
