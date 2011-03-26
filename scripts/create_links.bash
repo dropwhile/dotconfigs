@@ -22,6 +22,8 @@ dolink() {
         # appears to be a borken symlink. just link it
         echo "x> ${OFILE} already exists, but is a broken a link" >&2
         echo "     overwriting broken symlink" >&2
+        echo "     linking ${OFILE} to " >&2
+        echo "       ${dest_file}" >&2
         ln -f -s "${dest_file}" "${OFILE}"
     elif [ -f "${OFILE}" ] || [ -d "${OFILE}" ]; then
         echo "x> ${OFILE} already exists, but is not a link" >&2
