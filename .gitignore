@@ -1,3 +1,3 @@
-dotfiles/.vim/tmp/
-dotfiles/.vim/.viminfo
-dotfiles/.vim/.netrwhist
+dotfiles/vim/tmp/
+dotfiles/vim/.viminfo
+dotfiles/vim/.netrwhist

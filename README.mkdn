@@ -46,7 +46,9 @@ directories
 -   dotfiles/
     
     the dot files for various things. these are symlinked to the `$HOME`
-    directory.
+    directory and prepended with a `.`.
+
+    example: $HOME/.bashrc -> dotfiles/bashrc
 
 
 notes

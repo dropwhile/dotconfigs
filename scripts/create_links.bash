@@ -10,7 +10,7 @@ dolink() {
     link_dir=$1
     dest_file=$2
     FFILE="$(basename "${dest_file}")"
-    OFILE="${link_dir}/${FFILE}"
+    OFILE="${link_dir}/.${FFILE}"
     if [ -h "${OFILE}" ]; then
         ## just run silently if it is already a symlink
         #echo "-> ${OFILE} is already linked" >&2
