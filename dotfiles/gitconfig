@@ -25,7 +25,6 @@
     suppressfrom = true
     chainreplyto = false
     thread = true
-    compose = true
     confirm = auto
 [user]
     name = elij
