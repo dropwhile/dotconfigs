@@ -16,11 +16,12 @@
     subjectprefix = PATCH
     suffix = .patch.txt
     numbered = true
-    attach = true
+    #attach = true
+    inline = true
 [merge]
     tool = vimdiff3
 [sendemail]
-    smtpserver = /usr/local/bin/msmtp
+    smtpserver = /opt/local/bin/msmtp
     suppressfrom = true
     chainreplyto = false
     thread = true
