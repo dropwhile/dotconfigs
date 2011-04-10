@@ -124,20 +124,28 @@ services_lookup() {
     grep -w "${1}" /etc/services
 }
 
-# check to see if 'json' (node + npm) is present
-# if not, create a work-alike bash function
-if [ -z "$(type -p json)" ]; then
+# function that defines a json function
+define_json_f() {
     # try python
-    if [ -n "$(type -p python2.7 || type -p python2.6)" ]; then
-        json() { python -mjson.tool; }
-    # no python? try ruby
-    elif [ -n "$(type -p ruby)" ]; then
-        if [ "$(ruby -e 'puts RUBY_VERSION')" \> "1.9" ]; then
-            # no python version with mtool.json, so try ruby
-            json() { ruby -r json -e 'jj JSON.parse gets'; }
-        fi
+    local PYV="$(type -p python2.7 || type -p python2.6)"
+    if [ -n "${PYV}" ]; then
+        # use eval because PYV is local so as not to pollute
+        # the global namespace
+        eval "json() { ${PYV} -mjson.tool; }"
+        return
     fi
-fi
+    # no python? try ruby
+    local RBV="$(type -p ruby)"
+    if [ "$(ruby -e 'puts RUBY_VERSION')" \> "1.9" ]; then
+        # no python version with mtool.json, so try ruby
+        json() { ruby -r json -e 'jj JSON.parse gets'; }
+        return
+    fi
+}
+# check to see if 'json' (node + npm) is present, or 
+# already defined as a bash function
+# if not, create a work-alike bash function
+type json &>/dev/null || define_json_f
 
 ############################
 #### environment settings
