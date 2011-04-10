@@ -212,7 +212,7 @@ case $TERM in
     *) ;;
 esac
 
-set_bash_prompt
+set_bash_prompt && unset -f set_bash_prompt
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
