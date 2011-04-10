@@ -124,20 +124,26 @@ services_lookup() {
     grep -w "${1}" /etc/services
 }
 
-json_pretty() {
-    PYOK=$(cat <<EOP | python
-import sys
-if sys.version_info[0] > 2:
-    print "ok"
-elif sys.version_info[0] == 2 and sys.version_info[1] >= 6:
-    print "ok"
-else:
-    print "not-ok"
-EOP)
-    if [ "${PYOK}" = "ok" ]; then
-        cat $@ | python -mjson.tool
+# check to see if 'json' (node + npm) is present
+# if not, create a work-alike bash function
+if [ -z "$(type -p json)" ]; then
+    # try python
+    if [ -n "$(type -p python2.7 || type -p python2.6)" ]; then
+        json() {
+            cat $@ | python -mjson.tool
+            return
+        }
+    # no python? try ruby
+    elif [ -n "$(type -p ruby)" ]; then
+        if [ "$(ruby -e 'puts RUBY_VERSION')" \> "1.9" ]; then
+            # no python version with mtool.json, so try ruby
+            json() {
+                cat $@ | ruby -r json -e 'jj JSON.parse gets'
+                return
+            }
+        fi
     fi
-}
+fi
 
 ############################
 #### environment settings
