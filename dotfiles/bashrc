@@ -129,18 +129,12 @@ services_lookup() {
 if [ -z "$(type -p json)" ]; then
     # try python
     if [ -n "$(type -p python2.7 || type -p python2.6)" ]; then
-        json() {
-            cat $@ | python -mjson.tool
-            return
-        }
+        json() { python -mjson.tool; }
     # no python? try ruby
     elif [ -n "$(type -p ruby)" ]; then
         if [ "$(ruby -e 'puts RUBY_VERSION')" \> "1.9" ]; then
             # no python version with mtool.json, so try ruby
-            json() {
-                cat $@ | ruby -r json -e 'jj JSON.parse gets'
-                return
-            }
+            json() { ruby -r json -e 'jj JSON.parse gets'; }
         fi
     fi
 fi
