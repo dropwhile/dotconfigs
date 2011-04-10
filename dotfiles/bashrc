@@ -145,7 +145,8 @@ define_json_f() {
 # check to see if 'json' (node + npm) is present, or 
 # already defined as a bash function
 # if not, create a work-alike bash function
-type json &>/dev/null || define_json_f
+# finally, remove define_json_f regardless if it is used or not
+[ type json &>/dev/null || define_json_f ] && unset -f define_json_f
 
 ############################
 #### environment settings
