@@ -51,7 +51,7 @@ case $OS in
         ;;
 esac
 
-###### general
+#### exported functions
 # function to show git branch
 # later on bash-completion will pull in git-completion, if it is installed
 # which will override this function. So just provide this as a fallback in 
@@ -61,8 +61,27 @@ __git_ps1() {
     printf "${1:- (%s)}" "${ref#refs/heads/}"
 }
 
+dotfiles_update() {
+    $HOME/.myconfigs/scripts/dotfiles_update.bash
+}
+
+get_whois_registrant() {
+    while read domain; do
+        printf "#### ${domain} ####\n"
+        whois ${domain} | grep -A6 -E "(Registrant|Registration)"
+    done
+}
+
+services_lookup() {
+    grep -w "${1}" /etc/services
+}
+
+#### non-exported functions
+## these functions should be removed
+## when they are used (some remove themselves)
+
 # set prompt
-set_bash_prompt() {
+__mcfg_set_bash_prompt() {
     ## set some color variables to make things a bit easier to read later
     local TXTBLK='\e[0;30m' # Black - Regular
     local TXTRED='\e[0;31m' # Red
@@ -109,23 +128,11 @@ set_bash_prompt() {
     fi
 }
 
-dotfiles_update() {
-    $HOME/.myconfigs/scripts/dotfiles_update.bash
-}
-
-get_whois_registrant() {
-    while read domain; do
-        printf "#### ${domain} ####\n"
-        whois ${domain} | grep -A6 -E "(Registrant|Registration)"
-    done
-}
-
-services_lookup() {
-    grep -w "${1}" /etc/services
-}
+## call it and unset
+__mcfg_set_bash_prompt && unset -f __mcfg_set_bash_prompt
 
 # function that defines a json function
-define_json_f() {
+__mcfg_define_json_func() {
     # try python
     local PYV="$(type -p python2.7 || type -p python2.6)"
     if [ -n "${PYV}" ]; then
@@ -142,11 +149,11 @@ define_json_f() {
         return
     fi
 }
+
 # check to see if 'json' (node + npm) is present, or 
 # already defined as a bash function
 # if not, create a work-alike bash function
-# finally, remove define_json_f regardless if it is used or not
-[ type json &>/dev/null || define_json_f ] && unset -f define_json_f
+[ type json &>/dev/null || __mcfg_define_json_func ] && unset -f __mcfg_define_json_func
 
 ############################
 #### environment settings
@@ -211,8 +218,6 @@ case $TERM in
         ;;
     *) ;;
 esac
-
-set_bash_prompt && unset -f set_bash_prompt
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
