@@ -12,6 +12,22 @@
 # detect os
 export OS=$(uname -s)
 
+## some terminal settings
+# If this is an xterm set the title to user@host:dir
+# if 'dumb', just bail without doing anything further
+case $TERM in
+    xterm*)
+        PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME%%.*}\007"'
+        ;;
+    dumb)
+        # dont save history if 'dumb'
+        unset HISTFILE
+        return
+        ;;
+    *) ;;
+esac
+
+
 ## load local env vars if they exist
 [ -f $HOME/.bashrc_pre ] && . $HOME/.bashrc_pre
 
@@ -19,37 +35,6 @@ export OS=$(uname -s)
 #######################
 #### function defs
 #######################
-
-###### os specific
-case $OS in
-    Darwin)
-        # function to go to the directory of the topmost open
-        # finder folder
-        # from http://www.macosxhints.com/article.php?story=20060719155640762
-        ff() {
-            osascript -e 'tell application "Finder"'\
-              -e "if (${1-1} <= (count Finder windows)) then"\
-              -e "get POSIX path of (target of window ${1-1} as alias)"\
-              -e 'else' -e 'get POSIX path of (desktop as alias)'\
-              -e 'end if' -e 'end tell';
-        };
-        cdff() { cd "$(ff $@)"; };
-
-        finder-update-window() {
-            osascript -e 'tell application "Finder"'\
-              -e 'tell front window'\
-              -e 'update every item with necessity'\
-              -e 'end tell' -e 'end tell';
-        };
-
-        finder-update-desktop() {
-            osascript -e 'tell application "Finder"'\
-              -e 'update desktop' -e 'end tell';
-        };
-        ;;
-    Linux)
-        ;;
-esac
 
 #### exported functions
 # function to show git branch
@@ -160,66 +145,6 @@ __mcfg_define_json_func() {
 #### environment settings
 ############################
 
-###### os specific
-case $OS in
-    Darwin)
-        export COPYFILE_DISABLE='true'
-        export LSCOLORS='gxfxcxdxbxegedabagacad'
-        if [ -x /opt/local/bin/port ]; then
-            # purposefully putting opt paths first
-            export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-            export MANPATH=/opt/local/share/man:$MANPATH
-
-            ## lesspipe if installed ##
-            LESSPIPEX="$(type -p lesspipe.sh)"
-            [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
-
-            ## bash_completion if installed ##
-            [ -f /opt/local/etc/bash_completion ] &&
-                . /opt/local/etc/bash_completion
-        fi
-        ;;
-    Linux)
-        if [ -e /etc/redhat-release ]; then
-        # fix redhat goofy strip paths from PATH thing.
-            PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-        fi
-
-        ## dircolors stuff ##
-        #[ -x /usr/bin/dircolors ] && eval "`dircolors -b`"
-        export LS_COLORS='no=00:fi=00:di=36;40:ln=35;40:pi=33;40:so=36;40:bd=40;33;01:cd=40;33;01:or=35;40:mi=41;30;01:ex=31;40:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:'
-
-        # make less more friendly for non-text input files, see lesspipe(1)
-        type -p lesspipe 1>&- && eval "$(lesspipe)"
-        ## if the above fails, try this too.
-        if [ $? -ne 0 ]; then
-            ## lesspipe if installed ##
-            LESSPIPEX="$(type -p lesspipe.sh)"
-            [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
-        fi
-
-        ## enable bash completion ##
-        [ -f /etc/bash_completion ] && . /etc/bash_completion
-        ;;
-    FreeBSD)
-        export LSCOLORS='gxfxcxdxbxegedabagacad'
-        PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-        export BLOCKSIZE=K;
-        ;;
-esac
-
-###### general
-# If this is an xterm set the title to user@host:dir
-case $TERM in
-    xterm*)
-        PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME%%.*}\007"'
-        ;;
-    dumb)
-        return
-        ;;
-    *) ;;
-esac
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -296,48 +221,33 @@ if [ -d $HOME/.virtualenvs ]; then
             export PIP_VIRTUALENV_BASE=$WORKON_HOME
             export PIP_REQUIRE_VIRTUALENV=true
             export PIP_LOG_FILE=/dev/null
-            # prob don't need this. might be nice later at some point though.
-            # eval `pip completion --bash`
         fi
     fi
 fi
-
-### load completions if they exist
-# rvm
-#if [ -n "${rvm_selfcontained}" ] && [ -e $HOME/.rvm/scripts/completion ]; then
-#    . $HOME/.rvm/scripts/completion
-#fi
 
 # add my own bin to the END of path
 if [ -d ~/bin ] ; then
     export PATH="${PATH}:${HOME}/bin"
 fi
 
+### Load os specific settings
+if [ -r "$HOME/.bashrc.d/$OS.bash" ]; then
+    . "$HOME/.bashrc.d/$OS.bash"
+fi
+
+
 ##########################
 #### aliases
 ##########################
-## os specific
-case $OS in
-    Darwin)
-        alias locate='mdfind -name'
-        alias ls='ls -p'
-        ;;
-    Linux)
-        alias ls='ls --color=auto -p'
-        ;;
-    FreeBSD)
-        alias ls='ls -p'
-        alias psf='ps wwfaux'
-        ;;
-esac
 
 ### general
+alias ls='ls -p'
+
+## special case for getting color on linux.
+## why can't it use an env var like bsd ls?? *sigh*
+if [ $OS == 'Linux' ]; then alias ls='ls -p --color=auto'; fi
 alias l.='ls -d .*'
 alias ll='ls -lh'
-
-alias date-custom='date +"%a %b %d %I:%M%P %Z %G"'
-alias ps-custom='ps ax -o "pid user ni %cpu %mem tname stat time cmd"'
-alias rtorrent='ulimit -n 512; ulimit -u 128; rtorrent'
 
 ## load any local overrides at the end
 [ -f $HOME/.bashrc_post ] && . $HOME/.bashrc_post
