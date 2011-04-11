@@ -155,6 +155,7 @@ __mcfg_define_json_func() {
 # if not, create a work-alike bash function
 [ type json &>/dev/null || __mcfg_define_json_func ] && unset -f __mcfg_define_json_func
 
+
 ############################
 #### environment settings
 ############################
