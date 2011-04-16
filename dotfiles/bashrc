@@ -225,16 +225,15 @@ if [ -d $HOME/.virtualenvs ]; then
     fi
 fi
 
-# add my own bin to the END of path
-if [ -d ~/bin ] ; then
-    export PATH="${PATH}:${HOME}/bin"
-fi
-
 ### Load os specific settings
 if [ -r "$HOME/.bashrc.d/$OS.bash" ]; then
     . "$HOME/.bashrc.d/$OS.bash"
 fi
 
+# add my own bin to the END of path
+if [ -d ~/bin ] ; then
+    export PATH="${PATH}:${HOME}/bin"
+fi
 
 ##########################
 #### aliases
