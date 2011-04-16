@@ -145,6 +145,11 @@ __mcfg_define_json_func() {
 #### environment settings
 ############################
 
+### Load os specific settings
+if [ -r "$HOME/.bashrc.d/$OS.bash" ]; then
+    . "$HOME/.bashrc.d/$OS.bash"
+fi
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -223,11 +228,6 @@ if [ -d $HOME/.virtualenvs ]; then
             export PIP_LOG_FILE=/dev/null
         fi
     fi
-fi
-
-### Load os specific settings
-if [ -r "$HOME/.bashrc.d/$OS.bash" ]; then
-    . "$HOME/.bashrc.d/$OS.bash"
 fi
 
 # add my own bin to the END of path
