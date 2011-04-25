@@ -30,6 +30,12 @@
     name = elij
     email = elij.mx@gmail.com
     signingkey = A3925B9E
+[push]
+    default = tracking
+[mergetool "vimdiff3"]
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool "gvimdiff3"]
+    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [alias]
     co = checkout
     st = status -s
@@ -41,9 +47,13 @@
     qlog = log --pretty=oneline --abbrev-commit --graph --decorate
     lg = log --graph --pretty=format:'%Cred%h%Creset - %Cgreen%ad%Creset |%C(yellow)%d%Creset %s [%an]' --abbrev-commit --date=short
     lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --branches --remotes
-[push]
-    default = tracking
-[mergetool "vimdiff3"]
-    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
-[mergetool "gvimdiff3"]
-    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    # add all changed (but not new) files to stage (index):
+    au = add -u
+    # prune all tracking local branches that have been removed from remote:
+    prune-all = !git remote | xargs -n 1 git remote prune
+    # show list of contributors in descending order by number of commits
+    rank = shortlog -sn --no-merges
+    # given a string for an author, try to figure out full name and email:
+    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+    # given any git object, try to show it briefly
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
