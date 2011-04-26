@@ -118,6 +118,13 @@ __mcfg_set_bash_prompt && unset -f __mcfg_set_bash_prompt
 
 # function that defines a json function
 __mcfg_define_json_func() {
+    # try yajl
+    local JSON_REFORMAT=$(type -f json_reformat)
+    if [ -m "${JSON_REFORMAT}" ]; then
+        # use eval because PYV is local so as not to pollute
+        # the global namespace
+        eval "json() { ${JSON_REFORMAT}; }"
+    fi
     # try python
     local PYV="$(type -p python2.7 || type -p python2.6)"
     if [ -n "${PYV}" ]; then
