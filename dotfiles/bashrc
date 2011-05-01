@@ -102,14 +102,19 @@ __mcfg_set_bash_prompt() {
     local BAKWHT='\e[47m' # White - Background
     local TXTRST='\e[0m' # Text Reset
 
+    local HNAME='\h'
+    if [ -n "${TWO_DOT_HOSTNAME}" ]; then
+        local HNAME="${HOSTNAME%.*.*}"
+        unset -v TWO_DOT_HOSTNAME
+    fi
     # set ps1 to show git branch, using previously defined
     # function. Also show different host color if over ssh.
     # visual cues = winrar
     # ( idea lifted from phrakture. pew pew! )
     if [ -z "$SSH_TTY" ]; then
-        PS1="\[${TXTWHT}\]\u@\h\[${TXTRST}\]:\w\$(__git_ps1 '(%s)')\\$ "
+        PS1="\[${TXTWHT}\]\u@${HNAME}\[${TXTRST}\]:\w\$(__git_ps1 '(%s)')\\$ "
     else
-        PS1="\[${TXTYLW}\]\u@\h\[${TXTRST}\]:\w\$(__git_ps1 '(%s)')\\$ "
+        PS1="\[${TXTYLW}\]\u@${HNAME}\[${TXTRST}\]:\w\$(__git_ps1 '(%s)')\\$ "
     fi
 }
 
