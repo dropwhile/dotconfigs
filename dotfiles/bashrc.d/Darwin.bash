@@ -36,10 +36,6 @@ export COPYFILE_DISABLE='true'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 
 if [ -x /opt/local/bin/port ]; then
-    # purposefully putting opt paths first
-    export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-    export MANPATH=/opt/local/share/man:$MANPATH
-
     ## lesspipe if installed ##
     LESSPIPEX="$(type -p lesspipe.sh)"
     [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"

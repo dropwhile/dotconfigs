@@ -29,7 +29,7 @@ esac
 
 
 ## load local env vars if they exist
-[ -f $HOME/.bashrc_pre ] && . $HOME/.bashrc_pre
+[ -s $HOME/.bashrc_pre ] && . $HOME/.bashrc_pre
 
 
 #######################
@@ -158,9 +158,7 @@ __mcfg_define_json_func() {
 ############################
 
 ### Load os specific settings
-if [ -r "$HOME/.bashrc.d/$OS.bash" ]; then
-    . "$HOME/.bashrc.d/$OS.bash"
-fi
+[ -s "$HOME/.bashrc.d/$OS.bash" ] && . "$HOME/.bashrc.d/$OS.bash"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -242,10 +240,6 @@ if [ -d $HOME/.virtualenvs ]; then
     fi
 fi
 
-# add my own bin to the END of path
-if [ -d ~/bin ] ; then
-    export PATH="${PATH}:${HOME}/bin"
-fi
 
 ##########################
 #### aliases
@@ -261,4 +255,4 @@ alias l.='ls -d .*'
 alias ll='ls -lh'
 
 ## load any local overrides at the end
-[ -f $HOME/.bashrc_post ] && . $HOME/.bashrc_post
+[ -s $HOME/.bashrc_post ] && . $HOME/.bashrc_post
