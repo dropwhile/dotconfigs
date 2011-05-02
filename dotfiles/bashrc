@@ -153,7 +153,7 @@ __mcfg_define_json_func() {
 # check to see if 'json' (node + npm) is present, or 
 # already defined as a bash function
 # if not, create a work-alike bash function
-[ type json &>/dev/null || __mcfg_define_json_func ] && unset -f __mcfg_define_json_func
+( type json &>/dev/null || __mcfg_define_json_func ) && unset -f __mcfg_define_json_func
 
 
 ############################
