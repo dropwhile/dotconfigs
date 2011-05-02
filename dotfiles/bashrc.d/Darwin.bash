@@ -40,8 +40,8 @@ if [ -x /opt/local/bin/port ]; then
     LESSPIPEX="$(type -p lesspipe.sh)"
     [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 
-    ## bash_completion if installed ##
-    [ -f /opt/local/etc/bash_completion ] &&
+    ## bash_completion if installed, and not already loaded ##
+    [ -z "${BASH_COMPLETION}" ] && [ -f /opt/local/etc/bash_completion ] &&
         . /opt/local/etc/bash_completion
 fi
 

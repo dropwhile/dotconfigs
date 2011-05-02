@@ -12,7 +12,8 @@ if [ $? -ne 0 ]; then
     [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 fi
 
-## enable bash completion ##
-[ -f /etc/bash_completion ] && . /etc/bash_completion
+## enable bash completion, but only if it didn't get loaded by 
+## profile.d scripts or something
+[ -z "${BASH_COMPLETION}" ] && [ -f /etc/bash_completion ] && . /etc/bash_completion
 
 alias ls='ls -p --color=auto'
