@@ -1,10 +1,13 @@
 # vim: set ft=sh:
 
 ## rvm
-# This loads RVM into a shell session.
+# This loads RVM into a shell session, but only if it isn't
+# already loaded (eg if rvm was installed globally and
+# there is an /etc/profile.d/rvm.sh already loading it)
 # always source this file even for non-interactive shells
 # rvm requirement apparently for ruby exec stuff
-[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
+[ -z "${rvm_version}" ] && [ -s "$HOME/.rvm/scripts/rvm" ] && 
+    . "$HOME/.rvm/scripts/rvm"
 
 # If not running interactively, don't do anything else
 [ -z "$PS1" ] && return
