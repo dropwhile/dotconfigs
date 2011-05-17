@@ -1,0 +1,1 @@
+/Users/elij/projects/go/misc/vim/ftdetect/gofiletype.vim

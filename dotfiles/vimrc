@@ -1,9 +1,9 @@
 set nocompatible      " We're running Vim, not Vi!
 "set enc=utf-8         " set encoding to utf-8
 filetype on           " Enable fieltype detection
+filetype plugin on    " Enable filetype-specific plugins
 filetype indent off    " Disable filetype-specific indenting (I HATE IT!)
-filetype plugin indent off "more no indent magicalness
-"filetype plugin on    " Enable filetype-specific plugins
+"filetype plugin indent off "more no indent magicalness
 
 set mouse=v           "disable goofy mousing
 "set noswf             "disable swapfile
