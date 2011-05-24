@@ -1,1 +1,1 @@
-/Users/elij/projects/go/misc/vim/ftdetect/gofiletype.vim
+au BufRead,BufNewFile *.go set filetype=go sw=4 ts=4 noet
