@@ -12,6 +12,8 @@
     autocrlf = input
     excludesfile = ~/.gitignore
 	safecrlf = warn
+[diff]
+    renames = copies
 [format]
     subjectprefix = PATCH
     suffix = .patch.txt
