@@ -174,9 +174,12 @@ shopt -s huponexit
 # completion is attempted on an empty line.
 shopt -s no_empty_cmd_completion
 
+# minor errors in the spelling of a directory component in a cd command will be
+# corrected
+shopt -s cdspell
+
 ## set terminal tab width, if available
 type -p tabs &>/dev/null && tabs -4 &>/dev/null
-
 
 ## some classic env vars ##
 export EDITOR=vim
