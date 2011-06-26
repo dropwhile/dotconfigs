@@ -181,11 +181,6 @@ shopt -s cdspell
 ## set terminal tab width, if available
 type -p tabs &>/dev/null && tabs -4 &>/dev/null
 
-## some classic env vars ##
-export EDITOR=vim
-export VISUAL=vim
-export PAGER=less
-
 # erase dups before adding line, and ignore lines starting with spaces
 # See bash(1) for more options
 export HISTCONTROL="ignorespace:erasedups"
@@ -199,13 +194,24 @@ export HISTIGNORE="&:l[ls]:[bf]g:exit"
 ## enable colors in grep ##
 export GREP_OPTIONS='--color=auto'
 
+## some classic env vars ##
+export EDITOR=vim
+export VISUAL=vim
+export PAGER=less
+
 ## some git specific vars ##
-# vim on os x returns a non-zero exit code when called with the short
-# path name. fucks up git & friends. Use full path.
 export GIT_EDITOR=vim
 # pager is set it .gitconfig core.pager
 # setting it here overrides that setting (and subsequent args)
 #export GIT_PAGER=less
+
+# vim on os x returns a non-zero exit code when called with the short
+# path name. fucks up git & friends. Use full path.
+if [ "$OS" = "Darwin" ]; then
+    export GIT_EDITOR=/usr/bin/vim
+    export EDITOR=/usr/bin/vim
+    export VISUAL=/usr/bin/vim
+fi
 
 ## less specific vars ##
 # turn off .lesshst file
