@@ -35,15 +35,15 @@ finder-update-desktop() {
 export COPYFILE_DISABLE='true'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 
-if [ -x /opt/local/bin/port ]; then
-    ## lesspipe if installed ##
-    LESSPIPEX="$(type -p lesspipe.sh)"
-    [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
-
+if [ -x $HOME/.brew/bin/brew ]; then
     ## bash_completion if installed, and not already loaded ##
-    [ -z "${BASH_COMPLETION}" ] && [ -f /opt/local/etc/bash_completion ] &&
-        . /opt/local/etc/bash_completion
+    [ -z "${BASH_COMPLETION}" ] && [ -f $HOME/.brew/etc/bash_completion ] &&
+        . $HOME/.brew/etc/bash_completion
 fi
+
+## lesspipe if installed ##
+LESSPIPEX="$(type -p lesspipe.sh)"
+[ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 
 
 ##########################
