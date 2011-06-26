@@ -241,19 +241,14 @@ if [ -n "$(type -p gpg-agent)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
     export GPG_AGENT_INFO
 fi
 
-# virtualenvwrapper stuff
-# only enable when ~/.virtualenvs exists
-if [ -d $HOME/.virtualenvs ]; then
-    [ -n "${VENVW}" ] || VENVW="$(type -p virtualenvwrapper.sh)"
-    if [ -e "${VENVW}" ]; then
-        source "${VENVW}"
-        export WORKON_HOME=$HOME/.virtualenvs
-        if [ -e "$(type -p pip)" ]; then
-            export PIP_VIRTUALENV_BASE=$WORKON_HOME
-            export PIP_REQUIRE_VIRTUALENV=true
-            export PIP_LOG_FILE=/dev/null
-        fi
-    fi
+# virtualenvstuff
+if [ -e "$(type -p pip)" ] && [ -e "$(type -p virtualenv)" ]; then
+    #only run if there is a virtualenv currently activated
+    export PIP_REQUIRE_VIRTUALENV=true
+    # automatically use the currently active virtualenv
+    export PIP_RESPECT_VIRTUALENV=true
+    export VIRTUALENV_USE_DISTRIBUTE=true
+    export PIP_LOG_FILE=/dev/null
 fi
 
 
