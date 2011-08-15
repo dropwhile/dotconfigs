@@ -256,5 +256,7 @@ if [ $OS == 'Linux' ]; then alias ls='ls -p --color=auto'; fi
 alias l.='ls -d .*'
 alias ll='ls -lh'
 
+alias myip="curl icanhazip.com"
+
 ## load any local overrides at the end
 [ -s $HOME/.bashrc_post ] && . $HOME/.bashrc_post
