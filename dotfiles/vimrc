@@ -134,6 +134,7 @@ let g:netrw_alto = 1
 inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 
 if has('gui_running')
+    colorscheme desert
     set gfn:Monaco:h11
     set noantialias
     set columns=80
