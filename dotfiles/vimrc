@@ -59,7 +59,7 @@ set hidden            "current buffer can be backgrounded without having to
 
 "Set some colors"
 set background=dark
-colorscheme wombat256mod
+colorscheme desert
 
 "highlight LineNr  term=NONE
 "hi Normal          ctermfg=black       ctermbg=white
