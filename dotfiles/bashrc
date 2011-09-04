@@ -116,13 +116,15 @@ __mcfg_set_bash_prompt() {
 __mcfg_set_bash_prompt && unset -f __mcfg_set_bash_prompt
 
 # function that defines a json function
+declare JSON_FUNCTION=""
 __mcfg_define_json_func() {
     # try yajl
     local JSON_REFORMAT=$(type -p json_reformat)
     if [ -n "${JSON_REFORMAT}" ]; then
-        # use eval because PYV is local so as not to pollute
+        # use eval because JSON_REFORMAT is local so as not to pollute
         # the global namespace
         eval "json() { ${JSON_REFORMAT}; }"
+        return
     fi
     # try python
     local PYV="$(type -p python2.7 || type -p python2.6)"
@@ -136,7 +138,7 @@ __mcfg_define_json_func() {
     local RBV="$(type -p ruby)"
     if [ "$(ruby -e 'puts RUBY_VERSION')" \> "1.9" ]; then
         # no python version with mtool.json, so try ruby
-        json() { ruby -r json -e 'jj JSON.parse gets'; }
+        eval "json() { ruby -r json -e 'jj JSON.parse gets'; }"
         return
     fi
 }
@@ -144,7 +146,7 @@ __mcfg_define_json_func() {
 # check to see if 'json' (node + npm) is present, or 
 # already defined as a bash function
 # if not, create a work-alike bash function
-( type json &>/dev/null || __mcfg_define_json_func ) && unset -f __mcfg_define_json_func
+type json &>/dev/null || __mcfg_define_json_func && unset -f __mcfg_define_json_func
 
 
 ############################
