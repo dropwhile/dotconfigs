@@ -184,6 +184,9 @@ export HISTIGNORE="&:l[ls]:[bf]g:exit"
 # disable saving of history -- only make history per/bash process
 #unset HISTFILE
 
+# append to the history file, don't overwrite it
+shopt -s histappend
+
 ## enable colors in grep ##
 export GREP_OPTIONS='--color=auto'
 
