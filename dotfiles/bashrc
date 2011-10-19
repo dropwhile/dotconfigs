@@ -178,9 +178,9 @@ type -p tabs &>/dev/null && tabs -4 &>/dev/null
 # See bash(1) for more options
 export HISTCONTROL="ignorespace:erasedups"
 # suppress duplicate commands, the simple invocation of 'ls' without any
-# arguments, and the shell built-ins bg, fg, and exit
+# arguments, and the shell built-ins bg, fg, cd, pushd, popd, and exit
 # also ignores any command starting with a space
-export HISTIGNORE="&:l[ls]:[bf]g:exit"
+export HISTIGNORE="&:l[lsa]:[bf]g:cd:pushd:popd:git:exit"
 # disable saving of history -- only make history per/bash process
 #unset HISTFILE
 
