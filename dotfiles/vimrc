@@ -143,3 +143,8 @@ if has('gui_running')
     set mouse=a "enable visual mouse mode in gvim/macvim
     set gcr=a:blinkon0
 endif
+
+" set printheader to just filename (nice for :hardcopy)
+"   see http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline' for
+"   more options
+set printheader=%t
