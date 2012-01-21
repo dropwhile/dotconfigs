@@ -141,12 +141,12 @@ let mapleader = ","
 " F5 to insert current date/time
 inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 "" when in normal mode
-" \w to call stripwhitespace
-nnorem <leader>ws :call StripWhitespace()<CR>
-" \m call Markedapp.app with current file
+" ,w to call stripwhitespace
+nnoremap <leader>ws :call StripWhitespace()<CR>
+" ,m call Markedapp.app with current file
 "  from: http://captainbollocks.tumblr.com/post/9858989188/linking-macvim-and-marked-app
-:nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
-" \q to re-hardware paragraphs... so much win.
+nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
+" ,q to re-hardware paragraphs... so much win.
 "  from: http://stevelosh.com/blog/2010/09/coming-home-to-vim/#using-the-leader
 nnoremap <leader>q gqip
 nnoremap <leader>sh <C-w>s<C-w>j
