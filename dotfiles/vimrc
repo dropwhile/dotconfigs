@@ -1,4 +1,4 @@
-" vim-pathogen
+" vim-pathogen : https://github.com/tpope/vim-pathogen
 call pathogen#infect()
 
 set nocompatible      " We're running Vim, not Vi!
@@ -151,6 +151,36 @@ nnorem <leader>ws :call StripWhitespace()<CR>
 nnoremap <leader>q gqip
 nnoremap <leader>sh <C-w>s<C-w>j
 nnoremap <leader>sv <C-w>v<C-w>l
+
+" rainbow parens
+function! RainbowLoad()
+  "call rainbow_parentheses#load(0)
+  call rainbow_parentheses#load(1)
+  call rainbow_parentheses#load(2)
+  call rainbow_parentheses#load(3)
+endfunction
+autocmd Syntax * call RainbowLoad()
+
+nnoremap <leader>rp :RainbowParenthesesToggle<cr>
+let g:rbpt_colorpairs = [
+    \ ['red',         'firebrick3'],
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ]
+let g:rbpt_max = 16
 
 " change searching to 'normal' regex
 nnoremap / /\v
