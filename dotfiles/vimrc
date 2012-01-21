@@ -163,6 +163,7 @@ autocmd Syntax * call RainbowLoad()
 
 nnoremap <leader>rp :RainbowParenthesesToggle<cr>
 let g:rbpt_colorpairs = [
+    \ ['darkred',     'DarkOrchid3'],
     \ ['red',         'firebrick3'],
     \ ['brown',       'RoyalBlue3'],
     \ ['Darkblue',    'SeaGreen3'],
@@ -178,7 +179,6 @@ let g:rbpt_colorpairs = [
     \ ['Darkblue',    'firebrick3'],
     \ ['darkgreen',   'RoyalBlue3'],
     \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
     \ ]
 let g:rbpt_max = 16
 
