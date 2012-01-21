@@ -1,3 +1,6 @@
+" vim-pathogen
+call pathogen#infect()
+
 set nocompatible      " We're running Vim, not Vi!
 "set enc=utf-8         " set encoding to utf-8
 filetype on           " Enable fieltype detection
@@ -110,7 +113,7 @@ autocmd BufReadPost *
   \ endif
 
 " For all text files set 'textwidth' to 78 characters.
-autocmd FileType text setlocal textwidth=78
+autocmd FileType text setlocal textwidth=78 colorcolumn=85
 
 " disable expandtab in makefile
 autocmd FileType make set noet
@@ -130,16 +133,29 @@ let g:GPGUseAgent = 1
 let g:netrw_altv = 1
 let g:netrw_alto = 1
 
+" remap leader key
+let mapleader = ","
+
 """"" ramaps
 """ when in insert more
 " F5 to insert current date/time
 inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 "" when in normal mode
 " \w to call stripwhitespace
-nnorem <leader>w :call StripWhitespace()<CR>
+nnorem <leader>ws :call StripWhitespace()<CR>
 " \m call Markedapp.app with current file
-"   from: http://captainbollocks.tumblr.com/post/9858989188/linking-macvim-and-marked-app
+"  from: http://captainbollocks.tumblr.com/post/9858989188/linking-macvim-and-marked-app
 :nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
+" \q to re-hardware paragraphs... so much win.
+"  from: http://stevelosh.com/blog/2010/09/coming-home-to-vim/#using-the-leader
+nnoremap <leader>q gqip
+nnoremap <leader>sh <C-w>s<C-w>j
+nnoremap <leader>sv <C-w>v<C-w>l
+
+" change searching to 'normal' regex
+nnoremap / /\v
+vnoremap / /\v
+
 
 
 if has('gui_running')
