@@ -88,11 +88,6 @@ function! StripWhitespace()
     normal ``
 endfunction
 
-"maps and ignore maps
-"dont auto unindent # comments
-inoremap # X<BS>#
-set pastetoggle=<F11>
-
 "set completeopt=menu
 
 """"""
@@ -137,7 +132,12 @@ let g:netrw_alto = 1
 let mapleader = ","
 
 """"" ramaps
-""" when in insert more
+"dont auto unindent # comments
+inoremap # X<BS>#
+
+set pastetoggle=<F11>
+nnoremap <leader>p <F11>
+
 " F5 to insert current date/time
 inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 "" when in normal mode
