@@ -137,6 +137,10 @@ inoremap # X<BS>#
 
 set pastetoggle=<F11>
 nnoremap <leader>p <F11>
+" newline after line, in normal mode
+nnoremap <leader>o o<Esc>
+" newline before line, in normal mode
+nnoremap <leader>O O<Esc>
 
 " F5 to insert current date/time
 inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
@@ -186,8 +190,6 @@ let g:rbpt_max = 16
 nnoremap / /\v
 vnoremap / /\v
 
-
-
 if has('gui_running')
     colorscheme desert
     set gfn:Monaco:h11
@@ -197,6 +199,12 @@ if has('gui_running')
     set guioptions-=T
     set mouse=a "enable visual mouse mode in gvim/macvim
     set gcr=a:blinkon0
+endif
+
+if has("gui_macvim")
+    " Swipe to move between bufers :D
+    map <SwipeLeft> :bprev<CR>
+    map <SwipeRight> :bnext<CR>
 endif
 
 " set printheader to just filename (nice for :hardcopy)
