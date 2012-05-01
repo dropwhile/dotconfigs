@@ -116,7 +116,6 @@ __mcfg_set_bash_prompt() {
 __mcfg_set_bash_prompt && unset -f __mcfg_set_bash_prompt
 
 # function that defines a json function
-declare JSON_FUNCTION=""
 __mcfg_define_json_func() {
     # try yajl
     local JSON_REFORMAT=$(type -p json_reformat)
