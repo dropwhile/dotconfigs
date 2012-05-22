@@ -40,7 +40,7 @@
     cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [alias]
     co = checkout
-    st = status -s
+    st = status -sb
     unstage = reset HEAD
     wdiff = diff --color-words
     wshow = show --color-words
@@ -59,3 +59,13 @@
     whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
     # given any git object, try to show it briefly
     whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+    count = shortlog -sn
+    amend = commit --amend -C HEAD
+    # sets head's author as someone else
+    # git credit 'Joe User' 'joe@example.com'
+    credit = commit --amend --author "$1 <$2>" -C HEAD
+    diff-word = diff --word-diff
+    diff-stat = diff --stat
+    #lost-found = fsck --lost-found
+[rerere]
+	enabled = 1
