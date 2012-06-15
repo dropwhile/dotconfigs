@@ -1,1 +1,1 @@
-/Users/elij/projects/go/misc/vim/syntax/go.vim
+/usr/local/go/misc/vim/syntax/go.vim

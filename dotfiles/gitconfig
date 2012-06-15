@@ -40,6 +40,7 @@
     cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [alias]
     co = checkout
+    br = branch
     st = status -sb
     unstage = reset HEAD
     wdiff = diff --color-words

@@ -1,1 +1,1 @@
-/Users/elij/projects/go/misc/vim/indent/go.vim
+/usr/local/go/misc/vim/indent/go.vim
