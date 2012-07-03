@@ -106,9 +106,9 @@ __mcfg_set_bash_prompt() {
     # visual cues = winrar
     # ( idea lifted from phrakture. pew pew! )
     if [ -z "$SSH_TTY" ]; then
-        PS1="\[${TXTWHT}\]\u@${HNAME}\[${TXTRST}\]:\w\$(__git_ps1 '(%s)')\n\\$ "
+        PS1="\[${TXTWHT}\]\u@${HNAME}\[${TXTRST}\]:\W\$(__git_ps1 '(%s)')\\$ "
     else
-        PS1="\[${TXTYLW}\]\u@${HNAME}\[${TXTRST}\]:\w\$(__git_ps1 '(%s)')\n\\$ "
+        PS1="\[${TXTYLW}\]\u@${HNAME}\[${TXTRST}\]:\W\$(__git_ps1 '(%s)')\\$ "
     fi
 }
 
