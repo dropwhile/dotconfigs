@@ -37,8 +37,7 @@ esac
 # case __git_ps1 doesn't exist later....
 __git_ps1() {
     ref=$(git symbolic-ref -q HEAD 2> /dev/null) || return
-    [ -n "$(git status --porcelain)" ] && GSTATUS='!'
-    printf "${1:- (%s)}" "${ref#refs/heads/}${GSTATUS}"
+    printf "${1:- (%s)}" "${ref#refs/heads/}"
 }
 
 dotfiles_update() {
