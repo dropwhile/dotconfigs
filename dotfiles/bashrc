@@ -37,7 +37,8 @@ esac
 # case __git_ps1 doesn't exist later....
 __git_ps1() {
     ref=$(git symbolic-ref -q HEAD 2> /dev/null) || return
-    printf "${1:- (%s)}" "${ref#refs/heads/}"
+    [ -n "$(git status --porcelain)" ] && GSTATUS='!'
+    printf "${1:- (%s)}" "${ref#refs/heads/}${GSTATUS}"
 }
 
 dotfiles_update() {
@@ -60,7 +61,7 @@ services_lookup() {
 ## when they are used (some remove themselves)
 
 # set prompt
-__mcfg_set_bash_prompt() {
+prompt_on() {
     ## set some color variables to make things a bit easier to read later
     local TXTBLK='\e[0;30m' # Black - Regular
     local TXTRED='\e[0;31m' # Red
@@ -112,8 +113,13 @@ __mcfg_set_bash_prompt() {
     fi
 }
 
+prompt_off() {
+    PS1="\\$ "
+}
+
 ## call it and unset
-__mcfg_set_bash_prompt && unset -f __mcfg_set_bash_prompt
+#__mcfg_set_bash_prompt && unset -f __mcfg_set_bash_prompt
+prompt_on
 
 # function that defines a json function
 __mcfg_define_json_func() {
