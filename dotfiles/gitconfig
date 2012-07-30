@@ -11,7 +11,7 @@
     pager = less -+$LESS -FRSXi
     autocrlf = input
     excludesfile = ~/.gitignore
-	safecrlf = warn
+    safecrlf = warn
 [diff]
     renames = copies
 [format]
@@ -69,4 +69,4 @@
     diff-stat = diff --stat
     #lost-found = fsck --lost-found
 [rerere]
-	enabled = 1
+    enabled = 1
