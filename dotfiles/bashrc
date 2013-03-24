@@ -175,6 +175,9 @@ shopt -s no_empty_cmd_completion
 # corrected
 shopt -s cdspell
 
+## change readline history behavior
+bind 'set revert-all-at-newline on'
+
 ## set terminal tab width, if available
 type -p tabs &>/dev/null && tabs -4 &>/dev/null
 
