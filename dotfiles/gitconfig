@@ -46,6 +46,8 @@
     unstage = reset HEAD
     wdiff = diff --color-words
     wshow = show --color-words
+    list-unmerged = ls-files -u
+    ls-unmerged = ls-files -u
     type = cat-file -t
     dump = cat-file -p
     qlog = log --pretty=oneline --abbrev-commit --graph --decorate
