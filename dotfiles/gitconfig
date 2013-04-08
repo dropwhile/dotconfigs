@@ -70,6 +70,8 @@
     credit = commit --amend --author "$1 <$2>" -C HEAD
     diff-word = diff --word-diff
     diff-stat = diff --stat
+    diff-patience = diff --patience
+    show-patience = show --patience
     #lost-found = fsck --lost-found
 [rerere]
     enabled = 1
