@@ -19,7 +19,7 @@ hardstatus alwayslastline
 #hardstatus string '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}%{W}'
 #hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
 #hardstatus string '%{= kG}%-Lw%{= ky}%50> %n%f* %t%{= kG}%+Lw%< %{= kG}%-=[%{Y}%l%{G}] %{-}'
-hardstatus string '%{= kG}[%{Y}%l%{G}] %50L>%{g}%-Lw%{= ky}%n*%f %t%{= kG}%+Lw%<'
+hardstatus string '%{= dG}[%{Y}%l%{G}] %50L>%{g}%-Lw%{= dy}%n*%f %t%{= dG}%+Lw%<'
 
 # turns on monitoring. C-a M
 #defmonitor on

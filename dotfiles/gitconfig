@@ -15,6 +15,7 @@
 [diff]
     renames = copies
     guitool = p4merge
+    algorithm = patience
 [format]
     subjectprefix = PATCH
     suffix = .patch.txt
@@ -41,7 +42,7 @@
     cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [alias]
     co = checkout
-    br = branch
+    br = branch -vv
     st = status -sb
     unstage = reset HEAD
     wdiff = diff --color-words
@@ -73,5 +74,10 @@
     diff-patience = diff --patience
     show-patience = show --patience
     #lost-found = fsck --lost-found
+    assume   = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+    ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
+    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 [rerere]
     enabled = 1

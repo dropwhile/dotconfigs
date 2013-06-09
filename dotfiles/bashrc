@@ -179,7 +179,7 @@ shopt -s cdspell
 bind 'set revert-all-at-newline on'
 
 ## set terminal tab width, if available
-type -p tabs &>/dev/null && tabs -4 &>/dev/null
+#type -p tabs &>/dev/null && tabs -4 &>/dev/null
 
 # erase dups before adding line, and ignore lines starting with spaces
 # See bash(1) for more options
