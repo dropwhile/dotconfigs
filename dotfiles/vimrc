@@ -116,6 +116,10 @@ autocmd FileType make set noet
 " set linebreak for markdown and text
 autocmd FileType markdown,text set linebreak
 
+" make vim go to start of first line in a git commit instead of remembering
+" the last position
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
 " no clue what this does anymore...but umm... it looks neat. Wild!
 set wildchar=<tab>
 set wildmenu
