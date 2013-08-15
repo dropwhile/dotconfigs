@@ -32,7 +32,7 @@
     confirm = auto
 [user]
     name = elij
-    email = elij.source@wundrd.net
+    email = elij@wundrd.net
     signingkey = A3925B9E
 [push]
     default = tracking
