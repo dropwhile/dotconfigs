@@ -159,6 +159,8 @@ nnoremap <leader>m :silent !open -a Marked.app '%:p'<cr>
 nnoremap <leader>q gqip
 nnoremap <leader>sh <C-w>s<C-w>j
 nnoremap <leader>sv <C-w>v<C-w>l
+" ,jf to pretty print json file
+nnoremap <leader>jpp :%!python -mjson.tool
 
 " rainbow parens
 function! RainbowLoad()
