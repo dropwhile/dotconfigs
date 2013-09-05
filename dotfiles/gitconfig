@@ -35,7 +35,8 @@
     email = elij@wundrd.net
     signingkey = A3925B9E
 [push]
-    default = tracking
+    #default = tracking
+    default = simple
 [mergetool "vimdiff3"]
     cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [mergetool "gvimdiff3"]
