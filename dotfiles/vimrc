@@ -95,7 +95,7 @@ endfunction
 """"""
 "The following removes extra space at ends of lines, for certain file types
 "autocmd BufWritePre *.py normal m`:%s/\s\+$//e `` 
-"autocmd BufWritePre *.py call StripWhitespace()
+autocmd BufWritePre *.py :call StripWhitespace()
 " highlight trailing whitespace 
 autocmd BufRead,BufNewFile *.py match Error /\s\+$/
 
