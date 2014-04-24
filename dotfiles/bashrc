@@ -140,7 +140,7 @@ __mcfg_define_json_func() {
     fi
     # no python? try ruby
     local RBV="$(type -p ruby)"
-    if [ "$(ruby -e 'puts RUBY_VERSION')" \> "1.9" ]; then
+    if [ -n "$RBV" ] && [ "$(ruby -e 'puts RUBY_VERSION')" \> "1.9" ]; then
         # no python version with mtool.json, so try ruby
         eval "json() { ruby -r json -e 'jj JSON.parse gets'; }"
         return

@@ -45,6 +45,9 @@
     co = checkout
     br = branch -vv
     st = status -sb
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
     unstage = reset HEAD
     wdiff = diff --color-words
     wshow = show --color-words
