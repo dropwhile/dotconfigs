@@ -114,7 +114,7 @@ autocmd FileType text setlocal textwidth=78 colorcolumn=85
 autocmd FileType make set noet
 
 " set linebreak for markdown and text
-autocmd FileType markdown,text set linebreak
+autocmd FileType markdown,text set linebreak et
 
 " make vim go to start of first line in a git commit instead of remembering
 " the last position

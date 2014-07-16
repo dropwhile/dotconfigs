@@ -5,6 +5,8 @@
     autosetuprebase = remote
 [color]
     ui = auto
+[color "diff"]
+    whitespace = red reverse
 [core]
     editor = vim
     #pager = less -+$LESS -FRSXi +'/^---'

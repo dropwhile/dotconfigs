@@ -175,6 +175,9 @@ shopt -s no_empty_cmd_completion
 # corrected
 shopt -s cdspell
 
+# preserve multiline command newlines where possible
+shopt -s lithist
+
 ## change readline history behavior
 bind 'set revert-all-at-newline on'
 
