@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 DIR=$(dirname "${0}")
 NDIR=$(cd "${DIR}/../" && pwd -P)
 GLOBIGNORE="..;."
