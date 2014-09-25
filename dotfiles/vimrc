@@ -118,7 +118,12 @@ autocmd FileType markdown,text set linebreak et
 
 " make vim go to start of first line in a git commit instead of remembering
 " the last position
-autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+"autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" some stuff for Go
+let g:gofmt_command = "goimports"
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 " no clue what this does anymore...but umm... it looks neat. Wild!
 set wildchar=<tab>
