@@ -1,7 +1,7 @@
 [ -z "$PS1" ] && return
 
 # detect os
-export OS=$(uname -s)
+OS=$(uname -s)
 
 ## some terminal settings
 # If this is an xterm set the title to user@host:dir
@@ -286,3 +286,4 @@ alias myip="curl icanhazip.com"
 
 ## load any local overrides at the end
 [ -s $HOME/.mkshrc_post ] && . $HOME/.mkshrc_post
+unset OS
