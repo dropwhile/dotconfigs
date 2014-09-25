@@ -35,10 +35,12 @@ finder-update-desktop() {
 export COPYFILE_DISABLE='true'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 
-if [ -x $HOME/.brew/bin/brew ]; then
-    ## bash_completion if installed, and not already loaded ##
-    [ -z "${BASH_COMPLETION}" ] && [ -f $HOME/.brew/etc/bash_completion ] &&
-        . $HOME/.brew/etc/bash_completion
+if [ -n "$BASH" ]; then
+    if [ -x $HOME/.brew/bin/brew ]; then
+        ## bash_completion if installed, and not already loaded ##
+        [ -z "${BASH_COMPLETION}" ] && [ -f $HOME/.brew/etc/bash_completion ] &&
+            . $HOME/.brew/etc/bash_completion
+    fi
 fi
 
 ## lesspipe if installed ##

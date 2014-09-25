@@ -183,7 +183,7 @@ fi
 ###############
 
 dotfiles_update() {
-    $HOME/.myconfigs/scripts/dotfiles_update
+    $HOME/.myconfigs/scripts/dotfiles_update.sh
 }
 
 get_whois_registrant() {
@@ -199,18 +199,11 @@ services_lookup() {
 
 
 ###############
-## misc
-###############
-
-
-
-###############
-## env vars
+## env vars and OS specific stuff
 ###############
 
 ### Load os specific settings
 [ -s "$HOME/.profile.d/$OS.sh" ] && . "$HOME/.profile.d/$OS.sh"
-
 
 ## enable colors in grep ##
 export GREP_OPTIONS='--color=auto'
@@ -256,7 +249,6 @@ export FIREFOX_DSP=none
 export OOO_FORCE_DESKTOP=gnome
 export CLICOLOR=1
 
-export LSCOLORS="gxfxcxdxbxegedabagacad"
 export HISTFILE=$HOME/.history
 
 ## pull in gpg agent env var
