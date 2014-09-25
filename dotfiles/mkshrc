@@ -152,24 +152,18 @@ _get_prompt_color() {
     
 }
 
-_color() {
-    print -n "\e[$1;${2}m"
-    shift 2
-    print "$@\e[00m"
-}
-
 
 ###############
 ## prompt
 ###############
 
+PS1=$'\a\r'
 if [ -z "$SSH_TTY" ]; then
-    __color=37
+    PS1=$PS1$'\a\e[0;37m\a'
 else
-    __color=33
+    PS1=$PS1$'\a\e[0;33m\a'
 fi
-PS1="\$(_color 00 $__color '${USER:=$(id -un)}'"@${HOSTNAME:=$(hostname -s)}"):\$(_prompt_path)\$(_git_ps1)"
-unset __color
+PS1=$PS1$'${USER:=$(id -un)}@${HOSTNAME:=$(hostname -s)}\a\e[0m\a:\$(_prompt_path)\$(_git_ps1)'
 
 if (( USER_ID )); then
     PS1="$PS1 $ "
