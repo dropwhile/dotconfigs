@@ -9,7 +9,6 @@
     whitespace = red reverse
 [core]
     editor = vim
-    #pager = less -+$LESS -FRSXi +'/^---'
     pager = less -+$LESS -FRSXi
     autocrlf = input
     excludesfile = ~/.gitignore
@@ -47,7 +46,7 @@
     co = checkout
     br = branch -vv
     st = status -sb
-    tags = tag -l
+    tags = tag --sort="version:refname" -l
     branches = branch -a
     remotes = remote -v
     unstage = reset HEAD
@@ -87,3 +86,5 @@
     theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 [rerere]
     enabled = 1
+[grep]
+	fullname = true
