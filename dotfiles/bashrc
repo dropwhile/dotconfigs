@@ -158,7 +158,7 @@ type json &>/dev/null || __mcfg_define_json_func && unset -f __mcfg_define_json_
 ############################
 
 ### Load os specific settings
-[ -s "$HOME/.bashrc.d/$OS.bash" ] && . "$HOME/.bashrc.d/$OS.bash"
+[ -s "$HOME/.profile.d/$OS.sh" ] && . "$HOME/.profile.d/$OS.sh"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
