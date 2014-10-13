@@ -157,13 +157,13 @@ _get_prompt_color() {
 ## prompt
 ###############
 
-PS1=$'\a\r'
+PS1=$'\001\r'
 if [ -z "$SSH_TTY" ]; then
-    PS1=$PS1$'\a\e[0;37m\a'
+    PS1=$PS1$'\001\e[0;37m\001'
 else
-    PS1=$PS1$'\a\e[0;33m\a'
+    PS1=$PS1$'\001\e[0;33m\001'
 fi
-PS1=$PS1$'${USER:=$(id -un)}@${HOSTNAME:=$(hostname -s)}\a\e[0m\a:\$(_prompt_path)\$(_git_ps1)'
+PS1=$PS1$'${USER:=$(id -un)}@${HOSTNAME:=$(hostname -s)}\001\e[0m\001:\$(_prompt_path)\$(_git_ps1)'
 
 if (( USER_ID )); then
     PS1="$PS1 $ "

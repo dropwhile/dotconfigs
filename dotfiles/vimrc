@@ -222,3 +222,10 @@ endif
 "   see http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline' for
 "   more options
 set printheader=%t
+
+" if I wanted rainbows, I'd code in fucking skittles.
+hi clear Identifier
+hi clear Statement
+"hi clear Constant
+"hi clear PreProc
+"hi clear Type
