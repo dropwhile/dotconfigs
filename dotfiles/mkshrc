@@ -160,7 +160,7 @@ _get_prompt_color() {
 ## prompt
 ###############
 
-PS1=$'\001\r'
+PS1=$'\001\r\001\033]0;@${HOSTNAME}\007\001'
 if [ -z "$SSH_TTY" ]; then
     PS1=$PS1$'\001\e[0;37m\001'
 else
