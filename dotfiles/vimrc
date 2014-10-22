@@ -8,7 +8,6 @@ filetype plugin on    " Enable filetype-specific plugins
 filetype indent off    " Disable filetype-specific indenting (I HATE IT!)
 "filetype plugin indent off "more no indent magicalness
 
-set mouse=v           "disable goofy mousing
 "set noswf             "disable swapfile
 
 " change location of .viminfo and swp files
@@ -210,6 +209,8 @@ if has('gui_running')
     set guioptions-=T
     set mouse=a "enable visual mouse mode in gvim/macvim
     set gcr=a:blinkon0
+else
+    set mouse=h             "disable goofy mousing
 endif
 
 if has("gui_macvim")

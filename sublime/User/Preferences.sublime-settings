@@ -1,0 +1,22 @@
+{
+	"binary_file_patterns":
+	[
+		".DS_Store",
+		".gitignore",
+		"*.psd"
+	],
+	"color_scheme": "Packages/User/Hodor.tmTheme",
+	"detect_indentation": true,
+	"draw_minimap_border": true,
+	"font_face": "Monaco",
+	"font_options":
+	[
+		"no_antialias"
+	],
+	"font_size": 11,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"theme": "Soda Light 3.sublime-theme"
+}
