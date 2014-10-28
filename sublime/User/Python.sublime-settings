@@ -1,4 +1,7 @@
 {
 	"translate_tabs_to_spaces": true,
-	"tab_size": 4
+	"tab_size": 4,
+	"detect_indentation": false,
+	"trim_automatic_white_space": true,
+	"trim_trailing_white_space_on_save": true,
 }

@@ -1,4 +1,5 @@
 {
+	"auto_complete_commit_on_tab": true,
 	"binary_file_patterns":
 	[
 		".DS_Store",
@@ -18,5 +19,10 @@
 	[
 		"Vintage"
 	],
+	"rulers":
+	[
+		80
+	],
+	"tab_size": 4,
 	"theme": "Soda Light 3.sublime-theme"
 }

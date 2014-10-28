@@ -1,8 +1,14 @@
 {
 	"installed_packages":
 	[
+		"BracketHighlighter",
 		"ColorSchemeSelector",
+		"GoSublime",
+		"MarkdownTOC",
+		"Pretty JSON",
+		"SideBarEnhancements",
 		"Terminal",
-		"Theme - Soda"
+		"Theme - Soda",
+		"Unquote"
 	]
 }
