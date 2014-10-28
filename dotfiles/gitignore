@@ -7,3 +7,4 @@
 # twisted trial temp dir
 /_trial_temp
 
+/.sublime-workspace

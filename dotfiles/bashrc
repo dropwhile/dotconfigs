@@ -160,6 +160,12 @@ type json &>/dev/null || __mcfg_define_json_func && unset -f __mcfg_define_json_
 ### Load os specific settings
 [ -s "$HOME/.profile.d/$OS.sh" ] && . "$HOME/.profile.d/$OS.sh"
 
+# disable START/STOP output control
+if [ -x /bin/stty ]; then
+    /bin/stty -ixon
+    /bin/stty -ixoff
+fi
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
