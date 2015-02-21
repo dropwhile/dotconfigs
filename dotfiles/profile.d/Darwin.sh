@@ -40,6 +40,8 @@ if [ -n "$BASH" ]; then
         ## bash_completion if installed, and not already loaded ##
         [ -z "${BASH_COMPLETION}" ] && [ -f $HOME/.brew/etc/bash_completion ] &&
             . $HOME/.brew/etc/bash_completion
+        [ -z "${BASH_COMPLETION}" ] && [ -f $HOME/.brew/share/bash-completion/bash_completion ] &&
+            . $HOME/.brew/share/bash-completion/bash_completion
     fi
 fi
 
