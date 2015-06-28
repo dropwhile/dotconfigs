@@ -35,7 +35,7 @@ set smarttab          "smart tabs??
 set autoindent        "Autoindentation
 set smartindent       "smart indenting is smart
 set wrap              "wrap
-set ww=<,>,[,]        "allows left at start of line to go to end of prev line 
+set ww=<,>,[,]        "allows left at start of line to go to end of prev line
 
 "display"
 "set title             "Put title in title bar
@@ -101,12 +101,12 @@ command! -nargs=? Underline call s:Underline(<q-args>)
 "set completeopt=menu
 
 """"""
-"""""" FileType support and file detection autocommands 
+"""""" FileType support and file detection autocommands
 """"""
 "The following removes extra space at ends of lines, for certain file types
-"autocmd BufWritePre *.py normal m`:%s/\s\+$//e `` 
+"autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 autocmd BufWritePre *.py :call StripWhitespace()
-" highlight trailing whitespace 
+" highlight trailing whitespace
 autocmd BufRead,BufNewFile *.py match Error /\s\+$/
 
 " When editing a file, always jump to the last known cursor position.
@@ -234,6 +234,28 @@ endif
 "   see http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline' for
 "   more options
 set printheader=%t
+set laststatus=2
+
+" airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme="bubblegum"
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '^V' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '^S' : 'S',
+      \ }
+let g:airline#extensions#virtualenv#enabled=0
+let g:airline#extensions#tmuxline#enabled=0
+let g:airline#extensions#promptline#enabled=0
 
 " if I wanted rainbows, I'd code in fucking skittles.
 hi clear Identifier
