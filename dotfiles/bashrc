@@ -33,7 +33,7 @@ esac
 #### exported functions
 # function to show git branch
 # later on bash-completion will pull in git-completion, if it is installed
-# which will override this function. So just provide this as a fallback in 
+# which will override this function. So just provide this as a fallback in
 # case __git_ps1 doesn't exist later....
 __git_ps1() {
     ref=$(git symbolic-ref -q HEAD 2> /dev/null) || return
@@ -147,7 +147,7 @@ __mcfg_define_json_func() {
     fi
 }
 
-# check to see if 'json' (node + npm) is present, or 
+# check to see if 'json' (node + npm) is present, or
 # already defined as a bash function
 # if not, create a work-alike bash function
 type json &>/dev/null || __mcfg_define_json_func && unset -f __mcfg_define_json_func
