@@ -192,11 +192,11 @@ bind 'set revert-all-at-newline on'
 
 # erase dups before adding line, and ignore lines starting with spaces
 # See bash(1) for more options
-export HISTCONTROL="ignorespace:erasedups"
+export HISTCONTROL="ignoreboth"
 # suppress duplicate commands, the simple invocation of 'ls' without any
 # arguments, and the shell built-ins bg, fg, cd, pushd, popd, and exit
 # also ignores any command starting with a space
-export HISTIGNORE="&:l[lsa]:[bf]g:cd:pushd*:popd*:exit"
+export HISTIGNORE="&:l[lsa]:[bf]g:cd*:pushd*:popd*:exit:clear:reset"
 # disable saving of history -- only make history per/bash process
 #unset HISTFILE
 
