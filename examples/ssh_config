@@ -11,7 +11,11 @@ host *
     hashknownhosts yes
     stricthostkeychecking ask
     ServerAliveInterval 300
-    # recently, aes256 has been shown to be less secure than aes256
-    # due to number of permutations. so put it last
-    # http://www.schneier.com/blog/archives/2009/07/another_new_aes.html
-    ciphers aes192-ctr,aes128-ctr,aes256-ctr
+    # dont use kerberos. default is no, but specify it in case of server side
+    GSSAPIAuthentication no
+    # identities only for ssh-agent
+    IdentitiesOnly      yes
+    # ciphers and keys preferred
+    ciphers             chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+    HostKeyAlgorithms   ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa,ecdsa-sha2-nistp521-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp521,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
+
