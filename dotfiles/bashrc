@@ -181,11 +181,28 @@ shopt -s no_empty_cmd_completion
 # corrected
 shopt -s cdspell
 
+# Correct spelling errors during tab-completion
+shopt -s dirspell
+
 # preserve multiline command newlines where possible
 shopt -s lithist
 
+# This allows you to bookmark your favorite places across the file system
+# Define a variable containing a path and you will be able to cd into it
+# regardless of the directory you're in
+#shopt -s cdable_vars
+
 ## change readline history behavior
 bind 'set revert-all-at-newline on'
+
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+
+# Treat hyphens and underscores as equivalent
+#bind "set completion-map-case on"
+
+# Display matches for ambiguous patterns at first tab press
+#bind "set show-all-if-ambiguous on"
 
 ## set terminal tab width, if available
 #type -p tabs &>/dev/null && tabs -4 &>/dev/null
@@ -200,8 +217,14 @@ export HISTIGNORE="&:l[lsa]:[bf]g:cd*:pushd*:popd*:exit:clear:reset"
 # disable saving of history -- only make history per/bash process
 #unset HISTFILE
 
+# Automatically trim long paths in the prompt (requires Bash 4.x)
+PROMPT_DIRTRIM=2
+
 # append to the history file, don't overwrite it
 shopt -s histappend
+
+# Save multi-line commands as one command
+#shopt -s cmdhist
 
 ## enable colors in grep ##
 export GREP_OPTIONS='--color=auto'
