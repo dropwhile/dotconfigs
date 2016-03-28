@@ -9,10 +9,7 @@ How I use it:
 
 3. change to home dir: `cd $HOME`
 
-4.  `git co git://github.com/cactus/dotconfigs.git .myconfigs`
-
-    or `git co https://cactus@github.com/cactus/dotconfigs.git .myconfigs`
-    depending on firewall rules
+4.  `git co https://github.com/cactus/dotconfigs.git .myconfigs`
 
 5.  Run the 'move in' script: `.myconfigs/scripts/create_links.bash`
     
@@ -22,13 +19,9 @@ How I use it:
 
 6. Source the new .bashrc: `. $HOME/.bashrc`
 
-After I push a new change to the repo, and want to update the dotfiles on a
-particular system. Note that dotfiles_update is a shell function now
-(exported so I don't have to call the file directly anymore):
-
-    dotfiles_update
-
-this will also create symlinks for any new files
+After a change is pushed to the repo, update any installs by calling
+`dotfiles_update` (an exported shell function). This will also create symlinks
+for any new files.
 
 
 directories
