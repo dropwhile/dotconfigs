@@ -160,6 +160,8 @@ nnoremap <leader>p <F11>
 nnoremap <leader>o o<Esc>
 " newline before line, in normal mode
 nnoremap <leader>O O<Esc>
+" cd to current file directory
+nnoremap <leader>cd %:p:h
 
 " F5 to insert current date/time
 inoremap <F5> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
