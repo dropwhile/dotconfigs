@@ -83,6 +83,8 @@
     assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
     ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
     theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+    fixup = !sh -c 'git commit --fixup=$1' -
+    squash = !sh -c 'git commit --squash=$1' -
 [rerere]
     enabled = 1
 [grep]
