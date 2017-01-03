@@ -226,7 +226,8 @@ if has('gui_running')
     set mouse=a "enable visual mouse mode in gvim/macvim
     set gcr=a:blinkon0
 else
-    set mouse=h             "disable goofy mousing
+    "set mouse=h             "disable goofy mousing
+    set mouse=a
 endif
 
 if has("gui_macvim")
