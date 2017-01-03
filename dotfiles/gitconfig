@@ -88,7 +88,7 @@
 [rerere]
     enabled = 1
 [grep]
-	fullname = true
+    fullname = true
 # check that anything being pulled/fetched/etc, is complete and sane
 [transfer]
         fsckobjects = true
