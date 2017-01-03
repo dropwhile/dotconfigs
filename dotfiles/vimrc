@@ -80,6 +80,9 @@ hi PmenuSel         cterm=BOLD  ctermfg=yellow      ctermbg=darkgrey
 hi PmenuSbar        cterm=BOLD  ctermfg=lightblue   ctermbg=lightgrey
 hi PmenuThumb       cterm=BOLD  ctermfg=cyan        ctermbg=darkgrey
 
+" switch to tab if buffer already open there
+set switchbuf=usetab
+
 " function to strip trailing whitespace
 function! StripWhitespace()
     normal m`
