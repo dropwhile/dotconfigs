@@ -11,7 +11,7 @@ How I use it:
 
 4.  `git co https://github.com/cactus/dotconfigs.git .myconfigs`
 
-5.  Run the 'move in' script: `.myconfigs/scripts/create_links.bash`
+5.  Run the 'move in' script: `.myconfigs/scripts/setup.sh`
     
     Some action may be required. The script will report if any files already
     exist, and would cause a collision. Remove those files and run the script
