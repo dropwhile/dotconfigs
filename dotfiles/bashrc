@@ -41,7 +41,7 @@ __git_ps1() {
 }
 
 dotfiles_update() {
-    $HOME/.myconfigs/scripts/dotfiles_update.sh
+    $HOME/.myconfigs/scripts/update.sh
 }
 
 get_whois_registrant() {
