@@ -15,7 +15,7 @@
     safecrlf = warn
 [diff]
     renames = copies
-    guitool = p4merge
+    #guitool = p4merge
     algorithm = patience
 [format]
     subjectprefix = PATCH
