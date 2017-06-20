@@ -40,6 +40,7 @@ set ww=<,>,[,]        "allows left at start of line to go to end of prev line
 "display"
 "set title             "Put title in title bar
 syntax on             "Enable syntax highlighting
+set synmaxcol=200     "syntax highlight for only first 200 chars in a line
 set showmatch         "show matching parenthesis,brackets,etc
 set showcmd           "show current uncompleted command
 set ttyfast           "Smoother changes
@@ -133,6 +134,9 @@ autocmd FileType markdown,text set linebreak et
 " the last position
 "autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" automatically handle split equalization on window resize
+autocmd VimResized * wincmd =
 
 " some stuff for Go
 let g:gofmt_command = "goimports"
