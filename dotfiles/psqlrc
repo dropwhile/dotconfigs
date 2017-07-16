@@ -1,7 +1,7 @@
 \set QUIET 1
 \pset null '¤'
 
-\set PROMPT1 '%[%033[1m%][%/] # '
+-- \set PROMPT1 '%[%033[1m%][%/] # '
 -- \set PROMPT2 '%R > '
 
 \timing
