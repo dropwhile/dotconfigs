@@ -1,14 +1,20 @@
 \set QUIET 1
-\pset null '¤'
 
 -- \set PROMPT1 '%[%033[1m%][%/] # '
 -- \set PROMPT2 '%R > '
 
+-- show timing for queries
 \timing
 
+-- output formatting
 \x auto
+\pset pager off
+\pset null '¤'
+
+-- set psql variables
 \set VERBOSITY verbose
 \set HISTFILE ~/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
 \set COMP_KEYWORD_CASE upper
+
 \unset QUIET
