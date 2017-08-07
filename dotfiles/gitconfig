@@ -17,6 +17,7 @@
     renames = copies
     #guitool = p4merge
     algorithm = patience
+    indentHeuristic = true
 [format]
     subjectprefix = PATCH
     suffix = .patch.txt
