@@ -9,7 +9,7 @@
 -- output formatting
 \x auto
 \pset pager off
-\pset null '¤'
+\pset null 'NULL'
 
 -- set psql variables
 \set VERBOSITY verbose
