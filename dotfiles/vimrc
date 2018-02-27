@@ -2,7 +2,7 @@
 call pathogen#infect()
 
 set nocompatible      " We're running Vim, not Vi!
-"set enc=utf-8         " set encoding to utf-8
+set encoding=utf-8    " set encoding to utf-8
 filetype on           " Enable fieltype detection
 filetype plugin on    " Enable filetype-specific plugins
 filetype indent off    " Disable filetype-specific indenting (I HATE IT!)
@@ -19,6 +19,7 @@ set dir=~/.vim/tmp//   "set swp dir. trailing slashes avoid collisions
 
 " scroll by 3 line at window buffer edge instead of just 1 (shows more context)
 set scrolloff=3
+set sidescrolloff=3
 
 "searching related"
 set ignorecase        "Ignore case in searches --opposite is: set noic
@@ -44,6 +45,10 @@ set synmaxcol=200     "syntax highlight for only first 200 chars in a line
 set showmatch         "show matching parenthesis,brackets,etc
 set showcmd           "show current uncompleted command
 set ttyfast           "Smoother changes
+
+"claims to make vim a bit faster.
+:set lazyredraw
+
 
 "misc"
 "set noerrorbells      "no beeps
