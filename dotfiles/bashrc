@@ -4,7 +4,12 @@
 [ -z "$PS1" ] && return
 
 # detect os
-export OS=$(uname -s)
+if [ "$TERM_PROGRAM" = "Apple_Terminal" ]; then
+    OS="Darwin"
+else
+    OS=$(uname -s)
+fi
+export OS
 
 ## some terminal settings
 # If this is an xterm set the title to user@host:dir
@@ -42,17 +47,6 @@ __git_ps1() {
 
 dotfiles_update() {
     $HOME/.myconfigs/scripts/update.sh
-}
-
-get_whois_registrant() {
-    while read domain; do
-        printf "#### ${domain} ####\n"
-        whois ${domain} | grep -A6 -E "(Registrant|Registration)"
-    done
-}
-
-services_lookup() {
-    grep -w "${1}" /etc/services
 }
 
 #### non-exported functions
@@ -235,21 +229,9 @@ export LESS="Ri"
 #export OOO_FORCE_DESKTOP=gnome
 export CLICOLOR=1
 
-## set the gpg tty for helper apps (like gnupg.vim) ##
-#export GPG_TTY=$(tty)
-
-## pull in gpg agent env var
-#if [ -n "$(type -p gpg-agent)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
-#    . "$HOME/.gpg-agent-info"
-#    export GPG_AGENT_INFO
-#fi
-
-# virtualenvstuff
-if [ -e "$(type -p pip)" ] && [ -e "$(type -p virtualenv)" ]; then
-    # automatically use the currently active virtualenv
-    export PIP_LOG_FILE=/dev/null
-    export PIP_DISABLE_PIP_VERSION_CHECK=1
-fi
+# pip/virtualenvstuff
+export PIP_LOG_FILE=/dev/null
+export PIP_DISABLE_PIP_VERSION_CHECK=1
 
 
 ##########################
@@ -257,11 +239,9 @@ fi
 ##########################
 
 ### general
-alias ls='ls -p'
 
 ## special case for getting color on linux.
 ## why can't it use an env var like bsd ls?? *sigh*
-if [ $OS == 'Linux' ]; then alias ls='ls -p --color=auto'; fi
 alias l.='ls -d .*'
 alias ll='ls -lh'
 

@@ -35,24 +35,22 @@ finder-update-desktop() {
 export COPYFILE_DISABLE='true'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 
-if [ -n "$BASH" ]; then
-    if [ -x $HOME/.brew/bin/brew ]; then
-        ## bash_completion if installed, and not already loaded ##
-        [ -z "${BASH_COMPLETION}" ] && [ -f $HOME/.brew/etc/bash_completion ] &&
-            . $HOME/.brew/etc/bash_completion
-        [ -z "${BASH_COMPLETION}" ] && [ -f $HOME/.brew/share/bash-completion/bash_completion ] &&
-            . $HOME/.brew/share/bash-completion/bash_completion
-    fi
+if [ -n "$BASH" ] && [ -z "${BASH_COMPLETION}" ]; then
+    ## bash_completion if installed, and not already loaded ##
+    [ -f $HOME/.brew/share/bash-completion/bash_completion ] &&
+        . $HOME/.brew/share/bash-completion/bash_completion
 fi
 
 ## lesspipe if installed ##
 LESSPIPEX="$(type -p lesspipe.sh)"
 [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 
+# disable save/restore shell state support in macos (see /etc/bashrc_Apple_Terminal)
+export SHELL_SESSION_HISTORY=0
 
 ##########################
 #### aliases
 ##########################
 
 alias locate='mdfind -name'
-
+alias ls='ls -p'
