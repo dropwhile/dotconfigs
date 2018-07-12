@@ -229,8 +229,8 @@ if has('gui_running')
     colorscheme desert
     set gfn:Monaco:h11
     set noantialias
-    set columns=80
-    set lines=30
+    set columns=90
+    set lines=35
     set guioptions-=T
     set mouse=a "enable visual mouse mode in gvim/macvim
     set gcr=a:blinkon0

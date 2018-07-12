@@ -120,38 +120,6 @@ prompt_off() {
 #__mcfg_set_bash_prompt && unset -f __mcfg_set_bash_prompt
 prompt_on
 
-# function that defines a json function
-__mcfg_define_json_func() {
-    # try yajl
-    local JSON_REFORMAT=$(type -p json_reformat)
-    if [ -n "${JSON_REFORMAT}" ]; then
-        # use eval because JSON_REFORMAT is local so as not to pollute
-        # the global namespace
-        eval "json() { ${JSON_REFORMAT}; }"
-        return
-    fi
-    # try python
-    local PYV="$(type -p python2.7 || type -p python2.6)"
-    if [ -n "${PYV}" ]; then
-        # use eval because PYV is local so as not to pollute
-        # the global namespace
-        eval "json() { ${PYV} -mjson.tool; }"
-        return
-    fi
-    # no python? try ruby
-    local RBV="$(type -p ruby)"
-    if [ -n "$RBV" ] && [ "$(ruby -e 'puts RUBY_VERSION')" \> "1.9" ]; then
-        # no python version with mtool.json, so try ruby
-        eval "json() { ruby -r json -e 'jj JSON.parse gets'; }"
-        return
-    fi
-}
-
-# check to see if 'json' (node + npm) is present, or
-# already defined as a bash function
-# if not, create a work-alike bash function
-type json &>/dev/null || __mcfg_define_json_func && unset -f __mcfg_define_json_func
-
 
 ############################
 #### environment settings
@@ -261,29 +229,26 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 export LESS="Ri"
 
-## set the gpg tty for helper apps (like gnupg.vim) ##
-export GPG_TTY=$(tty)
-
 # other environment vars
 #export MOZ_DISABLE_PANGO=1
 #export FIREFOX_DSP=none
 #export OOO_FORCE_DESKTOP=gnome
 export CLICOLOR=1
 
+## set the gpg tty for helper apps (like gnupg.vim) ##
+#export GPG_TTY=$(tty)
+
 ## pull in gpg agent env var
-if [ -n "$(type -p gpg-agent)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
-    . "$HOME/.gpg-agent-info"
-    export GPG_AGENT_INFO
-fi
+#if [ -n "$(type -p gpg-agent)" ] && [ -f "$HOME/.gpg-agent-info" ]; then
+#    . "$HOME/.gpg-agent-info"
+#    export GPG_AGENT_INFO
+#fi
 
 # virtualenvstuff
 if [ -e "$(type -p pip)" ] && [ -e "$(type -p virtualenv)" ]; then
-    #only run if there is a virtualenv currently activated
-    export PIP_REQUIRE_VIRTUALENV=true
     # automatically use the currently active virtualenv
-    export PIP_RESPECT_VIRTUALENV=true
-    export VIRTUALENV_USE_DISTRIBUTE=true
     export PIP_LOG_FILE=/dev/null
+    export PIP_DISABLE_PIP_VERSION_CHECK=1
 fi
 
 

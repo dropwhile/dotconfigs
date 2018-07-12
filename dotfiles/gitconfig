@@ -100,3 +100,8 @@
 [pager]
 	branch = less -+$LESS -FRXi
 	tag = less -+$LESS -FRXi
+
+[includeIf "gitdir:~/projects/starcard/"]
+    path = ~/projects/starcard/.gitconfig
+[includeIf "gitdir:~/projects/starcard/tcomm-**"]
+    path = ~/projects/firstfoundry/.gitconfig
