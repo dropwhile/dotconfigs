@@ -99,11 +99,13 @@ prompt_on() {
     # function. Also show different host color if over ssh.
     # visual cues = winrar
     # ( idea lifted from phrakture. pew pew! )
+    local UH_COLOR="${TXTRST}"
     if [ -z "$SSH_TTY" ]; then
-        PS1="\[${TXTWHT}\]\u@${HNAME}\[${TXTRST}\]:\W\$(__git_ps1 '(%s)')\\$ "
+        UH_COLOR="${TXTWHT}"
     else
-        PS1="\[${TXTYLW}\]\u@${HNAME}\[${TXTRST}\]:\W\$(__git_ps1 '(%s)')\\$ "
+        UH_COLOR="${TXTYLW}"
     fi
+    PS1="\[${UH_COLOR}\]\u@${HNAME}\[${TXTRST}\]:\W\$(__git_ps1 '(%s)')\\$ "
 }
 
 prompt_off() {
