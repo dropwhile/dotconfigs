@@ -227,8 +227,10 @@ vnoremap / /\v
 
 if has('gui_running')
     colorscheme desert
-    set gfn:Monaco:h11
-    set noantialias
+    "set gfn:Monaco:h11
+    set gfn:InputMono\ Thin:h11
+    "set noantialias
+    set antialias
     set columns=90
     set lines=35
     set guioptions-=T
