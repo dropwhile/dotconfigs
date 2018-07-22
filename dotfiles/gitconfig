@@ -102,4 +102,4 @@
 	tag = less -+$LESS -FRXi
 
 [include]
-    path = ~/projects/.gitconfig
+    path = ~/.gitconfig-local
