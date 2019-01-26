@@ -32,6 +32,8 @@
     chainreplyto = false
     thread = true
     confirm = auto
+    verify = off
+    annotate = yes
 [user]
     name = elij
     email = elij@wundrd.net
@@ -98,8 +100,8 @@
 [receive]
         fsckObjects = true
 [pager]
-	branch = less -+$LESS -FRXi
-	tag = less -+$LESS -FRXi
+    branch = less -+$LESS -FRXi
+    tag = less -+$LESS -FRXi
 
 [include]
     path = ~/.gitconfig-local
