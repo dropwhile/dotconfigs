@@ -72,7 +72,6 @@
     # given any git object, try to show it briefly
     whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
     count = shortlog -sn
-    amend = commit --amend -C HEAD
     # sets head's author as someone else
     # git credit 'Joe User' 'joe@example.com'
     credit = commit --amend --author "$1 <$2>" -C HEAD
@@ -86,19 +85,21 @@
     assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
     ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
     theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
-    fixup = !sh -c 'git commit --fixup=$1' -
-    squash = !sh -c 'git commit --squash=$1' -
+    amend = commit --amend -C HEAD
+    fixup = commit --fixup "$1"
+    squash = commit --squash "$1"
 [rerere]
     enabled = 1
 [grep]
     fullname = true
+
 # check that anything being pulled/fetched/etc, is complete and sane
 [transfer]
-        fsckobjects = true
+    fsckobjects = true
 [fetch]
-        fsckobjects = true
+    fsckobjects = true
 [receive]
-        fsckObjects = true
+    fsckObjects = true
 [pager]
     branch = less -+$LESS -FRXi
     tag = less -+$LESS -FRXi
