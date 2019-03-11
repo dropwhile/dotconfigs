@@ -89,6 +89,11 @@
     amend = commit --amend -C HEAD
     fixup = commit --fixup "$1"
     squash = commit --squash "$1"
+    # ref: https://developer.atlassian.com/blog/2015/05/the-power-of-git-subtree/
+    # the acronym stands for "subtree add"
+    sba = "!f() { git subtree add --prefix $2 $1 master --squash; }; f"
+    # the acronym stands for "subtree update"
+    sbu = "!f() { git subtree pull --prefix $2 $1 master --squash; }; f"
 [rerere]
     enabled = 1
 [grep]
