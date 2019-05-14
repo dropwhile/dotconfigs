@@ -1,3 +1,6 @@
 [submodule "dotfiles/vim/bundle/nerdcommenter"]
 	path = dotfiles/vim/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule "dotfiles/vim/bundle/vim-terraform"]
+	path = dotfiles/vim/bundle/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git
