@@ -274,6 +274,10 @@ let g:airline#extensions#virtualenv#enabled=0
 let g:airline#extensions#tmuxline#enabled=0
 let g:airline#extensions#promptline#enabled=0
 
+" terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
 " if I wanted rainbows, I'd code in fucking skittles.
 hi clear Identifier
 hi clear Statement
