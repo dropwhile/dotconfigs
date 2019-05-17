@@ -114,3 +114,5 @@
     path = ~/.gitconfig-local
 [rebase]
 	autosquash = true
+[pack]
+	useSparse = true
