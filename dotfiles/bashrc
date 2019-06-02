@@ -235,6 +235,9 @@ export CLICOLOR=1
 export PIP_LOG_FILE=/dev/null
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
+# nix stuff
+export NIX_PAGER=cat
+
 
 ##########################
 #### aliases
