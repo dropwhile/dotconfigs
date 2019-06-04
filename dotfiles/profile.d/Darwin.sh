@@ -36,9 +36,11 @@ export COPYFILE_DISABLE='true'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 
 ## bash_completion if installed, and not already loaded ##
-[ -n "$BASH" ] && [ -z "${BASH_COMPLETION}" ] &&
-    [ -f $HOME/.brew/share/bash-completion/bash_completion ] &&
-    . $HOME/.brew/share/bash-completion/bash_completion
+if [ -n "$BASH" ] && [ -z "${BASH_COMPLETION}" ] &&
+        [ -f $HOME/.brew/share/bash-completion/bash_completion ]; then
+     export BASH_COMPLETION_COMPAT_DIR=$HOME/.brew/etc/bash_completion.d/
+     . $HOME/.brew/share/bash-completion/bash_completion
+fi;
 
 ## lesspipe if installed ##
 LESSPIPEX="$(type -p lesspipe.sh)"
