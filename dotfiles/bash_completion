@@ -11,3 +11,6 @@ if [ -n "$BASH" ] && [ -n "$BASH_COMPLETION_COMPAT_DIR" ]; then
     fi
     unset _my_backup_glob _my_blacklist_glob
 fi
+
+[ -e "$HOME/.bash_completion_local" ] &&
+    . "$HOME/.bash_completion_local"
