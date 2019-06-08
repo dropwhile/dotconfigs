@@ -16,7 +16,8 @@ export OS
 # if 'dumb', just bail without doing anything further
 case $TERM in
     xterm*)
-        PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME%%.*}\007"'
+        #PROMPT_COMMAND='echo -ne "\033]0;@${HOSTNAME%%.*}\007"'
+        PROMPT_COMMAND='echo -ne "\033]0;@\007"'
         ;;
     dumb)
         # dont save history if 'dumb'
@@ -92,7 +93,7 @@ prompt_on() {
 
     # only set hostname in prompt if /not/ local
     local HNAME=''
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ "$REMOTEHOST" != "localhost" ]; then
         HNAME='\h'
         if [ -n "${TWO_DOT_HOSTNAME}" ]; then
             HNAME="${HOSTNAME%.*.*}"
