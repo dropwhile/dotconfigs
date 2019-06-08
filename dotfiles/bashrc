@@ -90,10 +90,14 @@ prompt_on() {
     local BAKWHT='\e[47m' # White - Background
     local TXTRST='\e[0m' # Text Reset
 
-    local HNAME='\h'
-    if [ -n "${TWO_DOT_HOSTNAME}" ]; then
-        local HNAME="${HOSTNAME%.*.*}"
-        unset -v TWO_DOT_HOSTNAME
+    # only set hostname in prompt if /not/ local
+    local HNAME=''
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        HNAME='\h'
+        if [ -n "${TWO_DOT_HOSTNAME}" ]; then
+            HNAME="${HOSTNAME%.*.*}"
+            unset -v TWO_DOT_HOSTNAME
+        fi
     fi
     # set ps1 to show git branch, using previously defined
     # function. Also show different host color if over ssh.
