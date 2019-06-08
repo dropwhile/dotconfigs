@@ -27,6 +27,12 @@ case $TERM in
     *) ;;
 esac
 
+IS_SSH="no"
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    IS_SSH="yes"
+fi
+
+export IS_SSH
 
 ## load local env vars if they exist
 [ -s $HOME/.bashrc_pre ] && . $HOME/.bashrc_pre
@@ -93,7 +99,7 @@ prompt_on() {
 
     # only set hostname in prompt if /not/ local
     local HNAME=''
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ "$REMOTEHOST" != "localhost" ]; then
+    if [ "$IS_SSH" = "yes" ]; then
         HNAME='\h'
         if [ -n "${TWO_DOT_HOSTNAME}" ]; then
             HNAME="${HOSTNAME%.*.*}"
@@ -105,7 +111,7 @@ prompt_on() {
     # visual cues = winrar
     # ( idea lifted from phrakture. pew pew! )
     local UH_COLOR="${TXTRST}"
-    if [ -z "$SSH_TTY" ]; then
+    if [ "$IS_SSH" = "no" ]; then
         UH_COLOR="${TXTWHT}"
     else
         UH_COLOR="${TXTYLW}"
