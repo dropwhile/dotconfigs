@@ -105,6 +105,10 @@ prompt_on() {
             HNAME="${HOSTNAME%.*.*}"
             unset -v TWO_DOT_HOSTNAME
         fi
+        if [ -n "${HNAME_OVERRIDE}" ]; then
+            HNAME="${HNAME_OVERRIDE}"
+            unset -v HNAME_OVERRIDE
+        fi
     fi
     # set ps1 to show git branch, using previously defined
     # function. Also show different host color if over ssh.
