@@ -27,7 +27,7 @@ case $TERM in
     *) ;;
 esac
 
-IS_SSH="no"
+IS_SSH="${IS_SSH:-no}"
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     IS_SSH="yes"
 fi
