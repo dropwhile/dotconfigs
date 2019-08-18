@@ -1,0 +1,49 @@
+## options
+# allow function calls in prompt
+setopt prompt_subst
+setopt appendhistory nomatch
+#setopt extendedglob
+unsetopt autocd
+bindkey -e
+bindkey "[H" beginning-of-line
+bindkey "[F" end-of-line
+
+# git prompt stuff
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' formats "(%b%u%c)"
+zstyle ':vcs_info:git:*' stagedstr '+'
+zstyle ':vcs_info:git:*' unstagedstr '!'
+zstyle ':vcs_info:git:*' actionformats "(%b|%a%m%F{yellow}%u%c%f)"
+zstyle ':vcs_info:git:*' patch-format ' %n/%a'
+
+#zstyle ':vcs_info:git*' formats "%{$fg[grey]%}%s %{$reset_color%}%r/%S%{$fg[grey]%} %{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%} "
+
+precmd() {
+    vcs_info
+}
+
+## set PS1
+if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" || $IS_SSH = 1 ]]; then
+    IS_SSH=1
+    ps_c='%F{yellow}'
+else
+    IS_SSH=0
+    ps_c='%F{white}'
+fi
+PS1=${ps_c}'%n@%f:%1~%(!.%F{red}.%f)${vcs_info_msg_0_}%#%E '
+
+## history
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '$HOME/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
