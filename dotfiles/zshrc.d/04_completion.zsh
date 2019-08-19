@@ -15,6 +15,9 @@ if [[ -e "$zcompf" && $(date +'%j') == $(stat -f '%Sm' -t '%j' "$zcompf") ]]; th
     compinit -C -d "$zcompf"
 else
     compinit -d "$zcompf"
+fi
+# if zcompdump exists, and is older than the .zwc file, regenerate (in background-ish)
+if [[ -s "$zcompf" && (! -s "${zcompf}.zwc" || "$zcompf" -nt "${zcompf}.zwc") ]]; then
     { zrecompile -pq -M "$zcompf" } &!
 fi
 unset zcompf

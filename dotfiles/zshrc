@@ -26,20 +26,5 @@ export IS_SSH
 ## load local env vars if they exist
 [ -s $HOME/.zshrc_pre ] && . $HOME/.zshrc_pre
 
-
-############################
-#### environment settings
-############################
-
-### Load os specific settings
-[ -s "$HOME/.zshrc.d/os/$OS.zsh" ] && . "$HOME/.zshrc.d/os/$OS.zsh"
-
-# disable START/STOP output control
-if [ -x /bin/stty ]; then
-    /bin/stty -ixon
-    /bin/stty -ixoff
-fi
-
-for file in $HOME/.zshrc.d/*.zsh; do
-    source $file
-done
+## invoke main custom config entrypoint
+source $HOME/.zshrc.d/load.zsh
