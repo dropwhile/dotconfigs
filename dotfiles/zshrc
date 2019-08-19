@@ -40,9 +40,6 @@ if [ -x /bin/stty ]; then
     /bin/stty -ixoff
 fi
 
-source $HOME/.zshrc.d/01_general.zsh
-source $HOME/.zshrc.d/02_vcs_info.zsh
-source $HOME/.zshrc.d/03_prompt.zsh
-source $HOME/.zshrc.d/04_completion.zsh
-source $HOME/.zshrc.d/05_exports.zsh
-source $HOME/.zshrc.d/06_post.zsh
+for file in $HOME/.zshrc.d/*.zsh; do
+    source $file
+done
