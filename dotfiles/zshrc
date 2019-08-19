@@ -1,19 +1,75 @@
+# vim: set ft=zsh:
+
+# if not an interactive shell, return
+[[ ! -o interactive ]] && return
+
+
+# detect os
+if [ "$TERM_PROGRAM" = "Apple_Terminal" ]; then
+    OS="Darwin"
+else
+    OS=$(uname -s)
+fi
+export OS
+
+
+# detecth ssh
+IS_SSH="${IS_SSH:-0}"
+if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
+    IS_SSH=1
+fi
+export IS_SSH
+
+
+## load local env vars if they exist
+[ -s $HOME/.zshrc_pre ] && . $HOME/.zshrc_pre
+
+
+############################
+#### environment settings
+############################
+
+### Load os specific settings
+[ -s "$HOME/.zshrc.d/$OS.zsh" ] && . "$HOME/.zshrc.d/$OS.zsh"
+
+# disable START/STOP output control
+if [ -x /bin/stty ]; then
+    /bin/stty -ixon
+    /bin/stty -ixoff
+fi
+
 ## options
 # allow function calls in prompt
 setopt prompt_subst
+# enable interactive commnets
 setopt interactive_comments
+# extended/fancier zsh globbing
+setopt extended_glob
+# If a pattern for filename generation has no matches, print an error, instead
+# of leaving it unchanged in the argument list.
 setopt nomatch
+# disable 'cd without cd' support
 unsetopt auto_cd
 #setopt no_nomatch null_glob
-#setopt extended_glob
+
+
+## some bindkey fixes
 bindkey -e
-bindkey "[H" beginning-of-line
-bindkey "[F" end-of-line
+bindkey "\e[H" beginning-of-line
+bindkey "\e[F" end-of-line
 
-# case insensitive tab completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-# git prompt stuff
+# enable Emacs style command editing
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
+
+##########################
+#### git/vcs_info
+##########################
+## git/vcs_info prompt stuff
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git svn
 zstyle ':vcs_info:*' check-for-changes true
@@ -27,7 +83,7 @@ precmd() {
     vcs_info
 }
 
-## set PS1
+## set prompt/PS1
 if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" || $IS_SSH = 1 ]]; then
     IS_SSH=1
     ps_c='%F{yellow}'
@@ -37,17 +93,106 @@ else
 fi
 PS1=${ps_c}'%n@%f:%1~%(!.%F{red}.%f)${vcs_info_msg_0_}%#%E '
 
-## history
+
+##########################
+#### history control
+##########################
 # Lines configured by zsh-newuser-install
 setopt hist_ignore_dups hist_ignore_space append_history share_history
+HISTORY_IGNORE="(l[lsa]|[bf]g|cd *|pushd *|popd *|exit|clear|reset)"
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
+
+##########################
+#### completion control
+##########################
 ## completion stuff
-zstyle :compinstall filename '$HOME/.zshrc'
+zstyle ':compinstall' filename '$HOME/.zshrc'
+
 autoload -Uz compinit
 compinit
 
-## other stuff
-autoload -U zmv
+# simple matcher first, then case insensitive match
+zstyle ':completion:*' matcher-list \
+    '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+
+##########################
+#### exports
+##########################
+# enable colors in grep
+export GREP_OPTIONS='--color=auto'
+
+# some classic env vars
+export EDITOR=vim
+export VISUAL=vim
+export PAGER=less
+
+## some git specific vars ##
+export GIT_EDITOR=vim
+# pager is set it .gitconfig core.pager
+# setting it here overrides that setting (and subsequent args)
+#export GIT_PAGER=less
+
+# vim on os x returns a non-zero exit code when called with the short
+# path name. fucks up git & friends. Use full path.
+if [ "$OS" = "Darwin" ]; then
+    export GIT_EDITOR=/usr/bin/vim
+    export EDITOR=/usr/bin/vim
+    export VISUAL=/usr/bin/vim
+fi
+
+## less specific vars ##
+# turn off .lesshst file
+export LESSHISTFILE="-"
+# color highlighting in less
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+export LESS="Ri"
+
+# other environment vars
+#export MOZ_DISABLE_PANGO=1
+#export FIREFOX_DSP=none
+#export OOO_FORCE_DESKTOP=gnome
+export CLICOLOR=1
+
+# pip/virtualenvstuff
+export PIP_LOG_FILE=/dev/null
+export PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# nix stuff
+export NIX_PAGER=cat
+
+
+#######################
+#### special function defs
+#######################
+
+
+dotfiles_update() {
+    $HOME/.myconfigs/scripts/update.sh
+}
+
+
+##########################
+#### aliases
+##########################
+## special case for getting color on linux.
+## why can't it use an env var like bsd ls?? *sigh*
+alias l.='ls -d .*'
+alias ll='ls -lh'
+alias myip="curl icanhazip.com"
+
+
+##########################
+#### local overrides
+##########################
+## load any local overrides at the end
+[ -s $HOME/.zshrc_post ] && . $HOME/.zshrc_post
