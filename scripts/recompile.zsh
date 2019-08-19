@@ -3,10 +3,9 @@
 setopt LOCAL_OPTIONS EXTENDED_GLOB
 
 if [[ -d "$HOME/.zshrc.d/" ]]; then
-    printf "recompiling .zshrc.d zsh scripts\n"
+    printf "recompiling .zshrc.zwc\n"
     find $HOME/.zshrc.d/ -type f -name "*.zwc" -delete
+    rm -f $HOME/.zshrc.zwc
     autoload -U zrecompile
-    for f in $HOME/.zshrc.d/**/*.zsh; do
-        zrecompile -pq $HOME/.zshrc.d/load.zsh $HOME/.zshrc.d/*_*.zsh
-    done
+    zrecompile -pq $HOME/.zshrc $HOME/.zshrc.d/*_*.zsh
 fi
