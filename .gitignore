@@ -3,3 +3,4 @@ dotfiles/vim/.viminfo
 dotfiles/vim/.netrwhist
 *.merged-ca-bundle
 *.user-ca-bundle
+*.zwc
