@@ -1,11 +1,15 @@
 #!/usr/bin/env zsh
 
-setopt LOCAL_OPTIONS EXTENDED_GLOB
+setopt LOCAL_OPTIONS EXTENDED_GLOB NULL_GLOB
 
 if [[ -d "$HOME/.zshrc.d/" ]]; then
     printf "recompiling .zshrc.zwc\n"
-    find $HOME/.zshrc.d/ -type f -name "*.zwc" -delete
-    rm -f $HOME/.zshrc.zwc
     autoload -U zrecompile
-    zrecompile -pq $HOME/.zshrc $HOME/.zshrc.d/*_*.zsh
+
+    rm -f $HOME/.zshrc.zwc
+
+    find $HOME/.zshrc.d/ -type f -name "*.zwc" -delete
+    for file in $HOME/.zshrc.d/*.zsh; do
+        zrecompile -pq $file
+    done
 fi
