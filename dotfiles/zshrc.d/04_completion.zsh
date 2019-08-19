@@ -2,31 +2,27 @@
 #### completion control
 ##########################
 ## completion stuff
+autoload -U zrecompile
 zstyle ':compinstall' filename '$HOME/.zshrc'
 
-comp_cmd='compinit'
-if [[ -d $HOME/.tmpdots/ ]]; then
-    zcachedir="$HOME/.tmpdots/.zcache"
-    [[ -d "$zcachedir" ]] || mkdir -p "$zcachedir"
+zcachedir="$HOME/.tmpdots/.zcache"
+zcompcdir="$zcachedir/zcompcache"
+[[ -d "$zcompcdir" ]] || mkdir -p "$zcompcdir"
 
-    zcompf="$zcachedir/zcompdump"
-    # only re-eval compfile if at least one day has passed since last gen.
-    if [[ -e "$zcompf" && $(date +'%j') != $(stat -f '%Sm' -t '%j' "$zcompf") ]]; then
-        comp_cmd+=" -d $zcompf"
-    else
-        comp_cmd+=" -C -d $zcompf"
-    fi
-    unset zcompf
-
-    zcompcdir="$zcachedir/zcompcache"
-    [[ -d "$zcompcdir" ]] || mkdir -p "$zcompcdir"
-    zstyle ':completion:*' cache-path "$zcompcdir"
-    zstyle ':completion:*' use-cache on
-    unset zcompcdir
-    unset zcachedir
+zcompf="$zcachedir/zcompdump"
+# only re-eval compfile if at least one day has passed since last gen.
+if [[ -e "$zcompf" && $(date +'%j') == $(stat -f '%Sm' -t '%j' "$zcompf") ]]; then
+    compinit -C -d "$zcompf"
+else
+    compinit -d "$zcompf"
+    { zrecompile -pq -M "$zcompf" } &!
 fi
-eval "$comp_cmd"
-unset comp_cmd
+unset zcompf
+
+zstyle ':completion:*' cache-path "$zcompcdir"
+zstyle ':completion:*' use-cache on
+unset zcompcdir
+unset zcachedir
 
 # Use menu completion
 #zstyle ':completion:*' menu select
