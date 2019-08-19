@@ -2,7 +2,7 @@
 #### completion control
 ##########################
 ## completion stuff
-autoload -U zrecompile
+autoload -Uz compinit zrecompile
 zstyle ':compinstall' filename '$HOME/.zshrc'
 
 zcachedir="$HOME/.tmpdots/.zcache"

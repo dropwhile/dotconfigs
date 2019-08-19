@@ -25,7 +25,7 @@ bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
 
 ## autoloads
-autoload -Uz compinit vcs_info edit-command-line
+autoload -Uz edit-command-line
 
 # enable Emacs style command editing
 zle -N edit-command-line
