@@ -1,12 +1,17 @@
 ## options
 # allow function calls in prompt
 setopt prompt_subst
-setopt appendhistory nomatch
-#setopt extendedglob
-unsetopt autocd
+setopt interactive_comments
+setopt nomatch
+unsetopt auto_cd
+#setopt no_nomatch null_glob
+#setopt extended_glob
 bindkey -e
 bindkey "[H" beginning-of-line
 bindkey "[F" end-of-line
+
+# case insensitive tab completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # git prompt stuff
 autoload -Uz vcs_info
@@ -17,8 +22,6 @@ zstyle ':vcs_info:git:*' stagedstr '+'
 zstyle ':vcs_info:git:*' unstagedstr '!'
 zstyle ':vcs_info:git:*' actionformats "(%b|%a%m%F{yellow}%u%c%f)"
 zstyle ':vcs_info:git:*' patch-format ' %n/%a'
-
-#zstyle ':vcs_info:git*' formats "%{$fg[grey]%}%s %{$reset_color%}%r/%S%{$fg[grey]%} %{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%} "
 
 precmd() {
     vcs_info
@@ -36,14 +39,15 @@ PS1=${ps_c}'%n@%f:%1~%(!.%F{red}.%f)${vcs_info_msg_0_}%#%E '
 
 ## history
 # Lines configured by zsh-newuser-install
+setopt hist_ignore_dups hist_ignore_space append_history share_history
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
+## completion stuff
 zstyle :compinstall filename '$HOME/.zshrc'
-
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
+
+## other stuff
+autoload -U zmv
