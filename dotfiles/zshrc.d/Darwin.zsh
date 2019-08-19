@@ -2,8 +2,6 @@
 #### function defs
 #######################
 
-echo "loaded!"
-
 # function to go to the directory of the topmost open
 # finder folder
 # from http://www.macosxhints.com/article.php?story=20060719155640762

@@ -58,19 +58,23 @@ bindkey -e
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
 
+## autoloads
+autoload -Uz compinit vcs_info edit-command-line
 
 # enable Emacs style command editing
-autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
+
+# default is '*?_-.[]~=/&;!#$%^(){}<>'
+# omit / so word splits on path component too
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 
 ##########################
 #### git/vcs_info
 ##########################
 ## git/vcs_info prompt stuff
-autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git svn
 #zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
@@ -84,15 +88,25 @@ precmd() {
     vcs_info
 }
 
-## set prompt/PS1
-if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" || $IS_SSH = 1 ]]; then
+##########################
+#### set prompt/PS1
+##########################
+# check for ssh
+hname=''
+ps_c='%F{white}'
+if [[ $IS_SSH -eq 1 ]]; then
     IS_SSH=1
     ps_c='%F{yellow}'
-else
-    IS_SSH=0
-    ps_c='%F{white}'
+
+    if [[ -n "${TWO_DOT_HOSTNAME}" ]]; then
+        hname='%m2'
+    else
+        hname='%m'
+    fi
 fi
-PS1=${ps_c}'%n@%f:%1~%(!.%F{red}.%f)${vcs_info_msg_0_}%#%E '
+
+PS1=${ps_c}'%n@'${hname}'%f:%1~%(!.%F{red}.%f)${vcs_info_msg_0_}%#%E '
+unset ps_c hname TWO_DOT_HOSTNAME
 
 
 ##########################
@@ -112,8 +126,11 @@ SAVEHIST=1000
 ## completion stuff
 zstyle ':compinstall' filename '$HOME/.zshrc'
 
-autoload -Uz compinit
-compinit
+if [[ -d $HOME/.tmpdots/ ]]; then
+    compinit -d $HOME/.tmpdots/.zcompdump
+else
+    compinit
+fi
 
 # simple matcher first, then case insensitive match
 zstyle ':completion:*' matcher-list \
@@ -197,3 +214,8 @@ alias myip="curl icanhazip.com"
 ##########################
 ## load any local overrides at the end
 [ -s $HOME/.zshrc_post ] && . $HOME/.zshrc_post
+
+
+##########################
+#### cleanups
+##########################
