@@ -10,23 +10,47 @@ zcompcdir="$zcachedir/zcompcache"
 [[ -d "$zcompcdir" ]] || mkdir -p "$zcompcdir"
 
 zcompf="$zcachedir/zcompdump"
+# use a separate file to determine when to regenerate, as compinit doesn't
+# always need to modify the compdump
+zcompf_a="$zcachedir/zcompdump.augur"
 
-if [[ $OS = "Linux" ]]; then
-    stat -c '%y' "$zcompf" | read -A tmpA
-    STF=$tmpA[1]
-    unset tmpA
-else
-    STF=$(stat -f '%Sm' -t '%F' "$zcompf")
-fi
+
+lz_statf() {
+    local STF tmpA
+    # os specific stat
+    if [[ -e "$1" ]]; then
+        case $OS in
+        (Linux)
+            stat -c '%y' "$1" | read -A tmpA
+            STF=$tmpA[1]
+            ;;
+        (FreeBSD|Darwin)
+            STF=$(stat -f '%Sm' -t '%F' "$1")
+            ;;
+        esac
+    else
+        STF="0000-00-00"
+    fi
+    print $STF
+}
+
 # only re-eval compfile if at least one day has passed since last gen.
-if [[ -e "$zcompf" && $(date +'%F') == $STF ]]; then
+if [[ -e "$zcompf_a" && $(date +'%F') == $(lz_statf "$zcompf_a") ]]; then
     compinit -C -d "$zcompf"
 else
     compinit -d "$zcompf"
+    touch "$zcompf_a"
 fi
+unfunction lz_statf
+
 # if zcompdump exists, and is older than the .zwc file, regenerate (in background-ish)
 if [[ -s "$zcompf" && (! -s "${zcompf}.zwc" || "$zcompf" -nt "${zcompf}.zwc") ]]; then
-    { zrecompile -pq -M "$zcompf" } &!
+    {
+        zrecompile -pq -M "$zcompf"
+        if [[ -e "${zcompf}.zwc.old" ]]; then
+            rm -f "${zcompf}.zwc.old"
+        fi
+    } &!
 fi
 unset zcompf
 

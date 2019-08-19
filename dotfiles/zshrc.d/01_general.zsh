@@ -46,3 +46,11 @@ HISTORY_IGNORE="(l[lsa]|[bf]g|cd *|pushd *|popd *|exit|clear|reset)"
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
+
+
+##########################
+#### runtime help
+##########################
+unalias run-help
+autoload run-help
+alias help='run-help'
