@@ -4,11 +4,29 @@
 ## completion stuff
 zstyle ':compinstall' filename '$HOME/.zshrc'
 
+comp_cmd='compinit'
 if [[ -d $HOME/.tmpdots/ ]]; then
-    compinit -d $HOME/.tmpdots/.zcompdump
-else
-    compinit
+    zcachedir="$HOME/.tmpdots/.zcache"
+    [[ -d "$zcachedir" ]] || mkdir -p "$zcachedir"
+
+    zcompf="$zcachedir/zcompdump"
+    # only re-eval compfile if at least one day has passed since last gen.
+    if [[ -e "$zcompf" && $(date +'%j') != $(stat -f '%Sm' -t '%j' "$zcompf") ]]; then
+        comp_cmd+=" -d $zcompf"
+    else
+        comp_cmd+=" -C -d $zcompf"
+    fi
+    unset zcompf
+
+    zcompcdir="$zcachedir/zcompcache"
+    [[ -d "$zcompcdir" ]] || mkdir -p "$zcompcdir"
+    zstyle ':completion:*' cache-path "$zcompcdir"
+    zstyle ':completion:*' use-cache on
+    unset zcompcdir
+    unset zcachedir
 fi
+eval "$comp_cmd"
+unset comp_cmd
 
 # Use menu completion
 #zstyle ':completion:*' menu select
@@ -21,6 +39,11 @@ zstyle ':completion:*' matcher-list \
 # Don't try parent path completion if the directories exist
 zstyle ':completion:*' accept-exact-dirs true
 
+# This way you tell zsh comp to take the first part of the path to be
+# exact, and to avoid partial globs. Now path completions became nearly
+# immediate.
+zstyle ':completion:*' accept-exact '*(N)'
+
 # Always use menu selection for `cd -`
 zstyle ':completion:*:*:cd:*:directory-stack' force-list always
 zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
@@ -29,7 +52,7 @@ zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 zstyle ':completion:*' verbose true
 
 # Don't complete hosts from /etc/hosts
-zstyle -e ':completion:*' hosts 'reply=()'
+zstyle ':completion:*' hosts off
 
 # Use ls-colors for path completions
 function _set-list-colors() {
@@ -43,6 +66,11 @@ _set-list-colors
 zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' single-ignored show
 
-# Don't complete uninteresting stuff unless we really want to.
+# Dont complete uninteresting stuff unless we really want to.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|TRAP*)'
 zstyle ':completion:*:*:*:users' ignored-patterns '_*'
+
+# Better SSH/Rsync/SCP Autocomplete
+zstyle ':completion:*:(scp|rsync):*' tag-order ' hosts:-ipaddr:ip\ address hosts:-host:host files'
+zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
+zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
