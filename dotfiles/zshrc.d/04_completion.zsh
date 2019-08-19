@@ -10,8 +10,16 @@ zcompcdir="$zcachedir/zcompcache"
 [[ -d "$zcompcdir" ]] || mkdir -p "$zcompcdir"
 
 zcompf="$zcachedir/zcompdump"
+
+if [[ $OS = "Linux" ]]; then
+    stat -c '%y' "$zcompf" | read -A tmpA
+    STF=$tmpA[1]
+    unset tmpA
+else
+    STF=$(stat -f '%Sm' -t '%F' "$zcompf")
+fi
 # only re-eval compfile if at least one day has passed since last gen.
-if [[ -e "$zcompf" && $(date +'%j') == $(stat -f '%Sm' -t '%j' "$zcompf") ]]; then
+if [[ -e "$zcompf" && $(date +'%F') == $STF ]]; then
     compinit -C -d "$zcompf"
 else
     compinit -d "$zcompf"
