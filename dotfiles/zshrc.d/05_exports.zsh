@@ -1,9 +1,6 @@
 ##########################
 #### exports
 ##########################
-# enable colors in grep
-export GREP_OPTIONS='--color=auto'
-
 # some classic env vars
 export EDITOR=vim
 export VISUAL=vim

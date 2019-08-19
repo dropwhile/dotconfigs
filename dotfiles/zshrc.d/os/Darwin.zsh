@@ -32,6 +32,9 @@ finder-update-desktop() {
 #### export vars
 #######################
 
+# enable colors in grep
+export GREP_OPTIONS='--color=auto'
+
 export COPYFILE_DISABLE='true'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 

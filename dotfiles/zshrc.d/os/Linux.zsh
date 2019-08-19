@@ -15,3 +15,4 @@ if [ $? -ne 0 ]; then
 fi
 
 alias ls='ls -p --color=auto'
+alias grep='grep --color=auto'
