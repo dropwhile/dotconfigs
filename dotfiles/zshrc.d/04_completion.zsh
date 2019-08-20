@@ -9,9 +9,8 @@ zcachedir="$HOME/.zcache"
 
 _update_zcomp() {
     setopt local_options extendedglob
-    autoload -Uz compinit zrecompile
-    local zcachedir="$1"
-    local zcompf="$zcachedir/zcompdump"
+    autoload -Uz compinit
+    local zcompf="$1/zcompdump"
     # use a separate file to determine when to regenerate, as compinit doesn't
     # always need to modify the compdump
     local zcompf_a="${zcompf}.augur"
