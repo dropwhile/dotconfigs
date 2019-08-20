@@ -9,7 +9,7 @@ if [[ $IS_SSH -eq 1 ]]; then
     ps_c='%F{yellow}'
 
     if [[ -n "${TWO_DOT_HOSTNAME}" ]]; then
-        hname='%m2'
+        hname='%2m'
     else
         hname='%m'
     fi
