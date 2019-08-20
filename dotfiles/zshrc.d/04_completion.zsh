@@ -10,6 +10,7 @@ zcachedir="$HOME/.zcache"
 _update_zcomp() {
     setopt local_options extendedglob
     autoload -Uz compinit zrecompile
+    local zcachedir="$1"
     local zcompf="$zcachedir/zcompdump"
     # use a separate file to determine when to regenerate, as compinit doesn't
     # always need to modify the compdump
@@ -22,18 +23,17 @@ _update_zcomp() {
         touch "$zcompf_a"
     fi
     # if zcompdump exists (and is non-zero), and is older than the .zwc file,
-    # then regenerate (in background-ish)
+    # then regenerate
     if [[ -s "$zcompf" && (! -s "${zcompf}.zwc" || "$zcompf" -nt "${zcompf}.zwc") ]]; then
-        {
-            # since file is mapped, it might be mapped right now (current shells), so
-            # rename it then make a new one
-            [[ -e "$zcompf.zwc" ]] && mv -f "$zcompf.zwc" "$zcompf.zwc.old"
-            # compile it mapped, so multiple shells can share it (total mem reduction)
-            zcompile -M "$zcompf"
-        } &!
+        # since file is mapped, it might be mapped right now (current shells), so
+        # rename it then make a new one
+        [[ -e "$zcompf.zwc" ]] && mv -f "$zcompf.zwc" "$zcompf.zwc.old"
+        # compile it mapped, so multiple shells can share it (total mem reduction)
+        # run in background
+        zcompile -M "$zcompf" &!
     fi
 }
-_update_zcomp
+_update_zcomp "$zcachedir"
 unfunction _update_zcomp
 
 zcompcdir="$zcachedir/zcompcache"
