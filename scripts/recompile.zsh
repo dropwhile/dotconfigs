@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-setopt LOCAL_OPTIONS EXTENDED_GLOB NULL_GLOB
+setopt LOCAL_OPTIONS
+setopt EXTENDED_GLOB NULL_GLOB
 
 if [[ -d "$HOME/.zshrc.d/" ]]; then
     printf "recompiling .zshrc.zwc\n"
