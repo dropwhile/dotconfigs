@@ -40,7 +40,7 @@ dolink() {
 
 ## add dotfiles
 for dotfile in ${NDIR}/dotfiles/*; do
-    FFILE="$(basename "${dest_file}")"
+    FFILE="$(basename "${dotfile}")"
     # if file starts with an _, then skip it.  this is used to deprecate/remove
     # certain files without removing the file from the directory
     # (eg. a trail removal)
