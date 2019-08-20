@@ -137,7 +137,7 @@ prompt_on
 ############################
 
 ### Load os specific settings
-[ -s "$HOME/.profile.d/$OS.sh" ] && . "$HOME/.profile.d/$OS.sh"
+[ -s "$HOME/.bashrc.d/$OS.sh" ] && . "$HOME/.bashrc.d/$OS.sh"
 
 # disable START/STOP output control
 if [ -x /bin/stty ]; then
