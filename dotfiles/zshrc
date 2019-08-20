@@ -6,8 +6,10 @@
 #zmodload zsh/zprof
 #zprof -c
 
-# add ~/bin if it exists
-[[ -d $HOME/bin ]] && export PATH="${PATH}:${HOME}/bin"
+# add ~/bin if it exists, and isn't already in the path
+# note: using the magic $path arrayish variable here
+[[ ${path[(ie)$HOME/bin]} -le ${#path} ]] ||
+    export PATH="${PATH}:${HOME}/bin"
 
 # detect os
 if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
