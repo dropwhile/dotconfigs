@@ -8,7 +8,8 @@ zcachedir="$HOME/.zcache"
 [[ -d "$zcachedir" ]] || mkdir -p "$zcachedir"
 
 _update_zcomp() {
-    setopt local_options extendedglob
+    setopt local_options
+    setopt extendedglob
     autoload -Uz compinit
     local zcompf="$1/zcompdump"
     # use a separate file to determine when to regenerate, as compinit doesn't
