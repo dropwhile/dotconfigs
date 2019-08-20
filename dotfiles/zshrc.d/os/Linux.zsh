@@ -14,5 +14,5 @@ if [ $? -ne 0 ]; then
     [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 fi
 
-alias ls='ls -p --color=auto'
+alias ls='ls -Np --color=auto'
 alias grep='grep --color=auto'

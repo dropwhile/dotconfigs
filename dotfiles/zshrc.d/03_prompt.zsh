@@ -16,5 +16,7 @@ if [[ $IS_SSH -eq 1 ]]; then
 fi
 
 #PS1=${ps_c}'%n@'${hname}'%f:%1~%(!.%F{red}.%f)${vcs_info_msg_0_}%#%f%E '
-PS1=${ps_c}'%n@'${hname}'%f:%1~%(!.%F{red}.%f)${vcs_info_msg_0_}%#%f '
+#PS1=${ps_c}'%n@'${hname}'%f:%1~%(!.%F{red}.%f)${vcs_info_msg_0_}%#%f '
+PS1=${ps_c}'%n@'${hname}'%f:%1~%(!.%F{red}.%f)%#%f '
+RPS1='${vcs_info_msg_0_}'
 unset ps_c hname TWO_DOT_HOSTNAME
