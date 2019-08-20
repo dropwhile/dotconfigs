@@ -2,57 +2,42 @@
 #### completion control
 ##########################
 ## completion stuff
-autoload -Uz compinit zrecompile
 zstyle ':compinstall' filename '$HOME/.zshrc'
 
-zcachedir="$HOME/.tmpdots/.zcache"
+zcachedir="$HOME/.zcache"
+[[ -d "$zcachedir" ]] || mkdir -p "$zcachedir"
+
+_update_zcomp() {
+    setopt local_options extendedglob
+    autoload -Uz compinit zrecompile
+    local zcompf="$zcachedir/zcompdump"
+    # use a separate file to determine when to regenerate, as compinit doesn't
+    # always need to modify the compdump
+    local zcompf_a="${zcompf}.augur"
+
+    if [[ -e "$zcompf_a" && -f "$zcompf_a"(#qN.md-1) ]]; then
+        compinit -C -d "$zcompf"
+    else
+        compinit -d "$zcompf"
+        touch "$zcompf_a"
+    fi
+    # if zcompdump exists (and is non-zero), and is older than the .zwc file,
+    # then regenerate (in background-ish)
+    if [[ -s "$zcompf" && (! -s "${zcompf}.zwc" || "$zcompf" -nt "${zcompf}.zwc") ]]; then
+        {
+            # since file is mapped, it might be mapped right now (current shells), so
+            # rename it then make a new one
+            [[ -e "$zcompf.zwc" ]] && mv -f "$zcompf.zwc" "$zcompf.zwc.old"
+            # compile it mapped, so multiple shells can share it (total mem reduction)
+            zcompile -M "$zcompf"
+        } &!
+    fi
+}
+_update_zcomp
+unfunction _update_zcomp
+
 zcompcdir="$zcachedir/zcompcache"
 [[ -d "$zcompcdir" ]] || mkdir -p "$zcompcdir"
-
-zcompf="$zcachedir/zcompdump"
-# use a separate file to determine when to regenerate, as compinit doesn't
-# always need to modify the compdump
-zcompf_a="$zcachedir/zcompdump.augur"
-
-
-lz_statf() {
-    local STF tmpA
-    # os specific stat
-    if [[ -e "$1" ]]; then
-        case $OS in
-        (Linux)
-            stat -c '%y' "$1" | read -A tmpA
-            STF=$tmpA[1]
-            ;;
-        (FreeBSD|Darwin)
-            STF=$(stat -f '%Sm' -t '%F' "$1")
-            ;;
-        esac
-    else
-        STF="0000-00-00"
-    fi
-    print $STF
-}
-
-# only re-eval compfile if at least one day has passed since last gen.
-if [[ -e "$zcompf_a" && $(date +'%F') == $(lz_statf "$zcompf_a") ]]; then
-    compinit -C -d "$zcompf"
-else
-    compinit -d "$zcompf"
-    touch "$zcompf_a"
-fi
-unfunction lz_statf
-
-# if zcompdump exists, and is older than the .zwc file, regenerate (in background-ish)
-if [[ -s "$zcompf" && (! -s "${zcompf}.zwc" || "$zcompf" -nt "${zcompf}.zwc") ]]; then
-    {
-        zrecompile -pq -M "$zcompf"
-        if [[ -e "${zcompf}.zwc.old" ]]; then
-            rm -f "${zcompf}.zwc.old"
-        fi
-    } &!
-fi
-unset zcompf
 
 zstyle ':completion:*' cache-path "$zcompcdir"
 zstyle ':completion:*' use-cache on
