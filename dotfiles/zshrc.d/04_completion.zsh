@@ -22,6 +22,10 @@ _update_zcomp() {
         compinit -d "$zcompf"
         touch "$zcompf_a"
     fi
+
+    # complete dot files
+    #_comp_options+=(globdots)
+
     # if zcompdump exists (and is non-zero), and is older than the .zwc file,
     # then regenerate
     if [[ -s "$zcompf" && (! -s "${zcompf}.zwc" || "$zcompf" -nt "${zcompf}.zwc") ]]; then
@@ -68,10 +72,12 @@ zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 zstyle ':completion:*' verbose true
 
 # Don't complete hosts from /etc/hosts
-zstyle ':completion:*' hosts off
+zstyle ':completion:*' hosts
+# or users
+zstyle ':completion:*' users
 
 # group results by category
-zstyle ':completion:*' group-name ''
+#zstyle ':completion:*' group-name ''
 
 # Use ls-colors for path completions
 function _set-list-colors() {
@@ -86,7 +92,8 @@ zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' single-ignored show
 
 # output format
-zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+#zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:descriptions' format '.: %d :.'
 zstyle ':completion:*:corrections' format '%U%F{green}%d (errors: %e)%f%u'
 zstyle ':completion:*:warnings' format '%F{202}%Bno matches for: %F{214}%d%b'
 
@@ -94,7 +101,9 @@ zstyle ':completion:*:warnings' format '%F{202}%Bno matches for: %F{214}%d%b'
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|TRAP*)'
 zstyle ':completion:*:*:*:users' ignored-patterns '_*'
 
-# Better SSH/Rsync/SCP Autocomplete
+## Better SSH/Rsync/SCP Autocomplete
+# disable users in ssh tab completion
+zstyle ':completion:*:*:ssh:*:my-accounts' off
 zstyle ':completion:*:(ssh|scp|rsync):*' tag-order 'hosts:-host:host hosts:-domain:domain hosts:-ipaddr:ip\ address *'
 zstyle ':completion:*:(scp|rsync):*' group-order users files all-files hosts-domain hosts-host hosts-ipaddr
 zstyle ':completion:*:ssh:*' group-order users hosts-domain hosts-host users hosts-ipaddr
