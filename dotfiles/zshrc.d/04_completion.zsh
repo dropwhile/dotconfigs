@@ -87,7 +87,7 @@ zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|TRAP*)'
 zstyle ':completion:*:*:*:users' ignored-patterns '_*'
 
 # Better SSH/Rsync/SCP Autocomplete
-zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host hosts-ipaddr
+zstyle ':completion:*:ssh:*' group-order users hosts-domain hosts-host users hosts-ipaddr
 zstyle ':completion:*:(scp|rsync):*' group-order files all-files hosts-domain hosts-host hosts-ipaddr
 zstyle ':completion:*:(ssh|scp|rsync):*' tag-order 'hosts:-host:host hosts:-domain:domain hosts:-ipaddr:ip\ address *'
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
