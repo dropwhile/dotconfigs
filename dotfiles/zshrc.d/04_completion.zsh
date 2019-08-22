@@ -70,7 +70,7 @@ zstyle ':completion:*' verbose true
 # Don't complete hosts from /etc/hosts
 zstyle ':completion:*' hosts off
 
-# have all different types of matches displayed separately, instead of grouped
+# group results by category
 zstyle ':completion:*' group-name ''
 
 # Use ls-colors for path completions
@@ -84,6 +84,11 @@ _set-list-colors
 # list dirs first
 zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' single-ignored show
+
+# output format
+zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:corrections' format '%U%F{green}%d (errors: %e)%f%u'
+zstyle ':completion:*:warnings' format '%F{202}%Bno matches for: %F{214}%d%b'
 
 # Dont complete uninteresting stuff unless we really want to.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|TRAP*)'
