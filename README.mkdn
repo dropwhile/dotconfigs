@@ -17,7 +17,7 @@ How I use it:
     exist, and would cause a collision. Remove those files and run the script
     again. Rinse and repeat until no output is produced.
 
-6. Source the new .bashrc: `. $HOME/.bashrc`
+6. Source the new .zshrc: `. $HOME/.zshrc`
 
 After a change is pushed to the repo, update any installs by calling
 `dotfiles_update` (an exported shell function). This will also create symlinks
@@ -41,22 +41,15 @@ directories
     the dot files for various things. these are symlinked to the `$HOME`
     directory and prepended with a `.`.
 
-    example: $HOME/.bashrc -> dotfiles/bashrc
+    example: $HOME/.zshrc -> dotfiles/zshrc
 
 
 notes
 =====
 
--   `.bashrc_pre` and `.bashrc_post` files can be created to handle system 
+-   `.zshrc_pre` and `.zshrc_post` files can be created to handle system 
     specific configuration. These files are sourced at the beginning, and end 
-    (respectively), of the `.bashrc` file.
+    (respectively), of the `.zshrc` file.
 
-    This allows modification of behaviors later in the `.bashrc` file, while
-    keeping that file as system agnostic as possible. For example, to disable
-    virtualenvwrapper for python, I create a `.bashrc_pre` with `export
-    VENVW="disable"` in it.
-
--   On some systems, the `.bashrc` file can take a while to parse. This is
-    especially the case when loading hooks for rvm *and* virtualenvwrapper.
-    There is only one remote system (a VM) that I notice this on though, and I
-    attribute it to the very slow I/O that system occasionally sees.
+    This allows modification of behaviors later in the `.zshrc` file, while
+    keeping that file as system agnostic as possible.
