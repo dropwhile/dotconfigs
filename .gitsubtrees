@@ -1,0 +1,25 @@
+# this is not a git native file. just recording subtrees manually...
+
+vim-go-extra
+    path = dotfiles/vim/bundle/vim-go-extra
+    url = https://github.com/vim-jp/vim-go-extra.git
+
+nerdcommenter
+    path = dotfiles/vim/bundle/nerdcommenter
+    url = https://github.com/scrooloose/nerdcommenter.git
+
+vim-terraform
+    path = dotfiles/vim/bundle/vim-terraform
+    url = https://github.com/hashivim/vim-terraform.git
+
+salt-vim
+    path = dotfiles/vim/bundle/salt-vim
+    url = https://github.com/saltstack/salt-vim.git
+
+# to add a subtree:
+# $ git subtree add --prefix dotfiles/vim/bundle/vim-go-extra \
+#     https://github.com/vim-jp/vim-go-extra.git master --squash
+#
+# to update a subtree:
+# $ git subtree pull --prefix dotfiles/vim/bundle/vim-go-extra \
+#     https://github.com/vim-jp/vim-go-extra.git master --squash
