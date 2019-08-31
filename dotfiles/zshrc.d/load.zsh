@@ -7,6 +7,6 @@ if [ -x /bin/stty ]; then
     /bin/stty -ixoff
 fi
 
-for file in $HOME/.zshrc.d/[0-9](#c2)_*.zsh; do
+for file in $HOME/.zshrc.d/[0-9][0-9]_*.zsh; do
     source $file
 done
