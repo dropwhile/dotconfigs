@@ -79,6 +79,7 @@
     diff-word = diff --word-diff
     diff-stat = diff --stat
     diff-patience = diff --patience
+    diff-summary = diff --compact-summary
     show-patience = show --patience
     #lost-found = fsck --lost-found
     assume   = update-index --assume-unchanged
