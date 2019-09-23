@@ -4,7 +4,7 @@
 ## completion stuff
 zstyle ':compinstall' filename '$HOME/.zshrc'
 
-zcachedir="$HOME/.zcache"
+zcachedir="$HOME/.cache/zsh"
 [[ -d "$zcachedir" ]] || mkdir -p "$zcachedir"
 
 _update_zcomp() {
