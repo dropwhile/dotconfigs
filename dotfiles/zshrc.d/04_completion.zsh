@@ -43,9 +43,8 @@ unfunction _update_zcomp
 zcompcdir="$zcachedir/zcompcache"
 [[ -d "$zcompcdir" ]] || mkdir -p "$zcompcdir"
 
-zstyle ':completion:*' cache-path "$zcompcdir"
 zstyle ':completion:*' use-cache on
-zstyle ':completion:' use-cache on
+zstyle ':completion:*' cache-path "$zcompcdir"
 unset zcompcdir
 unset zcachedir
 
