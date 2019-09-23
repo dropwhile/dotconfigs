@@ -45,6 +45,7 @@ zcompcdir="$zcachedir/zcompcache"
 
 zstyle ':completion:*' cache-path "$zcompcdir"
 zstyle ':completion:*' use-cache on
+zstyle ':completion:' use-cache on
 unset zcompcdir
 unset zcachedir
 
