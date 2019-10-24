@@ -55,8 +55,8 @@ setopt hist_ignore_space hist_no_functions hist_no_store hist_reduce_blanks
 setopt inc_append_history
 HISTORY_IGNORE="(l[lsa]|[bf]g|cd *|pushd *|popd *|exit|clear|reset)"
 HISTFILE=~/.zsh_history
-HISTSIZE=2000
-SAVEHIST=4000
+HISTSIZE=2100
+SAVEHIST=2000
 
 
 ##########################
