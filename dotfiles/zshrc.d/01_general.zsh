@@ -43,8 +43,8 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 #### history control
 ##########################
 # Lines configured by zsh-newuser-install
-setopt hist_ignore_dups hist_ignore_space hist_no_functions hist_no_store
-setopt hist_find_no_dups hist_reduce_blanks hist_expire_dups_first
+setopt hist_ignore_all_dups hist_ignore_dups hist_expire_dups_first hist_find_no_dups
+setopt hist_ignore_space hist_no_functions hist_no_store hist_reduce_blanks
 # one or the other for inc_append_ or share_
 # share_history is actual a little irritating sometimes, as a terminal window is like a
 # "context", and having history polluted by default can make reruning things more
