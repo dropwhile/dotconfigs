@@ -14,6 +14,7 @@
     autocrlf = input
     excludesfile = ~/.gitignore
     safecrlf = warn
+	untrackedCache = true
 [diff]
     renames = copies
     #guitool = p4merge
@@ -119,3 +120,5 @@
 	autosquash = true
 [pack]
 	useSparse = true
+[index]
+	version = 4
