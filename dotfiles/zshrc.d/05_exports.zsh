@@ -14,7 +14,7 @@ export GIT_EDITOR=vim
 
 # vim on os x returns a non-zero exit code when called with the short
 # path name. fucks up git & friends. Use full path.
-if [[ "$OS" == "Darwin" ]]; then
+if [[ "$OS" == "darwin" ]]; then
     export GIT_EDITOR=/usr/bin/vim
     export EDITOR=/usr/bin/vim
     export VISUAL=/usr/bin/vim
