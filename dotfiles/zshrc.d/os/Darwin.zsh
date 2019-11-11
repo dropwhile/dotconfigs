@@ -39,7 +39,8 @@ export COPYFILE_DISABLE='true'
 export LSCOLORS='gxfxcxdxbxegedabagacad'
 
 ## lesspipe if installed ##
-LESSPIPEX="$(type -p lesspipe.sh)"
+local lp="lesspipe.sh"
+LESSPIPEX=${lp:c}
 [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 
 # disable save/restore shell state support in macos (see /etc/bashrc_Apple_Terminal)
