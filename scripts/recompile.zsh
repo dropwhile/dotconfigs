@@ -18,6 +18,9 @@ if [[ -d "$HOME/.zshrc.d/" ]]; then
     for file in $HOME/.zshrc.d/os/*.zsh; do
         zrecompile -pq $file
     done
+    for file in $HOME/.zshrc.d/autoloadx/*; do
+        zrecompile -pq $file
+    done
     zrecompile -pq $HOME/.zshrc.d/load.zsh $HOME/.zshrc.d/*_*.zsh $HOME/.zshrc.d/os/*.zsh
     #zrecompile -pq $HOME/.zshrc.zwc $HOME/.zshrc.d/*.zsh
 fi

@@ -36,9 +36,9 @@ _update_zcomp() {
         # run in background
         zcompile -M "$zcompf" &!
     fi
+    unfunction _update_zcomp
 }
 _update_zcomp "$zcachedir"
-unfunction _update_zcomp
 
 zcompcdir="$zcachedir/zcompcache"
 [[ -d "$zcompcdir" ]] || mkdir -p "$zcompcdir"
