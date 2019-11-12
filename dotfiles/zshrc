@@ -3,8 +3,8 @@
 # if not an interactive shell, return
 [[ ! -o interactive ]] && return
 
-zmodload zsh/zprof
-zprof -c
+#zmodload zsh/zprof
+#zprof -c
 
 # add ~/bin if it exists, and isn't already in the path
 # note: using the magic $path arrayish variable here
