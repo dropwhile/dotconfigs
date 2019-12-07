@@ -1,9 +1,6 @@
 ##########################
 #### general options
 ##########################
-# allow function calls in prompt
-setopt prompt_subst
-
 # enable interactive commnets
 setopt interactive_comments
 

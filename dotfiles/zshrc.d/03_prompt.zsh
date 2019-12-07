@@ -1,6 +1,10 @@
 ##########################
 #### set prompt/PS1
 ##########################
+#
+# allow function calls in prompt
+setopt no_prompt_bang prompt_percent prompt_subst
+
 # check for ssh
 hname=''
 ps_c='%F{white}'
