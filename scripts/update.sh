@@ -6,4 +6,4 @@ if type zsh >/dev/null 2>&1; then
 fi
 
 ## cleanups
-rm -f ${HOME}/.profile.d
+#rm -f ${HOME}/.profile.d
