@@ -65,27 +65,6 @@ set ruler             "show file location at the bottom right
 set hidden            "current buffer can be backgrounded without having to
                       "write something out. remembers marks and history.
 
-"Set some colors"
-set background=dark
-colorscheme desert
-
-"highlight LineNr  term=NONE
-"hi Normal          ctermfg=black       ctermbg=white
-"hi Comment         ctermfg=lightgreen
-"hi Function        ctermfg=lightred
-"hi Statement       ctermfg=lightblue
-"hi Include         ctermfg=lightblue
-"hi htmlSpecialChar ctermfg=yellow
-"hi Define          ctermfg=lightblue
-"hi Constant        ctermfg=magenta
-"hi Special         ctermfg=white
-"hi Type            ctermfg=lightblue
-
-hi Pmenu            cterm=NONE  ctermfg=lightblue   ctermbg=lightgrey
-hi PmenuSel         cterm=BOLD  ctermfg=yellow      ctermbg=darkgrey
-hi PmenuSbar        cterm=BOLD  ctermfg=lightblue   ctermbg=lightgrey
-hi PmenuThumb       cterm=BOLD  ctermfg=cyan        ctermbg=darkgrey
-
 " switch to tab if buffer already open there
 set switchbuf=usetab
 
@@ -225,8 +204,12 @@ let g:rbpt_max = 16
 nnoremap / /\v
 vnoremap / /\v
 
+"Set some colors"
+set background=dark
+colorscheme desert
+
 if has('gui_running')
-    colorscheme desert
+    "colorscheme desert
     "set gfn:Monaco:h11
     set gfn:InputMono\ Thin:h11
     "set noantialias
@@ -246,6 +229,31 @@ if has("gui_macvim")
     map <SwipeLeft> :bprev<CR>
     map <SwipeRight> :bnext<CR>
 endif
+
+"highlight LineNr  term=NONE
+"hi Normal          ctermfg=black       ctermbg=white
+"hi Comment         ctermfg=lightgreen
+"hi Function        ctermfg=lightred
+"hi Statement       ctermfg=lightblue
+"hi Include         ctermfg=lightblue
+"hi htmlSpecialChar ctermfg=yellow
+"hi Define          ctermfg=lightblue
+"hi Constant        ctermfg=magenta
+"hi Special         ctermfg=white
+"hi Type            ctermfg=lightblue
+
+" if I wanted rainbows, I'd code in fucking skittles.
+hi clear Identifier
+hi clear Statement
+"hi clear Constant
+"hi clear PreProc
+"hi clear Type
+hi Type             term=NONE ctermfg=2 gui=NONE guifg=darkkhaki
+
+hi Pmenu            cterm=NONE  ctermfg=lightblue   ctermbg=lightgrey
+hi PmenuSel         cterm=BOLD  ctermfg=yellow      ctermbg=darkgrey
+hi PmenuSbar        cterm=BOLD  ctermfg=lightblue   ctermbg=lightgrey
+hi PmenuThumb       cterm=BOLD  ctermfg=cyan        ctermbg=darkgrey
 
 " set printheader to just filename (nice for :hardcopy)
 "   see http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline' for
@@ -277,10 +285,3 @@ let g:airline#extensions#promptline#enabled=0
 " terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
-
-" if I wanted rainbows, I'd code in fucking skittles.
-hi clear Identifier
-hi clear Statement
-"hi clear Constant
-"hi clear PreProc
-"hi clear Type
