@@ -248,7 +248,11 @@ hi clear Statement
 "hi clear Constant
 "hi clear PreProc
 "hi clear Type
-hi Type             term=NONE ctermfg=2 gui=NONE guifg=darkkhaki
+"hi Type             term=NONE ctermfg=2 gui=NONE guifg=darkkhaki
+"hi Type             term=NONE gui=NONE ctermfg=yellow guifg=darkkhaki
+"hi Type             term=NONE cterm=NONE ctermfg=light gui=NONE guifg=darkkhaki
+"hi Type             term=NONE  cterm=NONE  ctermfg=229  gui=NONE guifg=darkkhaki
+hi Type             term=NONE  cterm=NONE  ctermfg=143 gui=NONE guifg=darkkhaki
 
 hi Pmenu            cterm=NONE  ctermfg=lightblue   ctermbg=lightgrey
 hi PmenuSel         cterm=BOLD  ctermfg=yellow      ctermbg=darkgrey
