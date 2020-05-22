@@ -18,5 +18,9 @@ if [ $? -ne 0 ]; then
     [ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 fi
 
-alias ls='ls -Np --color=auto'
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+export SYSTEMD_PAGER=
+
+unset GREP_OPTIONS
+alias ls='ls -Np --color=auto --quoting-style=literal'
 alias grep='grep --color=auto'
