@@ -32,6 +32,13 @@ zle -N edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
+## https://www.arp242.net/zshrc.html
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search    # Arrow up
+bindkey '^[[B' down-line-or-beginning-search  # Arrow down
+
 # default is '*?_-.[]~=/&;!#$%^(){}<>'
 # omit / so word splits on path component too
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -63,3 +70,31 @@ SAVEHIST=2000
 unalias run-help
 autoload run-help
 alias help='run-help'
+
+
+##########################
+#### path stuff
+##########################
+typeset -U PATH path
+
+# add ~/bin if it exists, and isn't already in the path
+# note: using the magic $path arrayish variable here
+#[[ ${path[(ie)$HOME/bin]} -le ${#path} ]] ||
+#    export PATH="${PATH}:${HOME}/bin"
+
+_prepath() {
+    for dir in "$@"; do
+        [[ -L "$dir" ]] && dir=$(readlink "$dir" 2>/dev/null)
+        [[ ! -d "$dir" ]] && return
+        path=("$dir" $path[@])
+    done
+}
+_postpath() {
+    for dir in "$@"; do
+        [[ -L "$dir" ]] && dir=$(readlink "$dir" 2>/dev/null)
+        [[ ! -d "$dir" ]] && return
+        path=($path[@] "$dir")
+    done
+}
+
+_postpath "$HOME/bin"

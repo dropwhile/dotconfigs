@@ -9,3 +9,8 @@ alias myip="curl icanhazip.com"
 # aliases to import history when desired
 alias import-history='fc -RI'
 alias history-import=import-history
+
+alias td='date +%Y-%m-%d'
+
+## dir hashes
+hash -d p=$HOME/projects

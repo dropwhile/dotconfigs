@@ -8,3 +8,5 @@
 ##########################
 #### cleanups
 ##########################
+unfunction _prepath
+unfunction _postpath
