@@ -70,7 +70,10 @@ SAVEHIST=2000
 unalias run-help
 autoload run-help
 alias help='run-help'
-
+# helpdir on macos is messed up
+if [[ "$OS" == "darwin" ]]; then
+  HELPDIR="/usr/share/zsh/${ZSH_VERSION}/help/"
+fi
 
 ##########################
 #### path stuff
