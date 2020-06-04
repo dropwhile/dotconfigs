@@ -122,3 +122,5 @@
 	useSparse = true
 [index]
 	version = 4
+[pull]
+	rebase = true
