@@ -40,8 +40,8 @@ export LSCOLORS='gxfxcxdxbxegedabagacad'
 
 ## lesspipe if installed ##
 local lp="lesspipe.sh"
-LESSPIPEX=${lp:c}
-[ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
+#LESSPIPEX=${lp:c}
+#[ -x "${LESSPIPEX}" ] && export LESSOPEN="|${LESSPIPEX} %s"
 
 # disable save/restore shell state support in macos (see /etc/bashrc_Apple_Terminal)
 export SHELL_SESSION_HISTORY=0

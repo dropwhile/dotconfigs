@@ -90,8 +90,9 @@
     theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
     absorb = !git-absorb
     amend = commit --amend -C HEAD
-    fixup = commit --fixup "$1"
-    squash = commit --squash "$1"
+    fixup = commit --fixup
+    cif = commit --fixup
+    squash = commit --squash
     # ref: https://developer.atlassian.com/blog/2015/05/the-power-of-git-subtree/
     # the acronym stands for "subtree add"
     sba = "!f() { git subtree add --prefix $2 $1 master --squash; }; f"
@@ -125,3 +126,5 @@
 [pull]
 	rebase = false
 	ff = only
+[init]
+	defaultBranch = develop
