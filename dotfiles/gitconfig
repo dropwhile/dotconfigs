@@ -48,7 +48,8 @@
     cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [alias]
     co = checkout
-    br = branch -vv
+    br = branch
+    brv = branch -vv
     st = status -sb
     tags = tag --sort="version:refname" -l
     branches = branch -a
