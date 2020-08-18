@@ -110,6 +110,7 @@
     fsckobjects = true
 [fetch]
     fsckobjects = true
+	prune = true
 [receive]
     fsckObjects = true
 [pager]
@@ -129,3 +130,6 @@
 	ff = only
 [init]
 	defaultBranch = develop
+[trim]
+	update = false
+	detach = false
