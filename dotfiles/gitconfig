@@ -14,7 +14,7 @@
     autocrlf = input
     excludesfile = ~/.gitignore
     safecrlf = warn
-	untrackedCache = true
+    untrackedCache = true
 [diff]
     renames = copies
     #guitool = p4merge
@@ -110,26 +110,26 @@
     fsckobjects = true
 [fetch]
     fsckobjects = true
-	prune = true
+    prune = true
 [receive]
     fsckObjects = true
 [pager]
     branch = less -+$LESS -FRXi
     tag = less -+$LESS -FRXi
+[rebase]
+    autosquash = true
+[pack]
+    useSparse = true
+[index]
+    version = 4
+[pull]
+    rebase = false
+    ff = only
+[init]
+    defaultBranch = develop
+[trim]
+    detach = false
+    protected = release/*,production,develop
 
 [include]
     path = ~/.gitconfig-local
-[rebase]
-	autosquash = true
-[pack]
-	useSparse = true
-[index]
-	version = 4
-[pull]
-	rebase = false
-	ff = only
-[init]
-	defaultBranch = develop
-[trim]
-	update = false
-	detach = false
