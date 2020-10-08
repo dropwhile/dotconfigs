@@ -9,7 +9,6 @@ setopt no_prompt_bang prompt_percent prompt_subst
 hname=''
 ps_c='%F{white}'
 if [[ $IS_SSH -eq 1 ]]; then
-    IS_SSH=1
     ps_c='%F{yellow}'
 
     if [[ -n "${TWO_DOT_HOSTNAME}" ]]; then

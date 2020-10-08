@@ -22,6 +22,7 @@ setopt rm_star_silent
 bindkey -e
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
+bindkey "^[[3~" delete-char
 bindkey \^U backward-kill-line
 
 ## autoloads
