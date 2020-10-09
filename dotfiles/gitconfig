@@ -126,10 +126,9 @@
     rebase = false
     ff = only
 [init]
-    defaultBranch = develop
+    defaultBranch = main
 [trim]
     detach = false
     protected = release/*,production,develop
-
 [include]
     path = ~/.gitconfig-local
