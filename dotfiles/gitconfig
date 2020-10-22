@@ -129,6 +129,6 @@
     defaultBranch = main
 [trim]
     detach = false
-    protected = release/*,production,develop
+    protected = main,master,develop,release/*,production
 [include]
     path = ~/.gitconfig-local
