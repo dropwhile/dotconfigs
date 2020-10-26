@@ -88,14 +88,14 @@ typeset -U PATH path
 
 _prepath() {
     for dir in "$@"; do
-        [[ -L "$dir" ]] && dir=$(readlink "$dir" 2>/dev/null)
+        [[ -L "$dir" ]] && dir=$dir:A
         [[ ! -d "$dir" ]] && return
         path=("$dir" $path[@])
     done
 }
 _postpath() {
     for dir in "$@"; do
-        [[ -L "$dir" ]] && dir=$(readlink "$dir" 2>/dev/null)
+        [[ -L "$dir" ]] && dir=$dir:A
         [[ ! -d "$dir" ]] && return
         path=($path[@] "$dir")
     done
