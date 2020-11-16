@@ -47,33 +47,17 @@
 [mergetool "gvimdiff3"]
     cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [alias]
-    co = checkout
-    br = branch
-    brv = branch -vv
-    st = status -sb
-    tags = tag --sort="version:refname" -l
-    branches = branch -a
-    remotes = remote -v
-    unstage = reset HEAD
-    wdiff = diff --color-words
-    wshow = show --color-words
-    list-unmerged = ls-files -u
-    ls-unmerged = ls-files -u
-    type = cat-file -t
-    dump = cat-file -p
-    qlog = log --pretty=oneline --abbrev-commit --graph --decorate
-    lg = log --graph --pretty=format:'%Cred%h%Creset - %Cgreen%ad%Creset |%C(yellow)%d%Creset %s [%an]' --abbrev-commit --date=short
-    lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --branches --remotes
+    absorb = !git-absorb
+    amend = commit --amend -C HEAD
+    assume   = update-index --assume-unchanged
+    assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
     # add all changed (but not new) files to stage (index):
     au = add -u
-    # prune all tracking local branches that have been removed from remote:
-    prune-all = !git remote | xargs -n 1 git remote prune
-    # show list of contributors in descending order by number of commits
-    rank = shortlog -sn --no-merges
-    # given a string for an author, try to figure out full name and email:
-    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-    # given any git object, try to show it briefly
-    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+    br = branch
+    branches = branch -a
+    brv = branch -vv
+    cif = commit --fixup
+    co = checkout
     count = shortlog -sn
     # sets head's author as someone else
     # git credit 'Joe User' 'joe@example.com'
@@ -82,24 +66,41 @@
     diff-stat = diff --stat
     diff-patience = diff --patience
     diff-summary = diff --compact-summary
-    show-patience = show --patience
-    #lost-found = fsck --lost-found
-    assume   = update-index --assume-unchanged
-    unassume = update-index --no-assume-unchanged
-    assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
-    ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
-    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
-    absorb = !git-absorb
-    amend = commit --amend -C HEAD
+    dump = cat-file -p
     fixup = commit --fixup
-    cif = commit --fixup
-    squash = commit --squash
+    lg = log --graph --pretty=format:'%Cred%h%Creset - %Cgreen%ad%Creset |%C(yellow)%d%Creset %s [%an]' --abbrev-commit --date=short
+    lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --branches --remotes
+    list-unmerged = ls-files -u
+    ls-unmerged = ls-files -u
+    ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
+    #lost-found = fsck --lost-found
+    # prune all tracking local branches that have been removed from remote:
+    prune-all = !git remote | xargs -n 1 git remote prune
+    pushf = push --force-with-lease
+    qlog = log --pretty=oneline --abbrev-commit --graph --decorate
+    # show list of contributors in descending order by number of commits
+    rank = shortlog -sn --no-merges
+    remotes = remote -v
     # ref: https://developer.atlassian.com/blog/2015/05/the-power-of-git-subtree/
     # the acronym stands for "subtree add"
     sba = "!f() { git subtree add --prefix $2 $1 master --squash; }; f"
     # the acronym stands for "subtree update"
     sbu = "!f() { git subtree pull --prefix $2 $1 master --squash; }; f"
+    show-patience = show --patience
     show-conflicts = "!git diff --name-only --diff-filter=U | sort | uniq"
+    squash = commit --squash
+    st = status -sb
+    tags = tag --sort="version:refname" -l
+    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+    type = cat-file -t
+    unassume = update-index --no-assume-unchanged
+    unstage = reset HEAD
+    wdiff = diff --color-words
+    wshow = show --color-words
+    # given a string for an author, try to figure out full name and email:
+    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+    # given any git object, try to show it briefly
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
 [rerere]
     enabled = 1
 [grep]
