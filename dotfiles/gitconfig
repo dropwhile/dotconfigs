@@ -76,8 +76,9 @@
     #lost-found = fsck --lost-found
     # prune all tracking local branches that have been removed from remote:
     prune-all = !git remote | xargs -n 1 git remote prune
+    pushf = push --force
     # push more safely with force leases
-    pushf = push --force-with-lease
+    pushfl = push --force-with-lease
     qlog = log --pretty=oneline --abbrev-commit --graph --decorate
     # show list of contributors in descending order by number of commits
     rank = shortlog -sn --no-merges
