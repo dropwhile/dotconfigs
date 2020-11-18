@@ -15,7 +15,12 @@ zcachedir="$HOME/.cache/zsh"
     # always need to modify the compdump
     local zcompf_a="${zcompf}.augur"
 
-    if [[ -e "$zcompf_a" && -f "$zcompf_a"(#qN.md-1) ]]; then
+    # use glob qualifiers (#q)
+    # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Glob-Qualifiers
+    # N -> NULL_GLOB
+    # . -> plain files
+    # m[Mwhms][-|+]n -> modification time qualifiers
+    if [[ -e "$zcompf_a" && -f "$zcompf_a"(#qN.mh-24) ]]; then
         compinit -C -d "$zcompf"
     else
         compinit -d "$zcompf"
