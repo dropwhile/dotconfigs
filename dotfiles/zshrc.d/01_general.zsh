@@ -68,7 +68,9 @@ SAVEHIST=2000
 ##########################
 #### runtime help
 ##########################
-unalias run-help
+# ignore any failures - some installs don't have this
+# already aliased...
+unalias run-help 2>/dev/null
 autoload run-help
 alias help='run-help'
 # helpdir on macos is messed up
