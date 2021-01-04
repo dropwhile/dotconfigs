@@ -14,7 +14,6 @@ alias history-import=import-history
 alias myip="curl icanhazip.com"
 alias td='date +%Y-%m-%d'
 
-
 ##########################
 #### dir hashes
 ##########################
