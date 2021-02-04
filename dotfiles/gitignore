@@ -8,3 +8,6 @@
 /_trial_temp
 
 /.sublime-workspace
+
+# asdf local tool versions
+/.tool-versions
