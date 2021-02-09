@@ -132,6 +132,7 @@
     defaultBranch = main
 [trim]
     detach = false
-    protected = main,master,develop,release/*,production
+    update = false
+    protected = refs/remotes/*,main,master,develop,production
 [include]
     path = ~/.gitconfig-local
