@@ -9,7 +9,6 @@
     whitespace = red reverse
 [core]
     editor = vim
-    #pager = less -+$LESS -FRSXi
     pager = less -+$LESS -FRSXi
     autocrlf = input
     excludesfile = ~/.gitignore
