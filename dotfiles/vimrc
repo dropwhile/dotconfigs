@@ -259,6 +259,13 @@ hi PmenuSel         cterm=BOLD  ctermfg=yellow      ctermbg=darkgrey
 hi PmenuSbar        cterm=BOLD  ctermfg=lightblue   ctermbg=lightgrey
 hi PmenuThumb       cterm=BOLD  ctermfg=cyan        ctermbg=darkgrey
 
+" some language specific overrides
+hi zigConstant  term=NONE  cterm=NONE  ctermfg=2 gui=NONE guifg=darkkhaki
+hi zigStatement term=NONE  cterm=NONE  ctermfg=2 gui=NONE guifg=darkkhaki
+hi zigStructure term=NONE  cterm=NONE  ctermfg=2 gui=NONE guifg=darkkhaki
+hi zigStorage   term=NONE  cterm=NONE  ctermfg=2 gui=NONE guifg=darkkhaki
+hi zigKeyword   term=NONE  cterm=NONE  ctermfg=2 gui=NONE guifg=darkkhaki
+
 " set printheader to just filename (nice for :hardcopy)
 "   see http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline' for
 "   more options

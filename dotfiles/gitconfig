@@ -67,8 +67,9 @@
     diff-summary = diff --compact-summary
     dump = cat-file -p
     fixup = commit --fixup
-    lg = log --graph --pretty=format:'%Cred%h%Creset - %Cgreen%ad%Creset |%C(yellow)%d%Creset %s [%an]' --abbrev-commit --date=short
-    lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --branches --remotes
+    lg = log --graph --abbrev-commit --decorate --date=iso
+    lga = log --graph --abbrev-commit --decorate --date=iso --branches --remotes
+    lgx = log --all --graph --decorate --oneline --simplify-by-decoration
     list-unmerged = ls-files -u
     ls-unmerged = ls-files -u
     ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
