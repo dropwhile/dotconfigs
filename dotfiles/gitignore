@@ -3,11 +3,14 @@
 
 # python byte-compiled files
 *.py[co]
+# pycache junk
+__pycache__/
 
-# twisted trial temp dir
-/_trial_temp
-
-/.sublime-workspace
+# vim swap files (and possible variations)
+## normal swap
+*.swp
+## other swap file crash/collision possibilities
+*.sw[a-z]
 
 # asdf local tool versions
 /.tool-versions
