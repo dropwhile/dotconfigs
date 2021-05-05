@@ -27,6 +27,7 @@
     inline = true
 [merge]
     tool = vimdiff3
+	ff = no
 [sendemail]
     smtpserver = /opt/local/bin/msmtp
     suppressfrom = true
