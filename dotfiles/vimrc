@@ -123,8 +123,9 @@ autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1
 autocmd VimResized * wincmd =
 
 " some stuff for Go
-let g:gofmt_command = "goimports"
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
+" Note: Switched to vim-go via pathogen
+"let g:gofmt_command = "goimports"
+"autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 " no clue what this does anymore...but umm... it looks neat. Wild!
 set wildchar=<tab>
