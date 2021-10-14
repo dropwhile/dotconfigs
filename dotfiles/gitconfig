@@ -69,8 +69,11 @@
     dump = cat-file -p
     fixup = commit --fixup
     lg = log --graph --abbrev-commit --decorate --date=iso
+    lgs = log --graph --abbrev-commit --decorate --date=iso --show-signature
     lga = log --graph --abbrev-commit --decorate --date=iso --branches --remotes
+    lgas = log --graph --abbrev-commit --decorate --date=iso --branches --remotes --show-signature
     lgx = log --all --graph --decorate --oneline --simplify-by-decoration
+    lgxs = log --all --graph --decorate --oneline --simplify-by-decoration --show-signature
     list-unmerged = ls-files -u
     ls-unmerged = ls-files -u
     ours   = "!f() { git checkout --ours $@ && git add $@; }; f"
