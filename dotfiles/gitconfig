@@ -28,6 +28,7 @@
 [merge]
     tool = vimdiff3
 	ff = no
+	conflictstyle = diff3
 [sendemail]
     smtpserver = /opt/local/bin/msmtp
     suppressfrom = true
