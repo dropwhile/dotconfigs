@@ -59,10 +59,10 @@ setopt hist_ignore_space hist_no_functions hist_no_store hist_reduce_blanks
 #setopt share_history
 #setopt append_history
 setopt inc_append_history
-HISTORY_IGNORE="(l[lsa] *|[bf]g|tmux *|cat *|wb *|vi[m ] *|cd *|pushd *|popd *|exit|clear|reset)"
-HISTFILE=~/.zsh_history
-HISTSIZE=2200
-SAVEHIST=2000
+export HISTORY_IGNORE="(l[lsa] *|[bf]g|mv *|tmux *|cat *|wb *|vi[m ] *|cd *|pushd *|popd *|exit|clear|reset)"
+export HISTFILE=~/.zsh_history
+export HISTSIZE=2200
+export SAVEHIST=2000
 
 
 ##########################

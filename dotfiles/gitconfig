@@ -141,3 +141,5 @@
     protected = refs/remotes/*,main,master,develop,production
 [include]
     path = ~/.gitconfig-local
+[submodule]
+	recurse = true
