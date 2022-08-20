@@ -1,6 +1,7 @@
 " vim-pathogen : https://github.com/tpope/vim-pathogen
 call pathogen#infect()
 
+set t_u7=             " workaround for some strange redraw issue
 set nocompatible      " We're running Vim, not Vi!
 set encoding=utf-8    " set encoding to utf-8
 filetype on           " Enable fieltype detection
