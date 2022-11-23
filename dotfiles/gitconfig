@@ -141,7 +141,7 @@
     detach = false
     update = false
     protected = refs/remotes/*,main,master,develop,production
-[include]
-    path = ~/.gitconfig-local
 [submodule]
 	recurse = true
+[include]
+    path = ~/.gitconfig-local
