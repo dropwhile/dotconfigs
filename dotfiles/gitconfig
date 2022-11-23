@@ -109,7 +109,7 @@
     # given any git object, try to show it briefly
     whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
 [rerere]
-    enabled = 1
+	enabled = true
 [grep]
     fullname = true
 
