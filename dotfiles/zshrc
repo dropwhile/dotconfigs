@@ -3,6 +3,56 @@
 # if not an interactive shell, return
 [[ ! -o interactive ]] && return
 
+# +----------------+-----------+-----------+------+
+# |                |Interactive|Interactive|Script|
+# |                |login      |non-login  |      |
+# +----------------+-----------+-----------+------+
+# |/etc/zshenv     |    A      |    A      |  A   |
+# +----------------+-----------+-----------+------+
+# |~/.zshenv       |    B      |    B      |  B   |
+# +----------------+-----------+-----------+------+
+# |/etc/zprofile   |    C      |           |      |
+# +----------------+-----------+-----------+------+
+# |~/.zprofile     |    D      |           |      |
+# +----------------+-----------+-----------+------+
+# |/etc/zshrc      |    E      |    C      |      |
+# +----------------+-----------+-----------+------+
+# |~/.zshrc        |    F      |    D      |      |
+# +----------------+-----------+-----------+------+
+# |/etc/zlogin     |    G      |           |      |
+# +----------------+-----------+-----------+------+
+# |~/.zlogin       |    H      |           |      |
+# +----------------+-----------+-----------+------+
+# |                |           |           |      |
+# +----------------+-----------+-----------+------+
+# |                |           |           |      |
+# +----------------+-----------+-----------+------+
+# |~/.zlogout      |    I      |           |      |
+# +----------------+-----------+-----------+------+
+# |/etc/zlogout    |    J      |           |      |
+# +----------------+-----------+-----------+------+
+#
+#  1. .zshenv is _always_ sourced, but other files sourced after may override it.
+#     you can set $ZDOTDIR in .zshenv to specify an alternative location for the rest of
+#     your zsh configs.
+#  2. .zprofile for login shells. same as .zlogin except it is sourced before .zshrc,
+#     wheareas .zlogin is sourced after .zshrc.
+#     According to the zsh documentation, ".zprofile is meant as an alternative
+#     to .zlogin for ksh fans; the two are not intended to be used together,
+#     although this could certainly be done if desired."
+#  3. .zshrc is for interactive shells. setopt/unsetopt commands, shell modules, history, etc.
+#     Also used for variables only used for interactive shells, like $LS_COLORS.
+#  4. .zlogin for login shells.  It is sourced on the start of a login shell
+#     but after .zshrc, if the shell is also interactive. This file is often
+#     used #  to start X using startx. Some systems start X on boot, so this
+#     file is not #  always very useful.
+#  5. .zlogout is sometimes used to clear and reset the terminal. Called when exiting.
+#
+#  refs:
+#  * https://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/
+#  * https://unix.stackexchange.com/a/71258
+
+
 #zmodload zsh/zprof
 #zprof -c
 
@@ -31,7 +81,6 @@ if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
     IS_SSH=1
 fi
 export IS_SSH
-
 
 ## load local env vars if they exist
 [ -s $HOME/.zshrc_pre ] && . $HOME/.zshrc_pre
