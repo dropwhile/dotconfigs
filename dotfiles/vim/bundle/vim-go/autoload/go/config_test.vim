@@ -49,7 +49,6 @@ func! Test_SetBuildTags() abort
       sleep 50m
       let l:lsplog = getbufline('__GOLSP_LOG__', 1, '$')
     endwhile
-    unlet g:go_debug
     " close the __GOLSP_LOG__ window
     only
 
@@ -75,7 +74,6 @@ func! Test_SetBuildTags() abort
 
   finally
     call go#config#SetBuildTags('')
-    unlet g:go_def_mode
   endtry
 endfunc
 
@@ -84,6 +82,7 @@ func! Test_GoplsEnabled_Clear() abort
     return
   endif
 
+  let l:wd = getcwd()
   try
     let g:go_gopls_enabled = 0
 
@@ -96,10 +95,11 @@ func! Test_GoplsEnabled_Clear() abort
           \ ] )
 
   finally
-    unlet g:go_gopls_enabled
+    call go#util#Chdir(l:wd)
     call delete(l:tmp, 'rf')
   endtry
 endfunc
+
 " restore Vi compatibility settings
 let &cpo = s:cpo_save
 unlet s:cpo_save

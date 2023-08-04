@@ -5,6 +5,7 @@ set cpo&vim
 scriptencoding utf-8
 
 func! Test_Callers() abort
+  let l:wd = getcwd()
   try
     let l:tmp = gotest#write_file('calls/caller.go', [
           \ 'package main',
@@ -14,7 +15,7 @@ func! Test_Callers() abort
           \ 'func Quux() {}',
           \ '',
           \ 'func main() {',
-          \ "\tQuux()",
+          \ "\tQ\x1fuux()",
           \ "\tQuux()",
           \ '',
           \ "\tfmt.Println(\"vim-go\")",
@@ -37,6 +38,7 @@ func! Test_Callers() abort
 
     call gotest#assert_quickfix(l:actual, l:expected)
   finally
+    call go#util#Chdir(l:wd)
     call delete(l:tmp, 'rf')
   endtry
 endfunc
