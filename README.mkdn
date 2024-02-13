@@ -39,7 +39,8 @@ directories
 -   dotfiles/
     
     the dot files for various things. these are symlinked to the `$HOME`
-    directory and prepended with a `.`.
+    directory and prepended with a dot (`.`). Files or directories prefixed 
+    with an underscore (`_`) are ignored.
 
     example: $HOME/.zshrc -> dotfiles/zshrc
 
