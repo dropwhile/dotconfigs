@@ -36,7 +36,11 @@ dolink() {
 
 create_dir() {
     if [ ! -d "${1}" ]; then
-        mkdir -p "${1}"
+        if [ -n "${2}" ]; then
+            mkdir -m ${2} -p "${1}"
+        else
+            mkdir -p "${1}"
+        fi
     fi
 }
 
@@ -58,6 +62,7 @@ for dotfile in "${NDIR}/dotfiles/"*; do
 done
 
 # setup .local directory if it doesn't exist
+create_dir "${HOME}/.cache"
 create_dir "${HOME}/.local"
-create_dir "${HOME}/.tmp"
+create_dir "${HOME}/.tmp" 750
 
