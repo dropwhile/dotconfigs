@@ -34,6 +34,12 @@ dolink() {
     fi
 }
 
+setup_tmpdots() {
+    if [ ! -d "${HOME}/.tmpdots" ]; then
+        mkdir -m 750 "${HOME}/.tmpdots"
+    fi
+}
+
 #######
 ### main
 #######
@@ -50,3 +56,7 @@ for dotfile in "${NDIR}/dotfiles/"*; do
 
     dolink "${HOME}" "$dotfile"
 done
+
+# setup tmpdots directory if it doesn't exist
+setup_tmpdots
+
