@@ -26,7 +26,7 @@ fi
     . ${HOME}/.nix-profile/etc/profile.d/nix.sh
 
 
-export MYSQL_HISTFILE="$HOME/.tmpdots/.mysql_history"
+export MYSQL_HISTFILE="$HOME/.local/tmp/mysql_history"
 export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --no-binaries"
 export HOMEBREW_NO_ANALYTICS=1
 export PYTHONSTARTUP="$HOME/.pystartup"

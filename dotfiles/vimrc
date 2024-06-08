@@ -13,9 +13,9 @@ filetype indent off    " Disable filetype-specific indenting (I HATE IT!)
 
 " change location of .viminfo and swp files
 " make the ~/.vim/tmp/ directory manually
-set viminfo='20,<50,s10,h,n~/.vim/.viminfo
-set dir=~/.vim/tmp//   "set swp dir. trailing slashes avoid collisions
-                          "by replacing path with %
+set viminfo='20,<50,s10,h,n~/.tmp/viminfo
+set dir=~/.tmp/vim//   "set swp dir. trailing slashes avoid collisions
+                       "by replacing path with %
 "set viminfo=""         "turn off viminfo
 
 " scroll by 3 line at window buffer edge instead of just 1 (shows more context)
