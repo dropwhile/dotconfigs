@@ -1,7 +1,9 @@
 ##########################
 #### aliases
 ##########################
-alias l.='ls -d .*'
+alias ls.='ls -d .*'
+alias ll.='ls -ld .*'
+alias la='ls -a'
 alias ll='ls -lh'
 alias vimp='vim -p'
 alias mvimp='mvim -p'
