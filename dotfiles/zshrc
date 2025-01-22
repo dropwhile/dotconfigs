@@ -64,6 +64,12 @@ case "$OSTYPE" in
   ;;
   linux*)
     OS=linux
+    case "$(sed -nE 's/^ID="?([^"]+)"?/\1/p' /etc/os-release)" in
+        chimera*)
+            # chimera uses a freebsd bsd userspace
+            OS=freebsd
+        ;;
+    esac
   ;;
   freebsd*)
     OS=freebsd
