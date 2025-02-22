@@ -36,7 +36,7 @@
     thread = true
     confirm = auto
     verify = off
-    annotate = yes
+	annotate = yes
 [user]
     name = elij
     email = elij@wundrd.net
