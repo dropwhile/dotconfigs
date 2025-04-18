@@ -12,6 +12,7 @@
     pager = less -+$LESS -FRSXi
     autocrlf = input
     excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
     safecrlf = warn
     untrackedCache = true
 [diff]

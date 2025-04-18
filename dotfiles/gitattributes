@@ -1,0 +1,3 @@
+# tell git to keep both versions when merging go.sum, and i'll just do a
+# `go mod tidy` afterwards
+go.sum merge=union
