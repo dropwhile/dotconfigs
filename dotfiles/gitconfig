@@ -42,12 +42,16 @@
     name = elij
     email = elij@wundrd.net
 [push]
-    #default = tracking
+    # same as simple, but doens't require upstream -u to be configured first
+    #default = current
     default = simple
+    followTags = true
 [mergetool "vimdiff3"]
     cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [mergetool "gvimdiff3"]
     cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[commit]
+    verbose = true
 [alias]
     absorb = !git-absorb
     amend = commit --amend -C HEAD
@@ -128,6 +132,13 @@
 [rebase]
     autosquash = true
 	updateRefs = true
+[tag]
+    sort = "-version:refname"
+[versionsort]
+	suffix = -pre
+	suffix = -alpha
+	suffix = -beta
+	suffix = -rc
 [pack]
     useSparse = true
 [index]
@@ -136,6 +147,10 @@
     rebase = false
     twohead = ort
     ff = only
+[status]
+    branch = true
+    showStash = true
+    #showUntrackedFiles = true
 [init]
     defaultBranch = main
 [trim]
