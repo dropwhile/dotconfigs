@@ -9,8 +9,9 @@ GLOBIGNORE="..;."
 dolink() {
     link_dir=$1
     dest_file=$2
+    prefix=$3
     FFILE="$(basename "${dest_file}")"
-    OFILE="${link_dir}/.${FFILE}"
+    OFILE="${link_dir}/${prefix}${FFILE}"
     if [ -h "${OFILE}" ] && [ -e "${OFILE}" ]; then
         ## just run silently if it is already a symlink
         #echo "-> ${OFILE} is already linked" >&2
@@ -48,7 +49,7 @@ create_dir() {
 ### main
 #######
 
-## add dotfiles
+## add top level dotfiles
 for dotfile in "${NDIR}/dotfiles/"*; do
     FFILE="$(basename "${dotfile}")"
     # if file starts with an _, then skip it.  this is used to deprecate/remove
@@ -58,8 +59,25 @@ for dotfile in "${NDIR}/dotfiles/"*; do
         continue
     esac
 
-    dolink "${HOME}" "$dotfile"
+    dolink "${HOME}" "$dotfile" "."
 done
+
+## deep link .config files
+if ! type find >/dev/null 2>&1; then
+    echo "missing 'find'; could not create .config entries" >&2
+elif ! type sed >/dev/null 2>&1; then
+    echo "missing 'sed'; could not create .config entries" >&2
+else
+    find "${NDIR}/config/" -type f | while read x; do
+        DPATH="$(echo "$x" | sed "s|${NDIR}/config/|$HOME/.config/|")"
+        DDIR="$(dirname "$DPATH")"
+        FFILE="$(basename "${dotfile}")"
+        if [ ! -d "$DDIR" ]; then
+            mkdir -p "$DDIR"
+        fi
+        dolink "${DDIR}" "${x}"
+    done
+fi
 
 # setup .local directory if it doesn't exist
 create_dir "${HOME}/.cache"
