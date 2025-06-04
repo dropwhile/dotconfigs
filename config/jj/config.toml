@@ -3,3 +3,33 @@
 [user]
 name = "elij"
 email = "elij@wundrd.net"
+
+[git]
+# store change ID in the Git commit itself (in a commit header called
+# change-id), which means it will be transferred by regular git push etc.
+write-change-id-header = true
+# controls whether to track the default remote bookmark on jj git clone.
+track-default-bookmark-on-clone = true
+
+[template-aliases]
+# from https://v5.chriskrycho.com/essays/jj-init/
+'format_short_id()' = 'id.shortest()'
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+'closest_pushable(to)' = 'heads(::to & mutable() & ~description(exact:"") & (~empty() | merges()))'
+
+[aliases]
+# moves the bookmark to the commit before the working copy
+#tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
+# moves the bookmark to the closest commit with a description that is either not empty or a merge
+#tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
+# moves the bookmark to the closest commit with a description that is either not empty or a merge,
+# or move a specified bookmark
+tug = ["util", "exec", "--", "sh", "-c", """
+if [ "x$1" = "x" ]; then
+  jj bookmark move --from "closest_bookmark(@)" --to "closest_pushable(@)"
+else
+  jj bookmark move --to "closest_pushable(@)" "$@"
+fi
+""", ""]
