@@ -54,8 +54,9 @@ fi
 #PS1=${ps_c}${upart}${hname}'%f'${ccolon}'%1~%(?..[%F{red}%?%f])%(!.%F{red}.%f)%#%f '
 #PS1='╭─ '${ps_c}${upart}${hname}'%f'${ccolon}'%1~%(?..[%F{red}%?%f])%(!.%F{red}.%f) ${vcs_info_msg_0_}'$'\n''╰─ %#%f '
 #PS1='┌─ '${ps_c}${upart}${hname}'%f'${ccolon}'%1~%(?.. [%F{red}%?%f])%(!.%F{red}.%f) ${vcs_info_msg_0_}'$'\n''└─ %#%f '
-PS1='┌─ '${ps_c}${upart}${hname}'%f'${ccolon}'%1~ ${vcs_info_msg_0_}'$'\n''└─%(?..[%F{red}%?%f])%(!.%F{red}.%f) %#%f '
 #RPS1='${vcs_info_msg_0_}'
-#PS1='%(?..[%F{red}%?%f])%(!.%F{red}.%f)%#%f '
+PS1='┌─ '${ps_c}${upart}${hname}'%f'${ccolon}'%2~ ${vcs_info_msg_0_}'$'\n''%(?..[%F{red}%?%f] )%(!.%F{red}.%f)%#%f '
+#PS1='%(?..[%F{red}%?%f] )%(!.%F{red}.%f)%#%f '
+#RPS1='${vcs_info_msg_0_} '${ps_c}${upart}${hname}'%f'${ccolon}'%1~'
 #RPS1=${ps_c}${upart}${hname}'%f'${ccolon}'%1~ ${vcs_info_msg_0_}'
 unset ps_c hname upart ccolon TWO_DOT_HOSTNAME
