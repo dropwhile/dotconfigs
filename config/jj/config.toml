@@ -11,6 +11,9 @@ write-change-id-header = true
 # controls whether to track the default remote bookmark on jj git clone.
 track-default-bookmark-on-clone = true
 
+[ui]
+pager = ":builtin"
+
 [template-aliases]
 # from https://v5.chriskrycho.com/essays/jj-init/
 'format_short_id()' = 'id.shortest()'
